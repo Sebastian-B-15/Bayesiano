@@ -59,4 +59,4 @@ c. Por último, si se toma una tercera prueba ELISA al mismo sujeto, ¿cuál es 
 
 Volvemos a actualizar la probabilidad $P(V) = P(V|P_2) = 0.93$. Entonces se sigue que $P(V|P_3) = \frac{P(P_3|V)*P(V)}{P(P_3)} = \frac{0.93*0.93}{P(P_3|V)*P(V)+P(P_3|V^C)*P(V^C)} = \frac{0.865}{0.93*0.93+0.01*0.07} \approx 0.999$. Luego, se puede deducir que a cada nueva prueba ELISA positiva que se tenga, aumenta la probabilidad de que la persona tenga VIH.
 
-Por otro lado, si esta última prueba hubiese salido negativa, la probabilidad de que la persona tenga VIH bajaría a un $0.48$ aproximadamente.
+Por otro lado, si esta última prueba hubiese salido negativa, la probabilidad de que la persona tenga VIH bajaría a un $0.48$ aprox..
