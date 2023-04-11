@@ -1,0 +1,62 @@
+---
+title: "Metodos bayesianos - Ayudantia1"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Ayudantía 1
+
+### Ejercicio 1
+
+Un taxi estuvo involucrado en un accidente de atropello y fuga por la noche. Dos empresas de taxis, la Verde y la Azul, operan en la ciudad. Se obtienen los siguientes datos:
+<ol>
+<li>El 85% de los taxis de la ciudad son Verdes y el 15% Azules.</li>
+<li>Teniendo un testigo presente, se probó su confiabilidad pidiéndole que identificara los colores de una serie de taxis que transitaban bajo las mismas circunstancias que existían la noche del accidente y se concluyó que el testigo identificó correctamente los colores el 80 % de las veces y falló el 20 % de las veces.</li>
+<li>Este testigo identificó el taxi como Azul.</li>
+
+¿Cuál es la probabilidad de que el taxi involucrado realmente fuese Azul (dado que el testigo lo identificó así)?
+
+Sean los eventos:
+<ul>
+<li>H: Accidente causado por un taxi azul.</li>
+<li>D: El testigo dijo que el auto era azul (antes de que el testigo lo dijera).</li>
+</ul>
+
+Entonces $P(H) = 0.15$, $P(D|H) = 0.8$, $P(D|H^C) = 0.2$ y $P(H^C) = 0.75$. Luego por teorema de Bayes: $P(H|D) = \frac{P(D|H) \cdot P(H)}{P(D|H) \cdot P(H) + P(D|H^C) \cdot P(H^C)} = \frac{0.8 \cdot 0.15}{0.8 \cdot 0.15 + 0.2 \cdot 0.85} \approx 0.4138$
+
+### Ejercicio 2
+
+Se desea probar la efectividad de una prueba llamada ELISA para detectar el VIH. Para ello se tiene la siguiente información:
+<ul>
+<li>$P(Prueba+|Tiene VIH) = 0.93$.</li>
+<li>$P(Prueba−|NOTiene VIH) = 0.99$.</li>
+<li>$P(Tiene VIH) = 0.00148$.</li>
+</ul>
+
+#### a. ¿Cuál es la probabilidad de que la persona tenga VIH dado que la prueba dio positiva?
+
+Sean los eventos:
+<ul>
+<li>$P_i$: La i-ésima prueba ELISA aplicada a la persona sale positiva ($i=1,2,...$).</li>
+<li>$V$: La persona tiene VIH.</li>
+</ul>
+
+Entonces tenemos que $P(P_1|V) = 0.93$, $P(P_1^C|V) = 0.07$, $P(P_1^C|V^C) = 0.99$, $P(P_1|V^C) = 0.01$, $P(V) = 0.00148$ y por teorema de probabilidad total (para aplicar luego Bayes): $P(P_1) = P(P_1|V) * P(V) + P(P_1|V^C) * P(V^C) = 0.93 * 0.00148 + 0.01 * 0.99852 = 0.0113616$. Ahora por Bayes: $P(V|P_1) = \frac{P(P_1|V)*P(V)}{P(P_1)} = \frac{0.93*0.00148}{0.0113616} \approx 0.12$.
+
+b. Si se toma una segunda prueba ELISA al mismo sujeto, ¿cuál es la probabilidad de que sea VIH positivo si también en esta segunda prueba ELISA da positivo?, ¿qué se debe asumir?
+
+En estadística bayesiana, los eventos que podríamos considerar independientes, como en una muestra aleatoria, especificamos que son independientes condicionalmente a un parámetro (o similar). En este caso, supondremos que los eventos $P_1$ y $P_2$ son independientes, pero condicionalmente el evento $V$ (o $V^C$). Esto suena razonable ($P(P_2 | V \cap P_1) = P(P_2 | V)$), ya que la información aportada por $V$; saber que la persona tiene (o no) VIH, es la única que es relevante y conocer el resultado del test (evento $P_1$) solo nos da un indicio de si la persona tiene VIH.
+
+Ahora hay dos caminos a tomar, el más específico es el siguiente. Queremos determinar $P(V|P_1 \cap P_2)$, entonces por Bayes: $P(V|P_1 \cap P_2) = \frac{P(V \cap P_1 \cap P_2)}{P(P_1 \cap P_2)} = \frac{P(P_2|V \cap P_1) * P(V|P_1) * P(P_1)}{P(P_2|P_1) * P(P_1)} = \frac{P(P_2|V \cap P_1) * P(V|P_1)}{P(P_2|P_1)}$, luego como $(P_1 \perp P_2)|V$, se sigue que $P(V|P_1 \cap P_2) = \frac{P(P_2|V) * P(V|P_1)}{P(P_2|P_1)}$. Y siguiendo Bayes $P(P_2|P_1) = P(P_2|P_1 \cap V) * P(V|P_1) + P(P_2|P_1 \cap V^C) * P(V^C|P_1) = P(P_2|V) * P(V|P_1) + P(P_2|V^C) * P(V^C|P_1) = 0.93 * 0.12 + 0.01 * 0.88 \approx 0.12$. Entonces $P(V|P_1 \cap P_2) = \frac{0.93 * 0.12}{0.12} = 0.93$.
+
+Por otro lado, otro camino, más sencillo a considerar es el de "actualizar probabilidades". Dado que $P(V|P_1) = 0.12$, consideramos ahora para la segunda prueba que $P(V) = 0.12$, esta es la probabilidad actualizada. Entonces se sigue por Bayes que $P(V|P_2) = \frac{P(P_2|V)*P(V)}{P(P_2)}$ y proseguimos normalmente, como en la pregunta a. pero con la probabilidad actualizada: $P(V|P_2) = \frac{0.93*0.12}{P(P_2|V)*P(V) + P(P_2|V^C)*P(V^C)} = \frac{0.1116}{0.93*0.12+0.01*0.88} = \frac{0.1116}{0.1204} \approx 0.93$. Se obtiene el mismo resultado y es más sencillo de realizar.
+
+c. Por último, si se toma una tercera prueba ELISA al mismo sujeto, ¿cuál es la probabilidad de que realmente tenga VIH después de dar positivo 3 veces en la prueba ELISA?, ¿qué se debe asumir?
+
+Volvemos a actualizar la probabilidad $P(V) = P(V|P_2) = 0.93$. Entonces se sigue que $P(V|P_3) = \frac{P(P_3|V)*P(V)}{P(P_3)} = \frac{0.93*0.93}{P(P_3|V)*P(V)+P(P_3|V^C)*P(V^C)} = \frac{0.865}{0.93*0.93+0.01*0.07} \approx 0.999$. Luego, se puede deducir que a cada nueva prueba ELISA positiva que se tenga, aumenta la probabilidad de que la persona tenga VIH.
+
+Por otro lado, si esta última prueba hubiese salido negativa, la probabilidad de que la persona tenga VIH bajaría a un $0.48$ aproximadamente.

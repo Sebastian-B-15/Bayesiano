@@ -1,0 +1,21 @@
+---
+title: "Metodos bayesianos - Algo de historia"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Introducción 1 - Algo de historia
+
+La primer idea de probabilidad surgió como idea de medir el azar en juegos de casino, durante los siglos XVI y XVII. En los siglos respectivos Cardano y Galileo consideraron el caso equiprobable y definieron implícitamente la probabilidad del evento $A$ como: $\frac{\# casos\_en\_que\_ocurre\_A}{\# casos\_totales}$. -> <b>Probabilidad de Laplace</b>
+
+Esta definición inicial de probabilidad entrega características fuertes (Las probabilidades son mayores o iguales a $0$, si un evento ocurre siempre o en todos los casos su probabilidad es $1$, si $A$ y $B$ no ocurren a la vez, entonces la probabilidad de que ocurra al menos uno de los dos es la suma de $P(A)$ y $P(B)$, la probabilidad de que no ocurra $A$ es $1 - P(A)$).
+
+Luego, en el siglo XVII, Pascal y Fermat hablan por medio de cartas sobre problemas planteados por este primero. En ellas, se ve que piensan que medir el azar contando casos equiprobables y además hay principios combinatorios para contar dichos casos. Y por otro lado, el concepto de un "juego justo" (justicia) se relaciona con el "valor esperado". -> <b>Valor esperado, tiene que ver con lo que considero justo pagar, retomado por Ramsey y Savage en el siglo XX</b> 
+
+En el mismo siglo XVII, Newton acuñó la idea de que el azar corresponde a la falta de conocimiento, pues si un dado es lanzado con fuerza y dirección determinadas, esta caerá de una forma determinada, en un lado determinado (lo que no es azar). -> <b>Azar es solo falta de información</b>
+
+Finalmente, Bernoulli aporta varias cosas, entre ellas la definición de probabilidad frecuentista (<b>Ley de Los Grandes Números</b>), o sea que $\forall \epsilon_1, \epsilon_2 \in \mathbb{R}^+, \exists N : P(|P(A) - fr_A(N)| \leq \epsilon_1) = 1 - \epsilon_2$. También sobre la imposibilidad de hacer conteos (contar partículas), o de considerar casos equiprobables (todas las enfermedades no son igual de mortales).

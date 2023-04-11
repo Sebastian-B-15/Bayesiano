@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sebastian Baeza">
+
+<title>Metodos bayesianos - Ayudantia1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Metodos-bayesianos_Ayudantia1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Metodos-bayesianos_Ayudantia1_files/libs/quarto-html/quarto.js"></script>
+<script src="Metodos-bayesianos_Ayudantia1_files/libs/quarto-html/popper.min.js"></script>
+<script src="Metodos-bayesianos_Ayudantia1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Metodos-bayesianos_Ayudantia1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Metodos-bayesianos_Ayudantia1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Ayudantia1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Metodos-bayesianos_Ayudantia1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Metodos-bayesianos_Ayudantia1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Ayudantia1_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#metodos-bayesianos" id="toc-metodos-bayesianos" class="nav-link active" data-scroll-target="#metodos-bayesianos">Metodos bayesianos</a>
+  <ul class="collapse">
+  <li><a href="#ayudantía-1" id="toc-ayudantía-1" class="nav-link" data-scroll-target="#ayudantía-1">Ayudantía 1</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-1" id="toc-ejercicio-1" class="nav-link" data-scroll-target="#ejercicio-1">Ejercicio 1</a></li>
+  <li><a href="#ejercicio-2" id="toc-ejercicio-2" class="nav-link" data-scroll-target="#ejercicio-2">Ejercicio 2</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Metodos bayesianos - Ayudantia1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sebastian Baeza </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="metodos-bayesianos" class="level1">
+<h1>Metodos bayesianos</h1>
+<section id="ayudantía-1" class="level2">
+<h2 class="anchored" data-anchor-id="ayudantía-1">Ayudantía 1</h2>
+<section id="ejercicio-1" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-1">Ejercicio 1</h3>
+Un taxi estuvo involucrado en un accidente de atropello y fuga por la noche. Dos empresas de taxis, la Verde y la Azul, operan en la ciudad. Se obtienen los siguientes datos:
+<ol>
+<li>
+El 85% de los taxis de la ciudad son Verdes y el 15% Azules.
+</li>
+<li>
+Teniendo un testigo presente, se probó su confiabilidad pidiéndole que identificara los colores de una serie de taxis que transitaban bajo las mismas circunstancias que existían la noche del accidente y se concluyó que el testigo identificó correctamente los colores el 80 % de las veces y falló el 20 % de las veces.
+</li>
+<li>
+Este testigo identificó el taxi como Azul.
+</li>
+<p>¿Cuál es la probabilidad de que el taxi involucrado realmente fuese Azul (dado que el testigo lo identificó así)?</p>
+Sean los eventos:
+<ul>
+<li>
+H: Accidente causado por un taxi azul.
+</li>
+<li>
+D: El testigo dijo que el auto era azul (antes de que el testigo lo dijera).
+</li>
+</ul>
+<p>Entonces <span class="math inline">\(P(H) = 0.15\)</span>, <span class="math inline">\(P(D|H) = 0.8\)</span>, <span class="math inline">\(P(D|H^C) = 0.2\)</span> y <span class="math inline">\(P(H^C) = 0.75\)</span>. Luego por teorema de Bayes: <span class="math inline">\(P(H|D) = \frac{P(D|H) \cdot P(H)}{P(D|H) \cdot P(H) + P(D|H^C) \cdot P(H^C)} = \frac{0.8 \cdot 0.15}{0.8 \cdot 0.15 + 0.2 \cdot 0.85} \approx 0.4138\)</span></p>
+</ol></section>
+<section id="ejercicio-2" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-2">Ejercicio 2</h3>
+Se desea probar la efectividad de una prueba llamada ELISA para detectar el VIH. Para ello se tiene la siguiente información:
+<ul>
+<li>
+<span class="math inline">\(P(Prueba+|Tiene VIH) = 0.93\)</span>.
+</li>
+<li>
+<span class="math inline">\(P(Prueba−|NOTiene VIH) = 0.99\)</span>.
+</li>
+<li>
+<span class="math inline">\(P(Tiene VIH) = 0.00148\)</span>.
+</li>
+</ul>
+<section id="a.-cuál-es-la-probabilidad-de-que-la-persona-tenga-vih-dado-que-la-prueba-dio-positiva" class="level4">
+<h4 class="anchored" data-anchor-id="a.-cuál-es-la-probabilidad-de-que-la-persona-tenga-vih-dado-que-la-prueba-dio-positiva">a. ¿Cuál es la probabilidad de que la persona tenga VIH dado que la prueba dio positiva?</h4>
+Sean los eventos:
+<ul>
+<li>
+<span class="math inline">\(P_i\)</span>: La i-ésima prueba ELISA aplicada a la persona sale positiva (<span class="math inline">\(i=1,2,...\)</span>).
+</li>
+<li>
+<span class="math inline">\(V\)</span>: La persona tiene VIH.
+</li>
+</ul>
+<p>Entonces tenemos que <span class="math inline">\(P(P_1|V) = 0.93\)</span>, <span class="math inline">\(P(P_1^C|V) = 0.07\)</span>, <span class="math inline">\(P(P_1^C|V^C) = 0.99\)</span>, <span class="math inline">\(P(P_1|V^C) = 0.01\)</span>, <span class="math inline">\(P(V) = 0.00148\)</span> y por teorema de probabilidad total (para aplicar luego Bayes): <span class="math inline">\(P(P_1) = P(P_1|V) * P(V) + P(P_1|V^C) * P(V^C) = 0.93 * 0.00148 + 0.01 * 0.99852 = 0.0113616\)</span>. Ahora por Bayes: <span class="math inline">\(P(V|P_1) = \frac{P(P_1|V)*P(V)}{P(P_1)} = \frac{0.93*0.00148}{0.0113616} \approx 0.12\)</span>.</p>
+<ol start="2" type="a">
+<li>Si se toma una segunda prueba ELISA al mismo sujeto, ¿cuál es la probabilidad de que sea VIH positivo si también en esta segunda prueba ELISA da positivo?, ¿qué se debe asumir?</li>
+</ol>
+<p>En estadística bayesiana, los eventos que podríamos considerar independientes, como en una muestra aleatoria, especificamos que son independientes condicionalmente a un parámetro (o similar). En este caso, supondremos que los eventos <span class="math inline">\(P_1\)</span> y <span class="math inline">\(P_2\)</span> son independientes, pero condicionalmente el evento <span class="math inline">\(V\)</span> (o <span class="math inline">\(V^C\)</span>). Esto suena razonable (<span class="math inline">\(P(P_2 | V \cap P_1) = P(P_2 | V)\)</span>), ya que la información aportada por <span class="math inline">\(V\)</span>; saber que la persona tiene (o no) VIH, es la única que es relevante y conocer el resultado del test (evento <span class="math inline">\(P_1\)</span>) solo nos da un indicio de si la persona tiene VIH.</p>
+<p>Ahora hay dos caminos a tomar, el más específico es el siguiente. Queremos determinar <span class="math inline">\(P(V|P_1 \cap P_2)\)</span>, entonces por Bayes: <span class="math inline">\(P(V|P_1 \cap P_2) = \frac{P(V \cap P_1 \cap P_2)}{P(P_1 \cap P_2)} = \frac{P(P_2|V \cap P_1) * P(V|P_1) * P(P_1)}{P(P_2|P_1) * P(P_1)} = \frac{P(P_2|V \cap P_1) * P(V|P_1)}{P(P_2|P_1)}\)</span>, luego como <span class="math inline">\((P_1 \perp P_2)|V\)</span>, se sigue que <span class="math inline">\(P(V|P_1 \cap P_2) = \frac{P(P_2|V) * P(V|P_1)}{P(P_2|P_1)}\)</span>. Y siguiendo Bayes <span class="math inline">\(P(P_2|P_1) = P(P_2|P_1 \cap V) * P(V|P_1) + P(P_2|P_1 \cap V^C) * P(V^C|P_1) = P(P_2|V) * P(V|P_1) + P(P_2|V^C) * P(V^C|P_1) = 0.93 * 0.12 + 0.01 * 0.88 \approx 0.12\)</span>. Entonces <span class="math inline">\(P(V|P_1 \cap P_2) = \frac{0.93 * 0.12}{0.12} = 0.93\)</span>.</p>
+<p>Por otro lado, otro camino, más sencillo a considerar es el de “actualizar probabilidades”. Dado que <span class="math inline">\(P(V|P_1) = 0.12\)</span>, consideramos ahora para la segunda prueba que <span class="math inline">\(P(V) = 0.12\)</span>, esta es la probabilidad actualizada. Entonces se sigue por Bayes que <span class="math inline">\(P(V|P_2) = \frac{P(P_2|V)*P(V)}{P(P_2)}\)</span> y proseguimos normalmente, como en la pregunta a. pero con la probabilidad actualizada: <span class="math inline">\(P(V|P_2) = \frac{0.93*0.12}{P(P_2|V)*P(V) + P(P_2|V^C)*P(V^C)} = \frac{0.1116}{0.93*0.12+0.01*0.88} = \frac{0.1116}{0.1204} \approx 0.93\)</span>. Se obtiene el mismo resultado y es más sencillo de realizar.</p>
+<ol start="3" type="a">
+<li>Por último, si se toma una tercera prueba ELISA al mismo sujeto, ¿cuál es la probabilidad de que realmente tenga VIH después de dar positivo 3 veces en la prueba ELISA?, ¿qué se debe asumir?</li>
+</ol>
+<p>Volvemos a actualizar la probabilidad <span class="math inline">\(P(V) = P(V|P_2) = 0.93\)</span>. Entonces se sigue que <span class="math inline">\(P(V|P_3) = \frac{P(P_3|V)*P(V)}{P(P_3)} = \frac{0.93*0.93}{P(P_3|V)*P(V)+P(P_3|V^C)*P(V^C)} = \frac{0.865}{0.93*0.93+0.01*0.07} \approx 0.999\)</span>. Luego, se puede deducir que a cada nueva prueba ELISA positiva que se tenga, aumenta la probabilidad de que la persona tenga VIH.</p>
+<p>Por otro lado, si esta última prueba hubiese salido negativa, la probabilidad de que la persona tenga VIH bajaría a un <span class="math inline">\(0.48\)</span> aproximadamente.</p>
+</section>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,63 @@
+---
+title: "Metodos bayesianos - Conceptos estadisticos"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Introducción 2 - Conceptos estadísticos básicos
+
+### Función de probabilidad
+
+Sea $\Sigma$ un espacio muestral y $\mathcal{F}$ un sigma-álgebra. Una función de probabilidad $P : \mathcal{F} \to [0,1]$ es tal que:
+<ol>
+<li>$P(A)>0$.</li>
+<li>$P(\Omega) = 1$.</li>
+<li>Sea $A_1, A_2, ...$ una secuencia de eventos disjuntos en $\mathcal{F}$, entonces $P \left( \bigcup\limits_{i=1}^\infty A_i \right) = \sum\limits_{i=1}^n P(A_i)$.</li>
+</ol>
+
+### Probabilidad condicional
+
+Sea $(\Omega, \mathcal{F}, P)$ un espacio de probabilidad y dos eventos $A,B \in \mathcal{F}$ tales que $P(B) > 0$. se define la probabilidad condicional de $A$ dado $B$ como: $P(A|B) = \frac{P(A \cap B)}{P(B)}$.
+
+La probabilidad condicional $P(\cdot|B)$, es una función de probabilidad. (primero, es directo que $P(A|B)>0$. En segundo lugar, $P(\Omega|B) = \frac{P(\Omega \cap B)}{P(B)} = \frac{P(B)}{P(B)} = 1$. Y por último, sean $A_1, A_2, ...$ disjuntos, entonces $A_1 \cap B, A_2 \cap B, ...$ también son disjuntos, luego $P(A_1 \cup A_2 \cup ...|B) = \frac{P((A_1 \cup A_2 \cup ... )\cap B)}{P(B)} = \frac{P(A_1 \cap B)}{P(B)} + \frac{P(A_2 \cap B)}{P(B)} + ...$).
+
+### Teorema de Bayes
+
+Sea $(\Omega, \mathcal{F}, P)$ un espacio de probabilidad y dos eventos $A,B \in \mathcal{F}$ tales que $P(B) > 0$. Sea una partición de $\Omega$: $E_1, E_2, ...$, cade evento perteneciente a $\mathcal{F}$. Entonces: $$P(A|B) = \frac{P(B|A)P(A)}{\sum_{i=1}^\infty P(B|E_i)P(E_i)}$$
+
+#### Naturaleza secuencial del teorema de Bayes
+
+En el contexto anterior, sea $D_1, ..., D_k$ una secuencia de eventos. Sea $D^{(j)} = \bigcap_{i=1}^j D_i, j=1,2,...,k$. Entonces $$P(A|D^k) = \frac{P(D_k | A \bigcap D^{(k-1)}) P(A | D^{(k-1)})}{P(D_k | D^{(k-1)})}$$
+
+### Independencia
+
+#### Independencia de eventos tradicional
+
+Se sabe que la independencia entre dos eventos $A$ y $B$ ($A \perp B$) está dada por $P(A|B) = P(A) \Leftrightarrow P(B|A) = P(B) \Leftrightarrow P(A \cap B) = P(A) \cdot P(B)$.
+
+#### Independencia condicional de eventos
+
+Sea $(\Omega, \mathcal{F}, P)$ un espacio de probabilidad y los eventos $A,B,C \in \mathcal{F}$, la independencia condicional dado un evento $C$, entre dos eventos $A$ y $B$ ($(A \perp B)|C$) se da SSI $P(A|B \cap C) = P(A|C)$.
+
+Lo anterior, es equivalente a $P(B|A \cap C) = P(B|C)$ o bien equivalente a $P(A \cap B|C) = P(A|C) \cdot P(B|C)$ (demostración sencilla).
+
+<details>
+<summary>Ver demostración</summary>
+Dado $P(A|B \cap C) = P(A|C)$, entonces $P(A|B \cap C) = \frac{P(A \cap B \cap C)}{P(B \cap C)}$<br> 
+$\Leftrightarrow P(A|B \cap C) = \frac{P(A \cap B|C) \cdot P(C)}{P(B|C) \cdot P(C)}$<br> 
+$\Leftrightarrow P(A|C) = \frac{P(A \cap B|C)}{P(B|C)}$<br>
+$\Leftrightarrow P(A|C) \cdot P(B|C) = P(A \cap B|C)$<br>
+Ya está demostrada la segunda equivalencia. Para la primera, dado $P(A|C) \cdot P(B|C) = P(A \cap B|C)$, entonces se sigue que: $P(B|A \cap C) = \frac{P(B \cap A|C) \cdot P(C)}{P(A|C) \cdot P(C)} = \frac{P(B|C) \cdot P(A|C)}{P(A|C)} = P(B|C)$. Y para la implicancia recíproca es análogo a la primera parte.
+</details>
+
+#### Independencia condicional de una secuencia de eventos
+
+Sea $(\Omega, \mathcal{F}, P)$ un espacio de probabilidad y $\{A_i \in \mathcal{F}, i \in I\}$ una secuencia de eventos. Se dice que estos eventos son condicionalmente independientes dado $G$ ($(A_1 \perp A_2 \perp ...)|G$), SSI $\forall I_c \subseteq I, P(\bigcap_{i \in I_c} A_i | G) = \prod_{i \in I_c} P(A_i | G)$.
+
+Luego, nos interesa también la siguiente deducción: $\forall i \in I, P(A_i | G \bigcap_{j \neq i} A_j) = P(A_i|G)$.
+
+<b>*Si actualizamos una probabilidad $P(A|B)$ dada una nueva información (o evento $C$), podemos usar $P(A|B \cap C) = \frac{P(B)}{P(C \cap B)} P(A|B)$, donde a $\frac{P(B)}{P(C \cap B)}$ lo llamamos factor de actualización.</b>

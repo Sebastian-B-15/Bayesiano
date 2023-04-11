@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sebastian Baeza">
+
+<title>Metodos bayesianos - Conceptos estadisticos 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Metodos-bayesianos_Introduccion3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Metodos-bayesianos_Introduccion3_files/libs/quarto-html/quarto.js"></script>
+<script src="Metodos-bayesianos_Introduccion3_files/libs/quarto-html/popper.min.js"></script>
+<script src="Metodos-bayesianos_Introduccion3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Metodos-bayesianos_Introduccion3_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Metodos-bayesianos_Introduccion3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Introduccion3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Metodos-bayesianos_Introduccion3_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Metodos-bayesianos_Introduccion3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Introduccion3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#metodos-bayesianos" id="toc-metodos-bayesianos" class="nav-link active" data-scroll-target="#metodos-bayesianos">Metodos bayesianos</a>
+  <ul class="collapse">
+  <li><a href="#introducción-3---conceptos-estadísticos-básicos-2" id="toc-introducción-3---conceptos-estadísticos-básicos-2" class="nav-link" data-scroll-target="#introducción-3---conceptos-estadísticos-básicos-2">Introducción 3 - Conceptos estadísticos básicos 2</a>
+  <ul class="collapse">
+  <li><a href="#variable-aleatoria" id="toc-variable-aleatoria" class="nav-link" data-scroll-target="#variable-aleatoria">Variable aleatoria</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Metodos bayesianos - Conceptos estadisticos 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sebastian Baeza </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="metodos-bayesianos" class="level1">
+<h1>Metodos bayesianos</h1>
+<section id="introducción-3---conceptos-estadísticos-básicos-2" class="level2">
+<h2 class="anchored" data-anchor-id="introducción-3---conceptos-estadísticos-básicos-2">Introducción 3 - Conceptos estadísticos básicos 2</h2>
+<section id="variable-aleatoria" class="level3">
+<h3 class="anchored" data-anchor-id="variable-aleatoria">Variable aleatoria</h3>
+<p>Sea un espacio de probabilidad <span class="math inline">\((\Omega, F, P)\)</span>. Una <b>variable aleatoria (v.a.)</b> es una función <span class="math inline">\(X: \Omega \to \mathbb{R}\)</span> tal que <span class="math inline">\(\forall x \in \mathbb{R}, \{ \omega \in \Omega : X(\omega) \leq x \} \in \mathcal{F}\)</span>.</p>
+<p><em>Una v.a. es una función y no tiene nada de aleatorio, lo único aleatorio es la entrada de la v.a. <span class="math inline">\(X(w)\)</span>. </em>Como una función de probabilidad <span class="math inline">\(P(\cdot)\)</span> está definida en <span class="math inline">\(\mathcal{F}\)</span>, es necesario que <span class="math inline">\(\{ \omega \in \Omega : X(\omega) \leq x \} \in \mathcal{F}\)</span>, para definir una FDA <span class="math inline">\(F(x) = P(X \leq x) = P(\{ \omega \in \Omega: X(\omega) \leq x \})\)</span></p>
+<section id="teorema" class="level4">
+<h4 class="anchored" data-anchor-id="teorema">Teorema</h4>
+<p>Sea una v.a. <span class="math inline">\(X\)</span>, entonces, no solo <span class="math inline">\(\{ \omega: X(\omega) \leq a \} \in \mathcal{F}\)</span>, sino que también pertenecen a <span class="math inline">\(\mathcal{F}\)</span>; <span class="math inline">\(\{ \omega: X(\omega) &lt; a \}\)</span>, <span class="math inline">\(\{ \omega: X(\omega) \geq a \}\)</span>, <span class="math inline">\(\{ \omega: X(\omega) &gt; a \}\)</span>, <span class="math inline">\(\{ \omega: X(\omega) = a \}\)</span>, <span class="math inline">\(\{ \omega: a &lt; X(\omega) &lt; b \}\)</span>, <span class="math inline">\(\{ \omega: a \leq X(\omega) &lt; b \}\)</span>, <span class="math inline">\(\{ \omega: a &lt; X(\omega) \leq b \}\)</span> y <span class="math inline">\(\{ \omega: a \leq X(\omega) \leq b \}\)</span>.</p>
+</section>
+<section id="variable-aleatoria-discreta" class="level4">
+<h4 class="anchored" data-anchor-id="variable-aleatoria-discreta">Variable aleatoria discreta</h4>
+<p>Es aquella tal que existe <span class="math inline">\(B\)</span> numerable, con <span class="math inline">\(P(X \in B) = 1\)</span>.</p>
+</section>
+<section id="variable-aleatoria-continua" class="level4">
+<h4 class="anchored" data-anchor-id="variable-aleatoria-continua">Variable aleatoria continua</h4>
+<p>Es aquella tal que su función de distribución <span class="math inline">\(F(x)\)</span> puede expresarse como el área bajo la curva de <span class="math inline">\(f(x)\)</span>: <span class="math inline">\(F(X) = \int\limits_{-\infty}^x f(u)du\)</span>, donde <span class="math inline">\(f(x)\)</span> es no negativa, su área bajo la curva existe e integra <span class="math inline">\(1\)</span>. A <span class="math inline">\(f(x)\)</span> se le denomina función de densidad.</p>
+<p>*Notaremos como <span class="math inline">\(p(x)\)</span> indistintamente a funciones de probabilidad como a funciones de densidad, resultará evidente a cual nos referimos según el contexto.</p>
+<section id="función-de-distribución-de-un-vector-aleatorio-continuo" class="level5">
+<h5 class="anchored" data-anchor-id="función-de-distribución-de-un-vector-aleatorio-continuo">Función de distribución de un vector aleatorio continuo</h5>
+<p>Para un vector aleatorio bi-variado se sigue que <span class="math inline">\(p_{X,Y}(x,y) = P(X \leq x, Y \leq y) = \int\limits_{-\infty}^y \int\limits_{-\infty}^x p_{X,Y}(u,v) dudy\)</span>. Donde <span class="math inline">\(p_{X,Y}(x,y)\)</span> es la función de densidad conjunta de <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>. La definición se puede ampliar a más variables.</p>
+</section>
+<section id="funciones-de-densidades-marginales" class="level5">
+<h5 class="anchored" data-anchor-id="funciones-de-densidades-marginales">Funciones de densidades marginales</h5>
+<p>La regla es integrar respecto a las variables que estorban, supongamos el caso bi-variado (para el caso discreto sustituir integrales por sumatorias):</p>
+<p><span class="math inline">\(p_X(x) = \int_{\Omega^Y} p_{X,Y}(x,v)dv\)</span>; <span class="math inline">\(p_Y(y) = \int_{\Omega^X} p_{X,Y}(u,y)du\)</span>.</p>
+</section>
+</section>
+<section id="distribución-condicional" class="level4">
+<h4 class="anchored" data-anchor-id="distribución-condicional">Distribución condicional</h4>
+<p>No importa si la variable es continua o discreta, se tiene que <span class="math inline">\(p_{X|Y}(x|y) = \frac{p(x,y)}{p(y)}\)</span>.</p>
+</section>
+<section id="teorema-de-probabilidad-total" class="level4">
+<h4 class="anchored" data-anchor-id="teorema-de-probabilidad-total">Teorema de probabilidad total</h4>
+<p>Para variables discretas hacer el cambio de la integral por una sumatoria.</p>
+<p><span class="math inline">\(p_X(x) = \int_{\Omega^Y} p_{X|Y}(x|v) \cdot p_Y(v) dv\)</span>; <span class="math inline">\(p_Y(y) = \int_{\Omega^X} p_{Y|X}(y|u) \cdot p_X(u) du\)</span>.</p>
+</section>
+<section id="teorema-de-bayes" class="level4">
+<h4 class="anchored" data-anchor-id="teorema-de-bayes">Teorema de Bayes</h4>
+<p>Para variables discretas hacer el cambio de la integral por una sumatoria.</p>
+<p><span class="math inline">\(p_{X|Y}(x|y) = \frac{p_{Y|X}(y|x) \cdot p_X(x)}{\int_{\Omega^X} p_{Y|X}(y|u) \cdot p_X(u) du}\)</span>.</p>
+<details>
+<summary>
+Ejemplo clásico sobre bayesiano
+</summary>
+<p>Sea <span class="math inline">\((X,Y)\)</span> un vector aleatorio tal que <span class="math inline">\(Y|X=x \sim bin(n,x)\)</span> y <span class="math inline">\(X \sim U(0,1)\)</span>. Encuentre la densidad de <span class="math inline">\(X\)</span> dado <span class="math inline">\(Y=y\)</span>.</p>
+Esto es un ejemplo claro de un caso bayesiano, donde tenemos un modelo binomial con parámetro desconocido <span class="math inline">\(x\)</span>. Proponemos una distribución a priori <span class="math inline">\(X \sim U(0,1)\)</span> para el parámetro desconocido (en este caso lo más neutro posible, que la probabilidad de la binomial es algún número entre 0 y 1, todos con igual probabilidad). La distribución a posteriori sería tras ver los datos del modelo binomial: <span class="math inline">\(p_{X|Y}(x|y) = \frac{P_{X,Y}(x,y)}{p_Y(y)}\)</span>, como <span class="math inline">\(p_Y(y)\)</span> es constante (ya que la fdp es función de <span class="math inline">\(x\)</span>), entonces <span class="math inline">\(p_{X|Y}(x|y) \propto p_{X,Y}(x,y) = p_{Y|X}(y|x) \cdot p_X(x) = \binom{n}{x}x^y(1-x)^{n-y} \cdot 1_{(0,1)}(x) \propto x^y(1-x)^{n-y} \cdot \cdot 1_{(0,1)}(x)\)</span>. Entonces reducimos todo al kernel de <span class="math inline">\(p_{X|Y}\)</span>, es decir a lo que solo depende de <span class="math inline">\(x\)</span> (lo demás es solo una constante que hace que la densidad integre 1), de esta forma podemos asociar esta expresión a alguna distribución conocida, como lo es una beta (<span class="math inline">\(p_X(x;\alpha,\beta) = x^{\alpha-1} (1-x)^{\beta-1}/\beta(\alpha,\beta), 0 &lt; x &lt; 1\)</span>) en este caso, de parámetros <span class="math inline">\(y+1\)</span> y <span class="math inline">\(n-y+1\)</span>.
+</details>
+</section>
+<section id="independencia" class="level4">
+<h4 class="anchored" data-anchor-id="independencia">Independencia</h4>
+<p>Dos v.a.s <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> se dicen independientes SSI <span class="math inline">\(p_{X|Y}(x|y) = p_X(x) \Leftrightarrow p_{Y|X}(y|x) = p_Y(y) \Leftrightarrow p_{X,Y}(x,y) = p_X(x) p_Y(y)\)</span>.</p>
+</section>
+<section id="independencia-condicional" class="level4">
+<h4 class="anchored" data-anchor-id="independencia-condicional">Independencia condicional</h4>
+<p>Sean dos v.a.s <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>, se dicen condicionalmente independientes dado <span class="math inline">\(Z\)</span> (otra v.a.) SSI <span class="math inline">\(p_{X|Y,Z}(x|y,z) = p_{X|Z}(x|z) \Leftrightarrow p_{Y|X,Z}(y|x,z) = p_{Y|Z}(y|z) \Leftrightarrow p_{X,Y|Z}(x,y|z) = p_{X|Z}(x|z) p_{Y|Z}(y|z)\)</span>.</p>
+<section id="propiedades-de-la-independencia-condicional" class="level5">
+<h5 class="anchored" data-anchor-id="propiedades-de-la-independencia-condicional">Propiedades de la independencia condicional</h5>
+Sean <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> condicionalmente dado <span class="math inline">\(Z\)</span>, entonces:
+<ol>
+<li>
+<span class="math inline">\(g(X) \perp Y|Z\)</span>
+<details>
+<summary>
+Demostración
+</summary>
+<p>Por definición (alternativa) de independencia condicional, sean $ A,B,C , P(X A Y B | Z C) = P(X A | Z C) P(Y B | Z C)$, luego notemos que <span class="math inline">\(P(g(X) \in D) = P(X \in g^{-1}(D))\)</span>, donde <span class="math inline">\(g^{-1}(D)\)</span> se puede definir como <span class="math inline">\(g^{-1}(D) = \{ a \in \mathbb{R}: g(a) \in D \}\)</span>. Entonces <span class="math inline">\(P(g(X) \in D \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) | Z \in C) P(Y \in B | Z \in C) = P(g(X) \in D | Z \in C) P(Y \in B | Z \in C)\)</span>.</p>
+Notemos que esta demostración es análoga para vectores aleatorios, es decir para demostrar <span class="math inline">\(((X_1,...,X_n) \perp Y)|Z \Rightarrow g(X_1,...,X_n) \perp Y|Z\)</span>. Pongamos la notación <span class="math inline">\(X = (X_1,...,X_n)\)</span> y consideremos <span class="math inline">\(G^{-1}(D) \subseteq \mathbb{R}^n\)</span> y <span class="math inline">\(D\)</span> de dimensiones adecuadas.
+</details>
+</li>
+<li>
+<span class="math inline">\(X \perp Y|Z,g(Z)\)</span>
+<details>
+<summary>
+Demostración
+</summary>
+Notemos que <span class="math inline">\((Z \in C) \cap (g(Z) \in D) = (Z \in C \cap g^{-1}(D))\)</span>. Supongamos que <span class="math inline">\(C \cap g^{-1}(D) \neq \emptyset\)</span>, luego <span class="math inline">\(P(X \in A \cap Y \in B | Z \in C \cap g(Z) \in D) = P(X \in A \cap Y \in B | Z \in C \cap g^{-1}(D))\)</span> <br> <span class="math inline">\(= P(X \in A | Z \in C \cap g^{-1}(D)) P(Y \in B | Z \in C \cap g^{-1}(D))\)</span><br> <span class="math inline">\(= P(X \in A | Z \in C \cap g(Z) \in D) P(Y \in B | Z \in C \cap g(Z) \in D)\)</span>
+</details>
+</li>
+<li>
+<span class="math inline">\(X \perp (Y,g(Z))|Z\)</span>
+</li>
+<li>
+<span class="math inline">\(h(X,Z) \perp g(Y,Z)|Z\)</span>
+</li>
+<li>
+<span class="math inline">\(X \perp Y|Z,h(X,Z),g(Y,Z)\)</span>
+</li>
+<li>
+Si además de lo anterior, <span class="math inline">\(X \perp W|(Y,Z)\)</span>, entonces <span class="math inline">\(X \perp (Y,W)|Z\)</span>
+</li>
+</ol>
+</section>
+</section>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,109 @@
+---
+title: "Metodos bayesianos - Conceptos estadisticos 2"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Introducción 3 - Conceptos estadísticos básicos 2
+
+### Variable aleatoria
+
+Sea un espacio de probabilidad $(\Omega, F, P)$. Una <b>variable aleatoria (v.a.)</b> es una función $X: \Omega \to \mathbb{R}$ tal que $\forall x \in \mathbb{R}, \{ \omega \in \Omega : X(\omega) \leq x \} \in \mathcal{F}$.
+
+*Una v.a. es una función y no tiene nada de aleatorio, lo único aleatorio es la entrada de la v.a. $X(w)$.
+*Como una función de probabilidad $P(\cdot)$ está definida en $\mathcal{F}$, es necesario que $\{ \omega \in \Omega : X(\omega) \leq x \} \in \mathcal{F}$, para definir una FDA $F(x) = P(X \leq x) = P(\{ \omega \in \Omega: X(\omega) \leq x \})$
+
+#### Teorema
+
+Sea una v.a. $X$, entonces, no solo $\{ \omega: X(\omega) \leq a \} \in \mathcal{F}$, sino que también pertenecen a $\mathcal{F}$; $\{ \omega: X(\omega) < a \}$, $\{ \omega: X(\omega) \geq a \}$, $\{ \omega: X(\omega) > a \}$, $\{ \omega: X(\omega) = a \}$, $\{ \omega: a < X(\omega) < b \}$, $\{ \omega: a \leq X(\omega) < b \}$, $\{ \omega: a < X(\omega) \leq b \}$ y $\{ \omega: a \leq X(\omega) \leq b \}$.
+
+#### Variable aleatoria discreta
+
+Es aquella tal que existe $B$ numerable, con $P(X \in B) = 1$.
+
+#### Variable aleatoria continua
+
+Es aquella tal que su función de distribución $F(x)$ puede expresarse como el área bajo la curva de $f(x)$: $F(X) = \int\limits_{-\infty}^x f(u)du$, donde $f(x)$ es no negativa, su área bajo la curva existe e integra $1$. A $f(x)$ se le denomina función de densidad.
+
+*Notaremos como $p(x)$ indistintamente a funciones de probabilidad como a funciones de densidad, resultará evidente a cual nos referimos según el contexto.
+
+##### Función de distribución de un vector aleatorio continuo
+
+Para un vector aleatorio bi-variado se sigue que $p_{X,Y}(x,y) = P(X \leq x, Y \leq y) = \int\limits_{-\infty}^y \int\limits_{-\infty}^x p_{X,Y}(u,v) dudy$. Donde $p_{X,Y}(x,y)$ es la función de densidad conjunta de $X$ e $Y$. La definición se puede ampliar a más variables.
+
+##### Funciones de densidades marginales
+
+La regla es integrar respecto a las variables que estorban, supongamos el caso bi-variado (para el caso discreto sustituir integrales por sumatorias):
+
+$p_X(x) = \int_{\Omega^Y} p_{X,Y}(x,v)dv$; $p_Y(y) = \int_{\Omega^X} p_{X,Y}(u,y)du$.
+
+#### Distribución condicional
+
+No importa si la variable es continua o discreta, se tiene que $p_{X|Y}(x|y) = \frac{p(x,y)}{p(y)}$.
+
+#### Teorema de probabilidad total
+
+Para variables discretas hacer el cambio de la integral por una sumatoria.
+
+$p_X(x) = \int_{\Omega^Y} p_{X|Y}(x|v) \cdot p_Y(v) dv$; $p_Y(y) = \int_{\Omega^X} p_{Y|X}(y|u) \cdot p_X(u) du$.
+
+#### Teorema de Bayes
+
+Para variables discretas hacer el cambio de la integral por una sumatoria.
+
+$p_{X|Y}(x|y) = \frac{p_{Y|X}(y|x) \cdot p_X(x)}{\int_{\Omega^X} p_{Y|X}(y|u) \cdot p_X(u) du}$.
+
+<details>
+<summary>Ejemplo clásico sobre bayesiano</summary>
+Sea $(X,Y)$ un vector aleatorio tal que $Y|X=x \sim bin(n,x)$ y $X \sim U(0,1)$. Encuentre la densidad de $X$ dado $Y=y$.
+
+Esto es un ejemplo claro de un caso bayesiano, donde tenemos un modelo binomial con parámetro desconocido $x$. Proponemos una distribución a priori $X \sim U(0,1)$ para el parámetro desconocido (en este caso lo más neutro posible, que la probabilidad de la binomial es algún número entre 0 y 1, todos con igual probabilidad). La distribución a posteriori sería tras ver los datos del modelo binomial: $p_{X|Y}(x|y) = \frac{P_{X,Y}(x,y)}{p_Y(y)}$, como $p_Y(y)$ es constante (ya que la fdp es función de $x$), entonces $p_{X|Y}(x|y) \propto p_{X,Y}(x,y) = p_{Y|X}(y|x) \cdot p_X(x) = \binom{n}{x}x^y(1-x)^{n-y} \cdot 1_{(0,1)}(x) \propto x^y(1-x)^{n-y} \cdot \cdot 1_{(0,1)}(x)$. Entonces reducimos todo al kernel de $p_{X|Y}$, es decir a lo que solo depende de $x$ (lo demás es solo una constante que hace que la densidad integre 1), de esta forma podemos asociar esta expresión a alguna distribución conocida, como lo es una beta ($p_X(x;\alpha,\beta) = x^{\alpha-1} (1-x)^{\beta-1}/\beta(\alpha,\beta), 0 < x < 1$) en este caso, de parámetros $y+1$ y $n-y+1$.
+</details>
+
+#### Independencia
+
+Dos v.a.s $X$ e $Y$ se dicen independientes SSI $p_{X|Y}(x|y) = p_X(x) \Leftrightarrow p_{Y|X}(y|x) = p_Y(y) \Leftrightarrow p_{X,Y}(x,y) = p_X(x) p_Y(y)$.
+
+#### Independencia condicional
+
+Sean dos v.a.s $X$ e $Y$, se dicen condicionalmente independientes dado $Z$ (otra v.a.) SSI $p_{X|Y,Z}(x|y,z) = p_{X|Z}(x|z) \Leftrightarrow p_{Y|X,Z}(y|x,z) = p_{Y|Z}(y|z) \Leftrightarrow p_{X,Y|Z}(x,y|z) = p_{X|Z}(x|z) p_{Y|Z}(y|z)$.
+
+##### Propiedades de la independencia condicional
+
+Sean $X$ e $Y$ condicionalmente dado $Z$, entonces:
+<ol>
+<li>
+$g(X) \perp Y|Z$
+<details>
+<summary>Demostración</summary>
+Por definición (alternativa) de independencia condicional, sean $ A,B,C \subseteq \mathbb{R}, P(X \in A \cap Y \in B | Z \in C) = P(X \in A | Z \in C) P(Y \in B | Z \in C)$, luego notemos que $P(g(X) \in D) = P(X \in g^{-1}(D))$, donde  $g^{-1}(D)$ se puede definir como $g^{-1}(D) = \{ a \in \mathbb{R}: g(a) \in D \}$. Entonces $P(g(X) \in D \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) | Z \in C) P(Y \in B | Z \in C) = P(g(X) \in D | Z \in C) P(Y \in B | Z \in C)$.
+
+Notemos que esta demostración es análoga para vectores aleatorios, es decir para demostrar $((X_1,...,X_n) \perp Y)|Z \Rightarrow g(X_1,...,X_n) \perp Y|Z$. Pongamos la notación $X = (X_1,...,X_n)$ y consideremos $G^{-1}(D) \subseteq \mathbb{R}^n$ y $D$ de dimensiones adecuadas.
+</details>
+</li>
+<li>
+$X \perp Y|Z,g(Z)$
+<details>
+<summary>Demostración</summary>
+Notemos que $(Z \in C) \cap (g(Z) \in D) = (Z \in C \cap g^{-1}(D))$. Supongamos que $C \cap g^{-1}(D) \neq \emptyset$, luego $P(X \in A \cap Y \in B | Z \in C \cap g(Z) \in D) = P(X \in A \cap Y \in B | Z \in C \cap g^{-1}(D))$ <br>
+$= P(X \in A | Z \in C \cap g^{-1}(D)) P(Y \in B | Z \in C \cap g^{-1}(D))$<br> 
+$= P(X \in A | Z \in C \cap g(Z) \in D) P(Y \in B | Z \in C \cap g(Z) \in D)$
+</details>
+</li>
+<li>
+$X \perp (Y,g(Z))|Z$
+</li>
+<li>
+$h(X,Z) \perp g(Y,Z)|Z$
+</li>
+<li>
+$X \perp Y|Z,h(X,Z),g(Y,Z)$
+</li>
+<li>
+Si además de lo anterior, $X \perp W|(Y,Z)$, entonces $X \perp (Y,W)|Z$
+</li>
+</ol>
