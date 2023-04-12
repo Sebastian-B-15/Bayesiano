@@ -80,7 +80,7 @@ Sean $X$ e $Y$ condicionalmente dado $Z$, entonces:
 $g(X) \perp Y|Z$
 <details>
 <summary>Demostración</summary>
-Por definición (alternativa) de independencia condicional, sean $ A,B,C \subseteq \mathbb{R}, P(X \in A \cap Y \in B | Z \in C) = P(X \in A | Z \in C) P(Y \in B | Z \in C)$, luego notemos que $P(g(X) \in D) = P(X \in g^{-1}(D))$, donde  $g^{-1}(D)$ se puede definir como $g^{-1}(D) = \{ a \in \mathbb{R}: g(a) \in D \}$. Entonces $P(g(X) \in D \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) | Z \in C) P(Y \in B | Z \in C) = P(g(X) \in D | Z \in C) P(Y \in B | Z \in C)$.
+Por definición (alternativa) de independencia condicional, sean $A,B,C \subseteq \mathbb{R}, P(X \in A \cap Y \in B | Z \in C) = P(X \in A | Z \in C) P(Y \in B | Z \in C)$, luego notemos que $P(g(X) \in D) = P(X \in g^{-1}(D))$, donde  $g^{-1}(D)$ se puede definir como $g^{-1}(D) = \{ a \in \mathbb{R}: g(a) \in D \}$. Entonces $P(g(X) \in D \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) | Z \in C) P(Y \in B | Z \in C) = P(g(X) \in D | Z \in C) P(Y \in B | Z \in C)$.
 
 Notemos que esta demostración es análoga para vectores aleatorios, es decir para demostrar $((X_1,...,X_n) \perp Y)|Z \Rightarrow g(X_1,...,X_n) \perp Y|Z$. Pongamos la notación $X = (X_1,...,X_n)$ y consideremos $G^{-1}(D) \subseteq \mathbb{R}^n$ y $D$ de dimensiones adecuadas.
 </details>
@@ -96,9 +96,15 @@ $= P(X \in A | Z \in C \cap g(Z) \in D) P(Y \in B | Z \in C \cap g(Z) \in D)$
 </li>
 <li>
 $X \perp (Y,g(Z))|Z$
-</li>
+<details>
+<summary>Demostración</summary>
+Notemos que $p_{X,(Y,g(Z))|Z}(x,(y,g)|z) = p_{X,Y,g(Z)|Z}(x,y,g|z)$, notar que si $g \neq g(z)$ esta probabilidad es 0, y como $p_{Y,g(Z)|Z}(y,g|z)$ también sería 0, quedaría demostrado el enunciado. Supongamos entonces que $g = g(z)$, luego $p_{X,Y,g(Z)|Z}(x,y,g|z) =$<br> 
+$p_{X,Y|g(Z),Z}(x,y|g,z)p_{g(Z)}(g) =$<br> $p_{X|g(Z),Z}(x|g,z)p_{Y|g(Z),Z}(y|g,z)p_{g(Z)}(g)$<br> 
+$= p_{X|g(Z),Z}(x|g,z)p_{Y,g(Z)|Z}(y,g|z)$ /como $g = g(z)$ en este caso:<br>
+$p_{X|Z}(x|z)p_{Y,g(Z)|Z}(y,g|z)$
+</details>
 <li>
-$h(X,Z) \perp g(Y,Z)|Z$
+$h(X,Z) \perp g(Y,Z)|Z$. Usando lo anterior y la propiedad 1 se obtiene directamente.
 </li>
 <li>
 $X \perp Y|Z,h(X,Z),g(Y,Z)$

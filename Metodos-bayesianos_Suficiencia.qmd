@@ -1,0 +1,18 @@
+---
+title: "Metodos bayesianos - Suficiencia"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Suficiencia
+
+### Suficiencia predictiva
+
+Dada la secuencia de v.a.s permutables $x_1, x_2...$. La secuencia de estadísticos $t_1, t_2, ...$ se dice suficiente predictiva para $x_1, x_2, ...$ SSI $\forall n \geq 1, r \geq 1$, y conjuntos disjuntos $\{ i_1, ..., i_r \}, \{ 1, ..., n \}$, 
+$$p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n) = p(x_{i_1}, ..., x_{i_r}|t_n)$$
+
+*Lo anterior es equivalente a $((x_{i_1}, ..., x_{i_r}) \perp x)|t_n$, notemos que $p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n, t_n) = p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n) = p(x_{i_1}, ..., x_{i_r}|t_n)$

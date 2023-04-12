@@ -1,0 +1,49 @@
+---
+title: "Metodos bayesianos - Distribución apriori y posteriori"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Distribución apriori y posteriori
+
+#### Permutabilidad finita
+
+Las v.a.s $X_1, ..., X_n$ se dicen permutables finitas, si $p(x_1, ..., x_n) = p(x_{\pi(1)}, ..., x_{\pi(n)})$, para toda permutación $\pi$.
+
+<details>
+<summary>Ejemplo</summary>
+Por ejemplo, si $X_1, X_2, X_3$ son permutables finitas, entonces se sigue que $P(X_1 = a, X_2 = b, X_3 = c) = P(X_1 = c, X_2 = a, X_3 = b), \forall a,b,c$ en el espacio muestral.
+</details>
+
+#### Permutabilidad infinita
+
+Las v.a.s $\{ X_1, X_2, ... \}$ se dicen permutables infinitas, si cualquier subconjunto/subsecuencia finita de ellas es permutable finito.
+
+### Teorema de representación general de Finetti
+
+Sea $X_1, X_2, ...$ una secuencia permutable infinita de v.a.s. Entonces existe un elemento $\theta$, con fdp $p(\theta)$ tal que la densidad (predictiva) de $X_1, ..., X_n$ tiene la forma:
+
+$$p(x_1, .., x_n) = \int_\Theta \left( \prod_{i=1}^n p(x_i | \theta) \right) \cdot p(\theta) d\theta$$
+En otras palabras, $(X_i \perp X_j )| \theta, \forall i \neq j$ para algún elemento $\theta$. En general, quienes cumplen esta representación son v.a.s iid dado un parámetro $\theta$.
+
+*Si se puede representar a $X_1, ..., X_n$ de esta forma (De Finetti), esto implica que son permutables (es decir este teorema es una equivalencia).
+
+#### Función de verosimilitud
+
+En la expresión anterior, a $\prod_{i=1}^n p(x_i|\theta)$ se le llama función de verosimilitud.
+
+#### Función de densidad a priori
+
+En la expresión anterior, a $p(\theta)$ se le llama fdp a priori para $\theta$.
+
+### Función de densidad a posteriori
+
+A la función de densidad de probabilidad $p(\theta|x) = \frac{\prod_{i=1}^n p(x_i|\theta) \cdot p(\theta)}{\int_{\Omega^X} \prod_{i=1}^n p(x_i|\theta) \cdot p(\theta)}$ se le conoce como densidad a posteriori de $\theta$. Luego, notemos que $p(\theta|x) \propto \prod_{i=1}^n p(x_i|\theta) \cdot p(\theta)$, de esta forma, nos interesa solamente encontrar la función respecto a $\theta$, es decir el kernel de la densidad, lo demás es una constante de normalización.
+
+### Distribución predictiva condicional
+
+Sean unas variables aleatorias permutables $x_1, ..., x_{n+m}$, entonces a la densidad $p(x_{n+1}, ..., x_m|x_1, ..., x_n) = \int_{\Theta} \left( \prod_{i=n+1}^{n+m} p(x_i|\theta) \right) p(\theta|x_1, ...,x_n) d\theta$.

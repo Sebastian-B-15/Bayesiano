@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -150,7 +150,7 @@ Sean <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</s
 <summary>
 Demostración
 </summary>
-<p>Por definición (alternativa) de independencia condicional, sean $ A,B,C , P(X A Y B | Z C) = P(X A | Z C) P(Y B | Z C)$, luego notemos que <span class="math inline">\(P(g(X) \in D) = P(X \in g^{-1}(D))\)</span>, donde <span class="math inline">\(g^{-1}(D)\)</span> se puede definir como <span class="math inline">\(g^{-1}(D) = \{ a \in \mathbb{R}: g(a) \in D \}\)</span>. Entonces <span class="math inline">\(P(g(X) \in D \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) | Z \in C) P(Y \in B | Z \in C) = P(g(X) \in D | Z \in C) P(Y \in B | Z \in C)\)</span>.</p>
+<p>Por definición (alternativa) de independencia condicional, sean <span class="math inline">\(A,B,C \subseteq \mathbb{R}, P(X \in A \cap Y \in B | Z \in C) = P(X \in A | Z \in C) P(Y \in B | Z \in C)\)</span>, luego notemos que <span class="math inline">\(P(g(X) \in D) = P(X \in g^{-1}(D))\)</span>, donde <span class="math inline">\(g^{-1}(D)\)</span> se puede definir como <span class="math inline">\(g^{-1}(D) = \{ a \in \mathbb{R}: g(a) \in D \}\)</span>. Entonces <span class="math inline">\(P(g(X) \in D \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) \cap Y \in B | Z \in C) = P(X \in g^{-1}(D) | Z \in C) P(Y \in B | Z \in C) = P(g(X) \in D | Z \in C) P(Y \in B | Z \in C)\)</span>.</p>
 Notemos que esta demostración es análoga para vectores aleatorios, es decir para demostrar <span class="math inline">\(((X_1,...,X_n) \perp Y)|Z \Rightarrow g(X_1,...,X_n) \perp Y|Z\)</span>. Pongamos la notación <span class="math inline">\(X = (X_1,...,X_n)\)</span> y consideremos <span class="math inline">\(G^{-1}(D) \subseteq \mathbb{R}^n\)</span> y <span class="math inline">\(D\)</span> de dimensiones adecuadas.
 </details>
 </li>
@@ -165,9 +165,14 @@ Notemos que <span class="math inline">\((Z \in C) \cap (g(Z) \in D) = (Z \in C \
 </li>
 <li>
 <span class="math inline">\(X \perp (Y,g(Z))|Z\)</span>
-</li>
-<li>
-<span class="math inline">\(h(X,Z) \perp g(Y,Z)|Z\)</span>
+<details>
+<summary>
+Demostración
+</summary>
+Notemos que <span class="math inline">\(p_{X,(Y,g(Z))|Z}(x,(y,g)|z) = p_{X,Y,g(Z)|Z}(x,y,g|z)\)</span>, notar que si <span class="math inline">\(g \neq g(z)\)</span> esta probabilidad es 0, y como <span class="math inline">\(p_{Y,g(Z)|Z}(y,g|z)\)</span> también sería 0, quedaría demostrado el enunciado. Supongamos entonces que <span class="math inline">\(g = g(z)\)</span>, luego <span class="math inline">\(p_{X,Y,g(Z)|Z}(x,y,g|z) =\)</span><br> <span class="math inline">\(p_{X,Y|g(Z),Z}(x,y|g,z)p_{g(Z)}(g) =\)</span><br> <span class="math inline">\(p_{X|g(Z),Z}(x|g,z)p_{Y|g(Z),Z}(y|g,z)p_{g(Z)}(g)\)</span><br> <span class="math inline">\(= p_{X|g(Z),Z}(x|g,z)p_{Y,g(Z)|Z}(y,g|z)\)</span> /como <span class="math inline">\(g = g(z)\)</span> en este caso:<br> <span class="math inline">\(p_{X|Z}(x|z)p_{Y,g(Z)|Z}(y,g|z)\)</span>
+</details>
+</li><li>
+<span class="math inline">\(h(X,Z) \perp g(Y,Z)|Z\)</span>. Usando lo anterior y la propiedad 1 se obtiene directamente.
 </li>
 <li>
 <span class="math inline">\(X \perp Y|Z,h(X,Z),g(Y,Z)\)</span>
