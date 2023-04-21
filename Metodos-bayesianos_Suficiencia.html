@@ -49,10 +49,17 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#metodos-bayesianos" id="toc-metodos-bayesianos" class="nav-link active" data-scroll-target="#metodos-bayesianos">Metodos bayesianos</a>
   <ul class="collapse">
+  <li><a href="#estadístico" id="toc-estadístico" class="nav-link" data-scroll-target="#estadístico">Estadístico</a></li>
   <li><a href="#suficiencia" id="toc-suficiencia" class="nav-link" data-scroll-target="#suficiencia">Suficiencia</a>
   <ul class="collapse">
   <li><a href="#suficiencia-predictiva" id="toc-suficiencia-predictiva" class="nav-link" data-scroll-target="#suficiencia-predictiva">Suficiencia predictiva</a></li>
+  <li><a href="#suficiencia-paramétrica" id="toc-suficiencia-paramétrica" class="nav-link" data-scroll-target="#suficiencia-paramétrica">Suficiencia paramétrica</a></li>
   </ul></li>
+  <li><a href="#equivalencia-de-suficiencias" id="toc-equivalencia-de-suficiencias" class="nav-link" data-scroll-target="#equivalencia-de-suficiencias">Equivalencia de suficiencias</a>
+  <ul class="collapse">
+  <li><a href="#factorización-de-neyman" id="toc-factorización-de-neyman" class="nav-link" data-scroll-target="#factorización-de-neyman">Factorización de Neyman</a></li>
+  </ul></li>
+  <li><a href="#estadístico-suficiente-minimal" id="toc-estadístico-suficiente-minimal" class="nav-link" data-scroll-target="#estadístico-suficiente-minimal">Estadístico suficiente minimal</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -84,13 +91,52 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="metodos-bayesianos" class="level1">
 <h1>Metodos bayesianos</h1>
+<section id="estadístico" class="level3">
+<h3 class="anchored" data-anchor-id="estadístico">Estadístico</h3>
+<p>Sean las v.a.s <span class="math inline">\(x_1, ..., x_n\)</span>, con conjuntos de valores posibles <span class="math inline">\(\chi_1, ..., \chi_n\)</span>, entonces al vector aleatorio <span class="math inline">\(t_n: \chi_1 \times ... \times \chi_n \rightarrow \mathbb{R}^{k(n)}\)</span> se le llama <b>estadístico</b>, con <span class="math inline">\(k(n) \leq n\)</span>.</p>
+</section>
 <section id="suficiencia" class="level2">
 <h2 class="anchored" data-anchor-id="suficiencia">Suficiencia</h2>
 <section id="suficiencia-predictiva" class="level3">
 <h3 class="anchored" data-anchor-id="suficiencia-predictiva">Suficiencia predictiva</h3>
-<p>Dada la secuencia de v.a.s permutables <span class="math inline">\(x_1, x_2...\)</span>. La secuencia de estadísticos <span class="math inline">\(t_1, t_2, ...\)</span> se dice suficiente predictiva para <span class="math inline">\(x_1, x_2, ...\)</span> SSI <span class="math inline">\(\forall n \geq 1, r \geq 1\)</span>, y conjuntos disjuntos <span class="math inline">\(\{ i_1, ..., i_r \}, \{ 1, ..., n \}\)</span>, <span class="math display">\[p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n) = p(x_{i_1}, ..., x_{i_r}|t_n)\]</span></p>
-<p>*Lo anterior es equivalente a <span class="math inline">\(((x_{i_1}, ..., x_{i_r}) \perp x)|t_n\)</span>, notemos que <span class="math inline">\(p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n, t_n) = p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n) = p(x_{i_1}, ..., x_{i_r}|t_n)\)</span></p>
+<p>Dada la secuencia de <i>v.a.s permutables <span class="math inline">\(x_1, x_2...\)</span></i>. La secuencia de estadísticos <span class="math inline">\(t_1, t_2, ...\)</span> se dice <b>suficiente predictiva para <span class="math inline">\(\boldsymbol{x_1, x_2, ...}\)</span> SSI <span class="math inline">\(\forall n \geq 1, r \geq 1\)</span></b>, y conjuntos disjuntos <span class="math inline">\(\{ i_1, ..., i_r \}, \{ 1, ..., n \}\)</span>, <span class="math display">\[\boldsymbol{p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n) = p(x_{i_1}, ..., x_{i_r}|t_n)}\]</span></p>
+<p>*Lo anterior es equivalente a <span class="math inline">\(\boldsymbol{((x_{i_1}, ..., x_{i_r}) \perp x)|t_n}\)</span></p>
+<details>
+<summary>
+Demostración
+</summary>
+Notemos que como <span class="math inline">\((x_1, ..., x_n)\)</span> contiene a <span class="math inline">\(t_n\)</span>, <span class="math inline">\(p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n, t_n) = p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n) = p(x_{i_1}, ..., x_{i_r}|t_n)\)</span>.
+</details>
 </section>
+<section id="suficiencia-paramétrica" class="level3">
+<h3 class="anchored" data-anchor-id="suficiencia-paramétrica">Suficiencia paramétrica</h3>
+<p>Dada la secuencia de <i>v.a.s permutables <span class="math inline">\(x_1, x_2...\)</span></i>. La secuencia de estadísticos <span class="math inline">\(t_1, t_2, ...\)</span> se dice <b>suficiente paramétrica para <span class="math inline">\(\boldsymbol{x_1, x_2, ...}\)</span> SSI <span class="math inline">\(\boldsymbol{\forall n \geq 1}\)</span></b>, <span class="math display">\[\boldsymbol{p(\theta|x_1, ..., x_n) = p(\theta|t_n)}\]</span></p>
+<p>*Lo anterior es equivalente a <span class="math inline">\(\boldsymbol{(\theta \perp x)|t_n}\)</span></p>
+<details>
+<summary>
+Demostración
+</summary>
+Notemos que como <span class="math inline">\((x_1, ..., x_n)\)</span> contiene a <span class="math inline">\(t_n\)</span>, <span class="math inline">\(p(\theta|x_1, ..., x_n, t_n) = p(\theta|x_1, ..., x_n) = p(\theta|t_n)\)</span>.
+</details>
+</section>
+</section>
+<section id="equivalencia-de-suficiencias" class="level2">
+<h2 class="anchored" data-anchor-id="equivalencia-de-suficiencias">Equivalencia de suficiencias</h2>
+<p>Sea una secuencia de v.a.s permutables <span class="math inline">\(x_1, x_2, ...\)</span>, la secuencia de estadísticos <span class="math inline">\(t_1, t_2, ...\)</span> es <b>suficiente predictiva</b> para <span class="math inline">\(x_1, x_2, ...\)</span> <b>SSI es suficiente paramétrica</b>.</p>
+<section id="factorización-de-neyman" class="level3">
+<h3 class="anchored" data-anchor-id="factorización-de-neyman">Factorización de Neyman</h3>
+<p>La secuencia <b><span class="math inline">\(\boldsymbol{t_1, t_2, ...}\)</span> es suficiente</b> para una secuencia infinita permutable <span class="math inline">\(x_1, x_2, ...\)</span> SSI <span class="math inline">\(\forall n \geq 1, \boldsymbol{p(x_1, ..., x_n|\theta) = h_n(t_n, \theta)g(x_1, ..., x_n)}\)</span>, donde <span class="math inline">\(h_n \geq 0\)</span> y <span class="math inline">\(g &gt; 0\)</span>.</p>
+<p>Esto quiere decir que cuando verosimilitud se puede expresar como una función que solo depende de <span class="math inline">\(t_n\)</span> y <span class="math inline">\(\theta\)</span>, y que se pondera por una función que depende de la muestra, entonces <span class="math inline">\(t_n\)</span> es suficiente.</p>
+</section>
+</section>
+<section id="estadístico-suficiente-minimal" class="level2">
+<h2 class="anchored" data-anchor-id="estadístico-suficiente-minimal">Estadístico suficiente minimal</h2>
+<p>Sea <span class="math inline">\(\{ p(x|\theta), \theta \in \Theta \}\)</span> una familia de densidades para <span class="math inline">\(x \in \chi\)</span>. Suponga que existe <span class="math inline">\(t_n\)</span> tal que, <span class="math inline">\(\forall x,y \in \chi\)</span> y para una función constante respecto a <span class="math inline">\(\theta\)</span>; <span class="math inline">\(C_{x,y}\)</span>, <span class="math inline">\(\boldsymbol{\forall \theta \in \Theta, \frac{p(x|\theta)}{p(y|\theta)} = C_{x,y} \Leftrightarrow t_n(x) = t_n(y)}\)</span>, <b>entonces <span class="math inline">\(t_n\)</span> es suficiente minimal</b>.</p>
+<details>
+<summary>
+Definición formal
+</summary>
+</details>
 </section>
 </section>
 

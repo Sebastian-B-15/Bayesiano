@@ -8,11 +8,51 @@ lang: es
 
 # Metodos bayesianos
 
+### Estadístico
+
+Sean las v.a.s $x_1, ..., x_n$, con conjuntos de valores posibles $\chi_1, ..., \chi_n$, entonces al vector aleatorio $t_n: \chi_1 \times ... \times \chi_n \rightarrow \mathbb{R}^{k(n)}$ se le llama <b>estadístico</b>, con $k(n) \leq n$.
+
 ## Suficiencia
 
 ### Suficiencia predictiva
 
-Dada la secuencia de v.a.s permutables $x_1, x_2...$. La secuencia de estadísticos $t_1, t_2, ...$ se dice suficiente predictiva para $x_1, x_2, ...$ SSI $\forall n \geq 1, r \geq 1$, y conjuntos disjuntos $\{ i_1, ..., i_r \}, \{ 1, ..., n \}$, 
-$$p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n) = p(x_{i_1}, ..., x_{i_r}|t_n)$$
+Dada la secuencia de <i>v.a.s permutables $x_1, x_2...$</i>. La secuencia de estadísticos $t_1, t_2, ...$ se dice <b>suficiente predictiva para $\boldsymbol{x_1, x_2, ...}$ SSI $\forall n \geq 1, r \geq 1$</b>, y conjuntos disjuntos $\{ i_1, ..., i_r \}, \{ 1, ..., n \}$, 
+$$\boldsymbol{p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n) = p(x_{i_1}, ..., x_{i_r}|t_n)}$$
 
-*Lo anterior es equivalente a $((x_{i_1}, ..., x_{i_r}) \perp x)|t_n$, notemos que $p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n, t_n) = p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n) = p(x_{i_1}, ..., x_{i_r}|t_n)$
+*Lo anterior es equivalente a $\boldsymbol{((x_{i_1}, ..., x_{i_r}) \perp x)|t_n}$ 
+
+<details>
+<summary>Demostración</summary>
+Notemos que como $(x_1, ..., x_n)$ contiene a $t_n$, $p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n, t_n) = p(x_{i_1}, ..., x_{i_r}|x_1, ..., x_n) = p(x_{i_1}, ..., x_{i_r}|t_n)$.
+</details>
+
+### Suficiencia paramétrica
+
+Dada la secuencia de <i>v.a.s permutables $x_1, x_2...$</i>. La secuencia de estadísticos $t_1, t_2, ...$ se dice <b>suficiente paramétrica para $\boldsymbol{x_1, x_2, ...}$ SSI $\boldsymbol{\forall n \geq 1}$</b>, 
+$$\boldsymbol{p(\theta|x_1, ..., x_n) = p(\theta|t_n)}$$
+
+*Lo anterior es equivalente a $\boldsymbol{(\theta \perp x)|t_n}$ 
+
+<details>
+<summary>Demostración</summary>
+Notemos que como $(x_1, ..., x_n)$ contiene a $t_n$, $p(\theta|x_1, ..., x_n, t_n) = p(\theta|x_1, ..., x_n) = p(\theta|t_n)$.
+</details>
+
+## Equivalencia de suficiencias
+
+Sea una secuencia de v.a.s permutables $x_1, x_2, ...$, la secuencia de estadísticos $t_1, t_2, ...$ es <b>suficiente predictiva</b> para $x_1, x_2, ...$ <b>SSI es suficiente paramétrica</b>.
+
+### Factorización de Neyman
+
+La secuencia <b>$\boldsymbol{t_1, t_2, ...}$ es suficiente</b> para una secuencia infinita permutable $x_1, x_2, ...$ SSI $\forall n \geq 1, \boldsymbol{p(x_1, ..., x_n|\theta) = h_n(t_n, \theta)g(x_1, ..., x_n)}$, donde $h_n \geq 0$ y $g > 0$.
+
+Esto quiere decir que cuando verosimilitud se puede expresar como una función que solo depende de $t_n$ y $\theta$, y que se pondera por una función que depende de la muestra, entonces $t_n$ es suficiente.
+
+## Estadístico suficiente minimal
+
+Sea $\{ p(x|\theta), \theta \in \Theta \}$ una familia de densidades para $x \in \chi$. Suponga que existe $t_n$ tal que, $\forall x,y \in \chi$ y para una función constante respecto a $\theta$; $C_{x,y}$, $\boldsymbol{\forall \theta \in \Theta, \frac{p(x|\theta)}{p(y|\theta)} = C_{x,y} \Leftrightarrow t_n(x) = t_n(y)}$, <b>entonces $t_n$ es suficiente minimal</b>.
+
+<details>
+<summary>Definición formal</summary>
+
+</details>

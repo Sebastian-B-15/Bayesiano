@@ -46,4 +46,4 @@ A la función de densidad de probabilidad $p(\theta|x) = \frac{\prod_{i=1}^n p(x
 
 ### Distribución predictiva condicional
 
-Sean unas variables aleatorias permutables $x_1, ..., x_{n+m}$, entonces a la densidad $p(x_{n+1}, ..., x_m|x_1, ..., x_n) = \int_{\Theta} \left( \prod_{i=n+1}^{n+m} p(x_i|\theta) \right) p(\theta|x_1, ...,x_n) d\theta$.
+Sean unas variables aleatorias permutables $x_1, ..., x_{n+m}$, entonces a la densidad $p(x_{n+1}, ..., x_m|x_1, ..., x_n)$. Si $x_1, x_2, ...$ es una secuencia permutable $= \int_{\Theta} \left( \prod_{i=n+1}^{n+m} p(x_i|\theta) \right) p(\theta|x_1, ...,x_n) d\theta$.
