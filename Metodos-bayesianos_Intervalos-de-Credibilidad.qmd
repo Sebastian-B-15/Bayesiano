@@ -1,0 +1,63 @@
+---
+title: "Metodos bayesianos - Regiones de Credibilidad"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Regiones de Credibilidad
+
+### Definición
+
+Consideremos una región $\mathcal{C} \subseteq \Theta$ tal que $\boldsymbol{\int_{\mathcal{C}} p(\theta)d\theta = 1 - \alpha}$. Entonces $\boldsymbol{\mathcal{C}}$ es una <b>región de credibilidad de $\boldsymbol{100(1-\alpha)\%}$</b> para $\theta$.
+
+Luego, $p(\theta)$ puede ser la fdp a priori, posteriori o incluso la predictiva a posteriori. Entonces diremos que la región $\mathcal{C}$ es una región de credibilidad a priori, posteriori o predictiva a posteriori, respectivamente.
+
+*[En general, las regiones de confianza para un parámetro unidemnsional que son más simples y muy usadas, son intervalos de <b>igualdad de colas</b> o <b>centrales</b>: $\boldsymbol{\mathcal{C} = \left[F^{-1} \left(\frac{\alpha}{2} \right), F^{-1} \left(1 - \frac{\alpha}{2} \right) \right]}$, donde $F$ es la función de distribución acumulada asociada a $p(\theta)$ y $F^{-1}$ es su inversa, es decir devuelve el cuantil indicado.]{style="font-size: 15px; color:#656565; font-style: italic"}
+
+<details>
+<summary>Ejemplo: Intervalo de credibilidad para una Gamma</summary>
+Se sabe que en el caso de tener una verosimilitud $P(\theta)$ y una priori $\textup{Gamma}(\alpha, \beta)$, entonces la posteriori es $\theta|x \sim \textup{Gamma}(\alpha + \sum_{i=1}^n x_i, \beta + n)$. Entonces un intervalo de credibilidad $(1-\alpha')100\%$ con igualdad de colas está dado por $\left[F^{-1} \left(\frac{\alpha}{2} \right), F^{-1} \left(1 - \frac{\alpha}{2} \right) \right]$, el cual no tiene forma explícita (o que sea agradable), luego en RStudio se puede encontrar este intervalo para valores númericos con la expresión:
+"qgamma(c($\alpha'/2$, $1 - \alpha'/2$), shape = $\alpha + \sum_{i=1}^n x_i$, rate = $\beta + n$)".
+</details>
+
+### Región de más alta probabilidad (HPD)
+
+Se dice que $\boldsymbol{\mathcal{C}}$<b> es una región de $\boldsymbol{100(1-\alpha)\%}$ de más alta probabilidad</b> para $\theta$ (priori, posteriori o predictiva posteriori según corresponda) SSI:
+<ol>
+<li>$\boldsymbol{P(\theta \in \mathcal{C}) = 1 - \alpha}$.</li>
+<li>$\boldsymbol{p(\theta_1) \geq p(\theta_2), \forall\theta_1 \in \mathcal{C}, \forall\theta_2 \notin \mathcal{C}}$, excepto por algún subconjunto de $\Theta$ de probabilidad $0$.</li>
+</ol>
+
+*[A la región $\mathcal{C}$ se le puede considerar como la más "pequeña", ya que como en estos puntos la fdp es mayor que en los demás, entonces "rellenan" más rápido la condición $P(\theta \in \mathcal{C}) = 1-\alpha$.]{style="font-size: 15px; color:#656565; font-style: italic"}
+
+#### Teorema - HPD y Función de pérdida
+
+[Sea la función de pérdida $l(\mathcal{C}, \theta) = k||\mathcal{C}|| - 1_{\mathcal{C}}(\theta), \mathcal{C} \in A, \theta \in \Theta, k>0$, donde $A = \{ \mathcal{C} : P(\theta \in \mathcal{C}) = 1-\alpha \}$. Entonces la región que minimiza la pérdida esperada es la región $\mathcal{C}$ HPD.]{style="font-size: 16.5px"}
+
+<details>
+<summary>Demostración</summary>
+Notemos que $E[l(\mathcal{C}, \theta)] = k||\mathcal{C}|| + E[1_{\mathcal{C}}(\theta)] = k||\mathcal{C}|| + P(\theta \in \mathcal{C})$. Luego como $\mathcal{C} \in A$, entonces $E[l(\mathcal{C}, \theta)] = k||\mathcal{C}|| + 1 - \alpha$. Luego, como $k>0$, esta expresión se minimiza cuando $||\mathcal{C}||$ es mínimo (región HPD), ya que todo lo demás es constante respecto a $\mathcal{C}$.
+</details>
+
+#### Observación - Región HPD caso uniparamétrico
+
+[Supongamos que tenemos una fdp $p(\theta)$ que es unimodal, o bien que tiene una joroba o que es cóncava* ($\cap$). Entonces, en general, las condiciones para encontrar la HPD $\mathcal{C} = [a,b]$ para $\theta$ son:]{style="font-size: 16.5px"}
+<ul>
+<li>[$\boldsymbol{P(\theta \in [a,b]) = 1-\alpha}$]{style="font-size: 16.5px"}.</li>
+<li>[$\boldsymbol{p(a) = p(b)}$]{style="font-size: 16.5px"}.</li>
+</ul>
+
+<details>
+<summary>Demostración</summary>
+Sea $p(\theta)$ cóncava y cuya derivada cambia de signo en algún punto. Para hallar el intervalo $[a,b]$ de menor longitud $(b-a)$ restringido a $P(\theta \in [a,b]) = 1-\alpha$, debemos usar multiplicadores de lagrange: $l(a,b;\lambda) = (b-a) + \lambda(\int_b^a p(\theta)d\theta - (1-\alpha))$. Derivando respecto a $a$, se sigue que:<br>
+$\frac{\partial l(a,b;\lambda)}{\partial a} = -1 + \lambda \cdot p(a)$, e igualando a $0$ se tiene que $\lambda = \frac{1}{p(a)}$.<br>
+Luego, derivando respecto a $b$, se sigue que:<br>
+$\frac{\partial l(a,b;lambda)}{\partial b} = 1 - \lambda \cdot p(b)$, e igualando a $0$ se tiene que $\lambda = \frac{1}{p(b)}$.<br>
+Luego, igualando ambas expresiones de $\lambda$, se sigue que $p(a) = p(b)$, y derivando respecto a $\lambda$ se tiene la restricción. Por otro lado, dado que $p$ es cóncava nos asegura que este intervalo sea mínimo.
+
+Por último, como $a < b$ y se sabe que $p'$ es decreciente, entonces $p'(a) > p'(b)$. Ahora, supongamos que $p'(a), p'(b)$ tienen el mismo signo, supongamos sin pérdida de generalidad que el signo es positivo. Entonces, a no ser de que la función $p$ sea decreciente en unos puntos intermedios ($p' < 0$) y luego creciente en otros $p' > 0$, no es posible que $p(a) = p(b)$, pero esto implicaría que la segunda derivada es positiva en algún punto -><-. Entonces $p'(a) > 0 >  p'(b)$ y por tanto existe $c$ (único por la monotonía de $p'$) tal que $p'(c) = 0$, entonces $\forall x \in[a,c], p(a) \leq p(x)$ y $\forall x \in[c,b], p(b) \leq p(x)$. Luego se tiene que $\forall \theta_1 \in [a,b], \forall \theta_2 \in ]-\infty, a[ \cup ]b, \infty[, p(\theta_1) \geq p(\theta_2)$.
+</details>

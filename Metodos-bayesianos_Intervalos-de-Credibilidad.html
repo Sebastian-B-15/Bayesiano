@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sebastian Baeza">
+
+<title>Metodos bayesianos - Regiones de Credibilidad</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Metodos-bayesianos_Intervalos-de-Credibilidad_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Metodos-bayesianos_Intervalos-de-Credibilidad_files/libs/quarto-html/quarto.js"></script>
+<script src="Metodos-bayesianos_Intervalos-de-Credibilidad_files/libs/quarto-html/popper.min.js"></script>
+<script src="Metodos-bayesianos_Intervalos-de-Credibilidad_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Metodos-bayesianos_Intervalos-de-Credibilidad_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Metodos-bayesianos_Intervalos-de-Credibilidad_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Intervalos-de-Credibilidad_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Metodos-bayesianos_Intervalos-de-Credibilidad_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Metodos-bayesianos_Intervalos-de-Credibilidad_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Intervalos-de-Credibilidad_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#metodos-bayesianos" id="toc-metodos-bayesianos" class="nav-link active" data-scroll-target="#metodos-bayesianos">Metodos bayesianos</a>
+  <ul class="collapse">
+  <li><a href="#regiones-de-credibilidad" id="toc-regiones-de-credibilidad" class="nav-link" data-scroll-target="#regiones-de-credibilidad">Regiones de Credibilidad</a>
+  <ul class="collapse">
+  <li><a href="#definición" id="toc-definición" class="nav-link" data-scroll-target="#definición">Definición</a></li>
+  <li><a href="#región-de-más-alta-probabilidad-hpd" id="toc-región-de-más-alta-probabilidad-hpd" class="nav-link" data-scroll-target="#región-de-más-alta-probabilidad-hpd">Región de más alta probabilidad (HPD)</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Metodos bayesianos - Regiones de Credibilidad</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sebastian Baeza </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="metodos-bayesianos" class="level1">
+<h1>Metodos bayesianos</h1>
+<section id="regiones-de-credibilidad" class="level2">
+<h2 class="anchored" data-anchor-id="regiones-de-credibilidad">Regiones de Credibilidad</h2>
+<section id="definición" class="level3">
+<h3 class="anchored" data-anchor-id="definición">Definición</h3>
+<p>Consideremos una región <span class="math inline">\(\mathcal{C} \subseteq \Theta\)</span> tal que <span class="math inline">\(\boldsymbol{\int_{\mathcal{C}} p(\theta)d\theta = 1 - \alpha}\)</span>. Entonces <span class="math inline">\(\boldsymbol{\mathcal{C}}\)</span> es una <b>región de credibilidad de <span class="math inline">\(\boldsymbol{100(1-\alpha)\%}\)</span></b> para <span class="math inline">\(\theta\)</span>.</p>
+<p>Luego, <span class="math inline">\(p(\theta)\)</span> puede ser la fdp a priori, posteriori o incluso la predictiva a posteriori. Entonces diremos que la región <span class="math inline">\(\mathcal{C}\)</span> es una región de credibilidad a priori, posteriori o predictiva a posteriori, respectivamente.</p>
+<p>*<span style="font-size: 15px; color:#656565; font-style: italic">En general, las regiones de confianza para un parámetro unidemnsional que son más simples y muy usadas, son intervalos de <b>igualdad de colas</b> o <b>centrales</b>: <span class="math inline">\(\boldsymbol{\mathcal{C} = \left[F^{-1} \left(\frac{\alpha}{2} \right), F^{-1} \left(1 - \frac{\alpha}{2} \right) \right]}\)</span>, donde <span class="math inline">\(F\)</span> es la función de distribución acumulada asociada a <span class="math inline">\(p(\theta)\)</span> y <span class="math inline">\(F^{-1}\)</span> es su inversa, es decir devuelve el cuantil indicado.</span></p>
+<details>
+<summary>
+Ejemplo: Intervalo de credibilidad para una Gamma
+</summary>
+Se sabe que en el caso de tener una verosimilitud <span class="math inline">\(P(\theta)\)</span> y una priori <span class="math inline">\(\textup{Gamma}(\alpha, \beta)\)</span>, entonces la posteriori es <span class="math inline">\(\theta|x \sim \textup{Gamma}(\alpha + \sum_{i=1}^n x_i, \beta + n)\)</span>. Entonces un intervalo de credibilidad <span class="math inline">\((1-\alpha')100\%\)</span> con igualdad de colas está dado por <span class="math inline">\(\left[F^{-1} \left(\frac{\alpha}{2} \right), F^{-1} \left(1 - \frac{\alpha}{2} \right) \right]\)</span>, el cual no tiene forma explícita (o que sea agradable), luego en RStudio se puede encontrar este intervalo para valores númericos con la expresión: “qgamma(c(<span class="math inline">\(\alpha'/2\)</span>, <span class="math inline">\(1 - \alpha'/2\)</span>), shape = <span class="math inline">\(\alpha + \sum_{i=1}^n x_i\)</span>, rate = <span class="math inline">\(\beta + n\)</span>)”.
+</details>
+</section>
+<section id="región-de-más-alta-probabilidad-hpd" class="level3">
+<h3 class="anchored" data-anchor-id="región-de-más-alta-probabilidad-hpd">Región de más alta probabilidad (HPD)</h3>
+Se dice que <span class="math inline">\(\boldsymbol{\mathcal{C}}\)</span><b> es una región de <span class="math inline">\(\boldsymbol{100(1-\alpha)\%}\)</span> de más alta probabilidad</b> para <span class="math inline">\(\theta\)</span> (priori, posteriori o predictiva posteriori según corresponda) SSI:
+<ol>
+<li>
+<span class="math inline">\(\boldsymbol{P(\theta \in \mathcal{C}) = 1 - \alpha}\)</span>.
+</li>
+<li>
+<span class="math inline">\(\boldsymbol{p(\theta_1) \geq p(\theta_2), \forall\theta_1 \in \mathcal{C}, \forall\theta_2 \notin \mathcal{C}}\)</span>, excepto por algún subconjunto de <span class="math inline">\(\Theta\)</span> de probabilidad <span class="math inline">\(0\)</span>.
+</li>
+</ol>
+<p>*<span style="font-size: 15px; color:#656565; font-style: italic">A la región <span class="math inline">\(\mathcal{C}\)</span> se le puede considerar como la más “pequeña”, ya que como en estos puntos la fdp es mayor que en los demás, entonces “rellenan” más rápido la condición <span class="math inline">\(P(\theta \in \mathcal{C}) = 1-\alpha\)</span>.</span></p>
+<section id="teorema---hpd-y-función-de-pérdida" class="level4">
+<h4 class="anchored" data-anchor-id="teorema---hpd-y-función-de-pérdida">Teorema - HPD y Función de pérdida</h4>
+<p><span style="font-size: 16.5px">Sea la función de pérdida <span class="math inline">\(l(\mathcal{C}, \theta) = k||\mathcal{C}|| - 1_{\mathcal{C}}(\theta), \mathcal{C} \in A, \theta \in \Theta, k&gt;0\)</span>, donde <span class="math inline">\(A = \{ \mathcal{C} : P(\theta \in \mathcal{C}) = 1-\alpha \}\)</span>. Entonces la región que minimiza la pérdida esperada es la región <span class="math inline">\(\mathcal{C}\)</span> HPD.</span></p>
+<details>
+<summary>
+Demostración
+</summary>
+Notemos que <span class="math inline">\(E[l(\mathcal{C}, \theta)] = k||\mathcal{C}|| + E[1_{\mathcal{C}}(\theta)] = k||\mathcal{C}|| + P(\theta \in \mathcal{C})\)</span>. Luego como <span class="math inline">\(\mathcal{C} \in A\)</span>, entonces <span class="math inline">\(E[l(\mathcal{C}, \theta)] = k||\mathcal{C}|| + 1 - \alpha\)</span>. Luego, como <span class="math inline">\(k&gt;0\)</span>, esta expresión se minimiza cuando <span class="math inline">\(||\mathcal{C}||\)</span> es mínimo (región HPD), ya que todo lo demás es constante respecto a <span class="math inline">\(\mathcal{C}\)</span>.
+</details>
+</section>
+<section id="observación---región-hpd-caso-uniparamétrico" class="level4">
+<h4 class="anchored" data-anchor-id="observación---región-hpd-caso-uniparamétrico">Observación - Región HPD caso uniparamétrico</h4>
+<span style="font-size: 16.5px">Supongamos que tenemos una fdp <span class="math inline">\(p(\theta)\)</span> que es unimodal, o bien que tiene una joroba o que es cóncava* (<span class="math inline">\(\cap\)</span>). Entonces, en general, las condiciones para encontrar la HPD <span class="math inline">\(\mathcal{C} = [a,b]\)</span> para <span class="math inline">\(\theta\)</span> son:</span>
+<ul>
+<li>
+<span style="font-size: 16.5px"><span class="math inline">\(\boldsymbol{P(\theta \in [a,b]) = 1-\alpha}\)</span></span>.
+</li>
+<li>
+<span style="font-size: 16.5px"><span class="math inline">\(\boldsymbol{p(a) = p(b)}\)</span></span>.
+</li>
+</ul>
+<details>
+<summary>
+Demostración
+</summary>
+<p>Sea <span class="math inline">\(p(\theta)\)</span> cóncava y cuya derivada cambia de signo en algún punto. Para hallar el intervalo <span class="math inline">\([a,b]\)</span> de menor longitud <span class="math inline">\((b-a)\)</span> restringido a <span class="math inline">\(P(\theta \in [a,b]) = 1-\alpha\)</span>, debemos usar multiplicadores de lagrange: <span class="math inline">\(l(a,b;\lambda) = (b-a) + \lambda(\int_b^a p(\theta)d\theta - (1-\alpha))\)</span>. Derivando respecto a <span class="math inline">\(a\)</span>, se sigue que:<br> <span class="math inline">\(\frac{\partial l(a,b;\lambda)}{\partial a} = -1 + \lambda \cdot p(a)\)</span>, e igualando a <span class="math inline">\(0\)</span> se tiene que <span class="math inline">\(\lambda = \frac{1}{p(a)}\)</span>.<br> Luego, derivando respecto a <span class="math inline">\(b\)</span>, se sigue que:<br> <span class="math inline">\(\frac{\partial l(a,b;lambda)}{\partial b} = 1 - \lambda \cdot p(b)\)</span>, e igualando a <span class="math inline">\(0\)</span> se tiene que <span class="math inline">\(\lambda = \frac{1}{p(b)}\)</span>.<br> Luego, igualando ambas expresiones de <span class="math inline">\(\lambda\)</span>, se sigue que <span class="math inline">\(p(a) = p(b)\)</span>, y derivando respecto a <span class="math inline">\(\lambda\)</span> se tiene la restricción. Por otro lado, dado que <span class="math inline">\(p\)</span> es cóncava nos asegura que este intervalo sea mínimo.</p>
+Por último, como <span class="math inline">\(a &lt; b\)</span> y se sabe que <span class="math inline">\(p'\)</span> es decreciente, entonces <span class="math inline">\(p'(a) &gt; p'(b)\)</span>. Ahora, supongamos que <span class="math inline">\(p'(a), p'(b)\)</span> tienen el mismo signo, supongamos sin pérdida de generalidad que el signo es positivo. Entonces, a no ser de que la función <span class="math inline">\(p\)</span> sea decreciente en unos puntos intermedios (<span class="math inline">\(p' &lt; 0\)</span>) y luego creciente en otros <span class="math inline">\(p' &gt; 0\)</span>, no es posible que <span class="math inline">\(p(a) = p(b)\)</span>, pero esto implicaría que la segunda derivada es positiva en algún punto -&gt;&lt;-. Entonces <span class="math inline">\(p'(a) &gt; 0 &gt; p'(b)\)</span> y por tanto existe <span class="math inline">\(c\)</span> (único por la monotonía de <span class="math inline">\(p'\)</span>) tal que <span class="math inline">\(p'(c) = 0\)</span>, entonces <span class="math inline">\(\forall x \in[a,c], p(a) \leq p(x)\)</span> y <span class="math inline">\(\forall x \in[c,b], p(b) \leq p(x)\)</span>. Luego se tiene que <span class="math inline">\(\forall \theta_1 \in [a,b], \forall \theta_2 \in ]-\infty, a[ \cup ]b, \infty[, p(\theta_1) \geq p(\theta_2)\)</span>.
+</details>
+</section>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
