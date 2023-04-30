@@ -1,0 +1,40 @@
+---
+title: "Metodos bayesianos - Estimación puntual y teoría de decisiones"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+### Teoría de decisiones
+
+En un teoría de decisiones tenemos los siguientes elementos:
+<ul>
+<li>Estados desconocidos de la naturaleza. En nuestro generalmente son los $\theta \in \Theta$.</li>
+<li>Soluciones posibles para el problema $a \in A$. En general, para nosotros $a \in \Theta$.</li>
+<li>La función de pérdida $l: A \times \Theta \rightarrow \mathbb{R}$, resume las consecuncias de las decisiones.</li>
+<li>Especificación, en forma de distribución de probabilidad, sobre la creencia de los estados de la naturaleza $p(\theta)$ o $p(\theta|x)$ o $p(x_2|x_1)$, etc.</li>
+</ul>
+
+#### Solución óptima
+
+La solución óptima es la que minimiza la pérdida esperada, es decir la acción $a \in A$ tal que se alcanza el mínimo de: $\int_{\Theta} l(a, \theta) p(\theta) d\theta$. 
+
+Cuando usamos $p(\theta)$ como densidad del parámetro o función de parámetro, hablamos de estimación puntual paramétrica. Al usar $p(x_1)$ como densidad de una observación futura, hablamos de estimación puntual predictiva.
+
+### Estimador de Bayes
+
+Un estimador de Bayes de un parámetro $\theta$, con respecto a la función de pérdida $l(a, \theta)$, es la acción $a \in \Theta$ que minimiza la pérdida esperada, es decir $\int_{\Theta} l(a, \theta) p(\theta) d\theta$.
+
+#### Ejemplos
+
+#### Estimador de Bayes bajo pérdida cuadrática
+
+Sea $l(a, \theta) = (a - \theta)^T H (a-\theta)$, con $H$ definida positiva, el estimador de Bayes de $\theta$ dado los datos $x$ es $E[\theta|x]$.
+
+<details>
+<summary>Demostración</summary>
+Notemos que $E[l(a, \theta)|x] = a^THa - 2 a^TH E[\theta|x] + E[\theta^TH\theta|x]$. Entonces notemos que al derivar respecto de $a$: $\frac{\partial E[l(a, \theta)|x]}{\partial a} = 2Ha - 2HE[\theta|x]$, e igualando a $0$ se sigue que: $0 = 2Ha - 2HE[\theta|x] \Rightarrow a = E[\theta|x]$. 
+</details>

@@ -60,4 +60,6 @@ Sea $(\Omega, \mathcal{F}, P)$ un espacio de probabilidad y $\{A_i \in \mathcal{
 
 Luego, nos interesa también la siguiente deducción: $\forall i \in I, P(A_i | G \bigcap_{j \neq i} A_j) = P(A_i|G)$.
 
-<b>*Si actualizamos una probabilidad $P(A|B)$ dada una nueva información (o evento $C$), podemos usar $P(A|B \cap C) = \frac{P(B)}{P(C \cap B)} P(A|B)$, donde a $\frac{P(B)}{P(C \cap B)}$ lo llamamos factor de actualización.</b>
+<b>*Si actualizamos una probabilidad $P(A|B)$ dada una nueva información (o evento $C$), podemos usar $P(A|B \cap C) = \frac{P(A \cap B \cap C)}{P(B \cap C)} = \frac{P(C|A \cap B) \cdot P(B) \cdot P(A|B)}{P(B) P(C|B)} = \frac{P(C|A \cap B)}{P(C | B)} P(A|B)$, donde a $\frac{P(C|A \cap B)}{P(C|B)}$ lo llamamos factor de actualización.</b>
+
+Además, supongamos que $C$ es condicionalmente independiente de $B$ dado $A$ (como por ejemplo $A$ es estar enfermo, $B$ es obtener positivo en un test de enfermedad y $C$ es el diagnóstico del médico), entonces lo anterior es: $P(A|B \cap C) = \frac{P(C|A \cap B)}{P(C | B)} P(A|B) = \frac{P(C|A)}{P(C | B)} P(A|B)$
