@@ -53,6 +53,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#definición" id="toc-definición" class="nav-link" data-scroll-target="#definición">Definición</a></li>
   <li><a href="#región-de-más-alta-probabilidad-hpd" id="toc-región-de-más-alta-probabilidad-hpd" class="nav-link" data-scroll-target="#región-de-más-alta-probabilidad-hpd">Región de más alta probabilidad (HPD)</a></li>
+  <li><a href="#ejercicio-1" id="toc-ejercicio-1" class="nav-link" data-scroll-target="#ejercicio-1">Ejercicio 1</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -111,8 +112,8 @@ Se dice que <span class="math inline">\(\boldsymbol{\mathcal{C}}\)</span><b> es 
 </li>
 </ol>
 <p>*<span style="font-size: 15px; color:#656565; font-style: italic">A la región <span class="math inline">\(\mathcal{C}\)</span> se le puede considerar como la más “pequeña”, ya que como en estos puntos la fdp es mayor que en los demás, entonces “rellenan” más rápido la condición <span class="math inline">\(P(\theta \in \mathcal{C}) = 1-\alpha\)</span>.</span></p>
-<section id="teorema---hpd-y-función-de-pérdida" class="level4">
-<h4 class="anchored" data-anchor-id="teorema---hpd-y-función-de-pérdida">Teorema - HPD y Función de pérdida</h4>
+<section id="teorema---región-hpd-y-función-de-pérdida" class="level5">
+<h5 class="anchored" data-anchor-id="teorema---región-hpd-y-función-de-pérdida">Teorema - Región HPD y Función de pérdida</h5>
 <p><span style="font-size: 16.5px">Sea la función de pérdida <span class="math inline">\(l(\mathcal{C}, \theta) = k||\mathcal{C}|| - 1_{\mathcal{C}}(\theta), \mathcal{C} \in A, \theta \in \Theta, k&gt;0\)</span>, donde <span class="math inline">\(A = \{ \mathcal{C} : P(\theta \in \mathcal{C}) = 1-\alpha \}\)</span>. Entonces la región que minimiza la pérdida esperada es la región <span class="math inline">\(\mathcal{C}\)</span> HPD.</span></p>
 <details>
 <summary>
@@ -121,8 +122,8 @@ Demostración
 Notemos que <span class="math inline">\(E[l(\mathcal{C}, \theta)] = k||\mathcal{C}|| + E[1_{\mathcal{C}}(\theta)] = k||\mathcal{C}|| + P(\theta \in \mathcal{C})\)</span>. Luego como <span class="math inline">\(\mathcal{C} \in A\)</span>, entonces <span class="math inline">\(E[l(\mathcal{C}, \theta)] = k||\mathcal{C}|| + 1 - \alpha\)</span>. Luego, como <span class="math inline">\(k&gt;0\)</span>, esta expresión se minimiza cuando <span class="math inline">\(||\mathcal{C}||\)</span> es mínimo (región HPD), ya que todo lo demás es constante respecto a <span class="math inline">\(\mathcal{C}\)</span>.
 </details>
 </section>
-<section id="observación---región-hpd-caso-uniparamétrico" class="level4">
-<h4 class="anchored" data-anchor-id="observación---región-hpd-caso-uniparamétrico">Observación - Región HPD caso uniparamétrico</h4>
+<section id="observación---región-hpd-caso-uniparamétrico" class="level5">
+<h5 class="anchored" data-anchor-id="observación---región-hpd-caso-uniparamétrico">Observación - Región HPD caso uniparamétrico</h5>
 <span style="font-size: 16.5px">Supongamos que tenemos una fdp <span class="math inline">\(p(\theta)\)</span> que es unimodal, o bien que tiene una joroba o que es cóncava* (<span class="math inline">\(\cap\)</span>). Entonces, en general, las condiciones para encontrar la HPD <span class="math inline">\(\mathcal{C} = [a,b]\)</span> para <span class="math inline">\(\theta\)</span> son:</span>
 <ul>
 <li>
@@ -140,6 +141,22 @@ Demostración
 Por último, como <span class="math inline">\(a &lt; b\)</span> y se sabe que <span class="math inline">\(p'\)</span> es decreciente, entonces <span class="math inline">\(p'(a) &gt; p'(b)\)</span>. Ahora, supongamos que <span class="math inline">\(p'(a), p'(b)\)</span> tienen el mismo signo, supongamos sin pérdida de generalidad que el signo es positivo. Entonces, a no ser de que la función <span class="math inline">\(p\)</span> sea decreciente en unos puntos intermedios (<span class="math inline">\(p' &lt; 0\)</span>) y luego creciente en otros <span class="math inline">\(p' &gt; 0\)</span>, no es posible que <span class="math inline">\(p(a) = p(b)\)</span>, pero esto implicaría que la segunda derivada es positiva en algún punto -&gt;&lt;-. Entonces <span class="math inline">\(p'(a) &gt; 0 &gt; p'(b)\)</span> y por tanto existe <span class="math inline">\(c\)</span> (único por la monotonía de <span class="math inline">\(p'\)</span>) tal que <span class="math inline">\(p'(c) = 0\)</span>, entonces <span class="math inline">\(\forall x \in[a,c], p(a) \leq p(x)\)</span> y <span class="math inline">\(\forall x \in[c,b], p(b) \leq p(x)\)</span>. Luego se tiene que <span class="math inline">\(\forall \theta_1 \in [a,b], \forall \theta_2 \in ]-\infty, a[ \cup ]b, \infty[, p(\theta_1) \geq p(\theta_2)\)</span>.
 </details>
 </section>
+</section>
+<section id="ejercicio-1" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-1">Ejercicio 1</h3>
+<p>Sea una secuencia de v.a.s permutables con verosimilitud <span class="math inline">\(N(\theta, \sigma^2)\)</span> y una a priori <span class="math inline">\(N(\mu, \tau^2)\)</span> para <span class="math inline">\(\theta\)</span>, encuentre una región HPD de credibilidad <span class="math inline">\(100(1-\alpha)\%\)</span> a posteriori para <span class="math inline">\(\theta\)</span>.</p>
+Se sabe que en un modelo normal-normal tiene una posteriori <span class="math inline">\(\theta|x \sim N \left( \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right), \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \right)\)</span>. Luego, notemos que la fdp de la distribución normal es unimodal y además es par (al estar centrada), entonces podemos determinar fácilmente <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> tales que:
+<ol>
+<li>
+<span class="math inline">\(P(\theta \in [a,b]) = 1 - \alpha\)</span>.
+</li>
+<li>
+<span class="math inline">\(p(a) = p(b)\)</span>.
+</li>
+</ol>
+<p>Notemos que <span class="math inline">\(p(a) = p(b)\)</span><br> <span class="math inline">\(\Rightarrow \left| a - \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right| = \left| b - \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right|\)</span> / <span class="math inline">\((b \neq a)\)</span><br> <span class="math inline">\(\Rightarrow - a + \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) = b - \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right)\)</span> <span class="math inline">\(\Rightarrow - a + 2\left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) = b\)</span><br> Luego, por propiedades de la normal se sigue que: <span class="math inline">\(a = F^{-1}(\alpha/2)\)</span>, <span class="math inline">\(b = F^{-1}(1 - \alpha/2)\)</span>.</p>
+<p>Si bien en este caso se pudo encontrar una expresión bastante agradable para un intervalo de credibilidad, pocas veces es así de sencillo. En general se deben usar métodos númericos, como el comando “hpd()” de RStudio.</p>
+<p>Otras desventajas de las regiones HPD es que son variantes ante reparametrizaciones o si se quiere una región HPD de una transformación del parámetro. Además no se pueden obtener regiones HPD marginales a partir de conjuntas.</p>
 </section>
 </section>
 </section>

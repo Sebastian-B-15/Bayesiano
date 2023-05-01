@@ -34,7 +34,7 @@ Se dice que $\boldsymbol{\mathcal{C}}$<b> es una región de $\boldsymbol{100(1-\
 
 *[A la región $\mathcal{C}$ se le puede considerar como la más "pequeña", ya que como en estos puntos la fdp es mayor que en los demás, entonces "rellenan" más rápido la condición $P(\theta \in \mathcal{C}) = 1-\alpha$.]{style="font-size: 15px; color:#656565; font-style: italic"}
 
-#### Teorema - HPD y Función de pérdida
+##### Teorema - Región HPD y Función de pérdida
 
 [Sea la función de pérdida $l(\mathcal{C}, \theta) = k||\mathcal{C}|| - 1_{\mathcal{C}}(\theta), \mathcal{C} \in A, \theta \in \Theta, k>0$, donde $A = \{ \mathcal{C} : P(\theta \in \mathcal{C}) = 1-\alpha \}$. Entonces la región que minimiza la pérdida esperada es la región $\mathcal{C}$ HPD.]{style="font-size: 16.5px"}
 
@@ -43,7 +43,7 @@ Se dice que $\boldsymbol{\mathcal{C}}$<b> es una región de $\boldsymbol{100(1-\
 Notemos que $E[l(\mathcal{C}, \theta)] = k||\mathcal{C}|| + E[1_{\mathcal{C}}(\theta)] = k||\mathcal{C}|| + P(\theta \in \mathcal{C})$. Luego como $\mathcal{C} \in A$, entonces $E[l(\mathcal{C}, \theta)] = k||\mathcal{C}|| + 1 - \alpha$. Luego, como $k>0$, esta expresión se minimiza cuando $||\mathcal{C}||$ es mínimo (región HPD), ya que todo lo demás es constante respecto a $\mathcal{C}$.
 </details>
 
-#### Observación - Región HPD caso uniparamétrico
+##### Observación - Región HPD caso uniparamétrico
 
 [Supongamos que tenemos una fdp $p(\theta)$ que es unimodal, o bien que tiene una joroba o que es cóncava* ($\cap$). Entonces, en general, las condiciones para encontrar la HPD $\mathcal{C} = [a,b]$ para $\theta$ son:]{style="font-size: 16.5px"}
 <ul>
@@ -61,3 +61,22 @@ Luego, igualando ambas expresiones de $\lambda$, se sigue que $p(a) = p(b)$, y d
 
 Por último, como $a < b$ y se sabe que $p'$ es decreciente, entonces $p'(a) > p'(b)$. Ahora, supongamos que $p'(a), p'(b)$ tienen el mismo signo, supongamos sin pérdida de generalidad que el signo es positivo. Entonces, a no ser de que la función $p$ sea decreciente en unos puntos intermedios ($p' < 0$) y luego creciente en otros $p' > 0$, no es posible que $p(a) = p(b)$, pero esto implicaría que la segunda derivada es positiva en algún punto -><-. Entonces $p'(a) > 0 >  p'(b)$ y por tanto existe $c$ (único por la monotonía de $p'$) tal que $p'(c) = 0$, entonces $\forall x \in[a,c], p(a) \leq p(x)$ y $\forall x \in[c,b], p(b) \leq p(x)$. Luego se tiene que $\forall \theta_1 \in [a,b], \forall \theta_2 \in ]-\infty, a[ \cup ]b, \infty[, p(\theta_1) \geq p(\theta_2)$.
 </details>
+
+### Ejercicio 1
+
+Sea una secuencia de v.a.s permutables con verosimilitud $N(\theta, \sigma^2)$ y una a priori $N(\mu, \tau^2)$ para $\theta$, encuentre una región HPD de credibilidad $100(1-\alpha)\%$ a posteriori para $\theta$.
+
+Se sabe que en un modelo normal-normal tiene una posteriori $\theta|x \sim N \left( \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right), \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \right)$. Luego, notemos que la fdp de la distribución normal es unimodal y además es par (al estar centrada), entonces podemos determinar fácilmente $a$ y $b$ tales que:
+<ol>
+<li>$P(\theta \in [a,b]) = 1 - \alpha$.</li>
+<li>$p(a) = p(b)$.</li>
+</ol>
+Notemos que $p(a) = p(b)$<br> 
+$\Rightarrow \left| a - \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right| = \left| b - \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right|$ / $(b \neq a)$<br>
+$\Rightarrow - a + \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) = b - \left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right)$
+$\Rightarrow - a + 2\left(\frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1} \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) = b$<br>
+Luego, por propiedades de la normal se sigue que: $a = F^{-1}(\alpha/2)$, $b = F^{-1}(1 - \alpha/2)$.
+
+Si bien en este caso se pudo encontrar una expresión bastante agradable para un intervalo de credibilidad, pocas veces es así de sencillo. En general se deben usar métodos númericos, como el comando "hpd()" de RStudio.
+
+Otras desventajas de las regiones HPD es que son variantes ante reparametrizaciones o si se quiere una región HPD de una transformación del parámetro. Además no se pueden obtener regiones HPD marginales a partir de conjuntas.
