@@ -1,0 +1,47 @@
+---
+title: "Metodos bayesianos - Test de hipótesis"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Tests de Hipótesis
+
+El problema clásico de test de hipótesis, también corresponde a un problema de decisión. Supongamos que $\theta$ puede tomar valores en $\Theta$, entonces las hipótesis a probar son de la forma $H_0: \theta \in \Theta_0$ versus $H_1: \theta \in \Theta_1$, donde $\{ \Theta_0, \Theta_1 \}$ es una partición de $\Theta$.
+
+Siguiendo con el problema de decisión, definiremos los estados desconocidos de la naturaleza como $\Omega = \{w_0 := "\theta \in \Theta_0", w_1 := "\theta \in \Theta_1" \}$, o sea nos interesa cuál es la hipótesis cierta, no el valor específico de $\theta$. Las decisiones posibles a tomar son $A = \{ a_0, a_1 \}$, que son concluir $H_0$ y $H_1$ respectivamente.
+
+Luego, la función de pérdida $l(a_i, w_i), i=1,2$ toma a lo mucho mucho cuatro valores, ya que su dominio es $\{ (a_0, w_0), (a_1, w_0), (a_0, w_1), (a_1, w_1) \}$.
+
+### Función de pérdida 0-1 generalizada
+
+Dado un problema de decisión tipo test de hipótesis, la función de pérdida 0-1 generalizada se dice que es aquella de la forma: $l(a_0, w_0) = l(a_1, w_1) = 0$ (aceptar/concluir la hipotesis correcta), $l(a_1, w_0) = c_1 > 0$, $l(a_0, w_1) = c_2 > 0$.
+
+#### Regla de decisión óptima
+
+Bajo esta función de pérdida y contexto, supongamos que deseamos tomar una decisión a posteriori, entonces la decisión óptima que minimiza la pérdida esperada es:
+
+- Aceptar $H_1: \theta \in \Theta_1$ si $P(\theta \in \Theta_0|x) < \frac{c_2}{c_1 + c_2}$.
+- Aceptar $H_0: \theta \in \Theta_0$ si $P(\theta \in \Theta_0|x) > \frac{c_2}{c_1 + c_2}$.
+
+<details>
+<summary>Demostración</summary>
+Podemos expresar la pérdida esperada como una matriz:
+$$(l(a_i, w_i) \cdot P(w_i))_{i=1,2} = \begin{bmatrix} & a_0 & a_1 \\ w_0 & 0 & c_1 \cdot P(\theta \in \Theta_0) \\ w_1 & c_2 \cdot P(\theta \in \Theta_1) & 0 \end{bmatrix}$$
+Luego, la pérdida esperada al escoger $a_0$ es la suma de la primera columna: $c_2 \cdot P(\theta \in \Theta_1)$, mientras que la de escoger $a_1$ es la suma de la segunda: $c_1 \cdot P(\theta \in \Theta_0)$. Entonces escogemos la menor pérdida esperada, supongamos que decidimos $a_0: \textup{Concluir } H_0$, entonces es porque $c_2 \cdot P(\theta \in \Theta_1) < c_1 \cdot P(\theta \in \Theta_0) \Rightarrow c_2 \cdot (1 - P(\theta \in \Theta_0)) < c_1 \cdot P(\theta \in \Theta_0) \Rightarrow c_2 < (c_1 + c_2) P(\theta \in \Theta_0)$. Luego, es análogo para demostrar el caso en que se decide $a_1$.
+</details>
+
+<details>
+<summary>Ejercicio 1</summary> 
+Considere la secuencia de variables aleatorias permutables $x_1 , ..., x_n$ , con verosimilitud $N(\theta, \sigma^2)$, con distribución a priori $N(\mu, \tau^2)$ para $\theta$, donde $\sigma^2, \mu, \tau^2$ son conocidos. Interesa testear:<br>
+$H_0: \theta \geq \theta_0 $ versus $H_1: \theta < \theta_0$, con $\theta_0$ un valor fijo en $\mathbb{R}$. Encuentre la regla de decisión óptima bajo una función de pérdida 0-1 generalizada.
+
+Se sabe que en un modelo normal-normal como esta, la distribución a posteriori es una $N\left(v^2 \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right), v^2 \right)$, con $v^2 = \left( \frac{1}{\tau^2} + \frac{n}{\sigma^2} \right)^{-1}$.
+
+Luego, se tiene que $P(\theta \geq \theta_0) = P \left( v^{-2}\theta - \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \geq v^{-2}\theta_0 - \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right)$<br>
+$= 1 - P \left( Z < v^{-2}\theta_0 - \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right)$<br>
+Entonces concluimos $H_1$ si $1 - \phi \left( v^{-2}\theta_0 - \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right) < \frac{c_2}{c_1 + c_2}$. (En Rstudio otra opción es usar 1 - pnorm($\theta_0$, $\left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right)$, $v$))
+</details>
