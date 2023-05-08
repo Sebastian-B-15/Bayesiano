@@ -52,6 +52,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#tests-de-hipótesis" id="toc-tests-de-hipótesis" class="nav-link" data-scroll-target="#tests-de-hipótesis">Tests de Hipótesis</a>
   <ul class="collapse">
   <li><a href="#función-de-pérdida-0-1-generalizada" id="toc-función-de-pérdida-0-1-generalizada" class="nav-link" data-scroll-target="#función-de-pérdida-0-1-generalizada">Función de pérdida 0-1 generalizada</a></li>
+  <li><a href="#hipótesis-puntuales" id="toc-hipótesis-puntuales" class="nav-link" data-scroll-target="#hipótesis-puntuales">Hipótesis puntuales</a></li>
+  <li><a href="#probabilidad-a-posteriori" id="toc-probabilidad-a-posteriori" class="nav-link" data-scroll-target="#probabilidad-a-posteriori">Probabilidad a posteriori</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -114,6 +116,15 @@ Ejercicio 1
 Luego, se tiene que <span class="math inline">\(P(\theta \geq \theta_0) = P \left( v^{-2}\theta - \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \geq v^{-2}\theta_0 - \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right)\)</span><br> <span class="math inline">\(= 1 - P \left( Z &lt; v^{-2}\theta_0 - \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right)\)</span><br> Entonces concluimos <span class="math inline">\(H_1\)</span> si <span class="math inline">\(1 - \phi \left( v^{-2}\theta_0 - \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right) &lt; \frac{c_2}{c_1 + c_2}\)</span>. (En Rstudio otra opción es usar 1 - pnorm(<span class="math inline">\(\theta_0\)</span>, <span class="math inline">\(\left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right)\)</span>, <span class="math inline">\(v\)</span>))
 </details>
 </section>
+</section>
+<section id="hipótesis-puntuales" class="level3">
+<h3 class="anchored" data-anchor-id="hipótesis-puntuales">Hipótesis puntuales</h3>
+<p>Consideren las hipótesis <span class="math inline">\(H_0: \theta = \theta_0\)</span> versus <span class="math inline">\(H_1: \theta \neq \theta_0\)</span>. Entonces si la distribución de <span class="math inline">\(\theta\)</span> (a priori/posteriori según corresponda) es continua, <span class="math inline">\(P(\theta = \theta_0) = 0\)</span>, por lo que nunca podríamos aceptar <span class="math inline">\(H_0\)</span> (bajo la función de pérdida anterior).</p>
+<p>Luego debemos asignarle una probabilidad a este evento, supongamos <span class="math inline">\(0 &lt; p_0 = P(\theta = \theta_0)\)</span>. Entonces la nueva fdp ajustada sería: <span class="math display">\[p(\theta) = p_0 \cdot I_{(\theta = \theta_0)} + (1 - p_0) \cdot p'(\theta) \cdot I_{(\theta \neq \theta_0)} *\]</span> Donde <span class="math inline">\(p'(\theta)\)</span> es la fdp original de <span class="math inline">\(\theta\)</span> a priori/posteriori. Como <span class="math inline">\(P(\theta = \theta_0) = p_0\)</span>, entonces <span class="math inline">\(P(\theta \neq \theta_0) = 1 - p_0\)</span>. De esta forma, escalamos la fdp original por <span class="math inline">\((1 - p_0)\)</span> cuando <span class="math inline">\(\theta\)</span> es diferente de <span class="math inline">\(\theta_0\)</span>. Esta v.a. ahora tiene una parte continua y otra discreta, luego si se integra la fdp en el dominio continuo y se suma la fdp el dominio discreto, el total es <span class="math inline">\(1\)</span>.</p>
+</section>
+<section id="probabilidad-a-posteriori" class="level3">
+<h3 class="anchored" data-anchor-id="probabilidad-a-posteriori">Probabilidad a posteriori</h3>
+<p>Supongamos que la probabilidad de <span class="math inline">\(\theta = \theta_0\)</span> a posteriori es <span class="math inline">\(p_1\)</span> (<span class="math inline">\(p_1 = P(\theta = \theta_0|x)\)</span>). Si la probabilidad a priori es como se definió anteriormente <span class="math inline">\(P(\theta = \theta_0) = p_0\)</span>, entonces esta se puede actualizar usando: <span class="math display">\[\frac{p_1}{1-p_1} = \frac{p_0}{1-p_0} \cdot \frac{p(x|\theta_0)}{\int_{\theta} p(x|\theta)p(\theta) d\theta}\]</span> Esto se demuestra usando la fdp ajustada anteriormente para <span class="math inline">\(\theta\)</span>.</p>
 </section>
 </section>
 </section>

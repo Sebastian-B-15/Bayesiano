@@ -45,3 +45,17 @@ Luego, se tiene que $P(\theta \geq \theta_0) = P \left( v^{-2}\theta - \left( \f
 $= 1 - P \left( Z < v^{-2}\theta_0 - \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right)$<br>
 Entonces concluimos $H_1$ si $1 - \phi \left( v^{-2}\theta_0 - \left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right) \right) < \frac{c_2}{c_1 + c_2}$. (En Rstudio otra opción es usar 1 - pnorm($\theta_0$, $\left( \frac{\mu}{\tau^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2} \right)$, $v$))
 </details>
+
+### Hipótesis puntuales
+
+Consideren las hipótesis $H_0: \theta = \theta_0$ versus $H_1: \theta \neq \theta_0$. Entonces si la distribución de $\theta$ (a priori/posteriori según corresponda) es continua, $P(\theta = \theta_0) = 0$, por lo que nunca podríamos aceptar $H_0$ (bajo la función de pérdida anterior).
+
+Luego debemos asignarle una probabilidad a este evento, supongamos $0 < p_0 = P(\theta = \theta_0)$. Entonces la nueva fdp ajustada sería:
+$$p(\theta) = p_0 \cdot I_{(\theta = \theta_0)} + (1 - p_0) \cdot p'(\theta) \cdot I_{(\theta \neq \theta_0)} *$$
+Donde $p'(\theta)$ es la fdp original de $\theta$ a priori/posteriori. Como $P(\theta = \theta_0) = p_0$, entonces $P(\theta \neq \theta_0) = 1 - p_0$. De esta forma, escalamos la fdp original por $(1 - p_0)$ cuando $\theta$ es diferente de $\theta_0$. Esta v.a. ahora tiene una parte continua y otra discreta, luego si se integra la fdp en el dominio continuo y se suma la fdp el dominio discreto, el total es $1$.
+
+### Probabilidad a posteriori
+
+Supongamos que la probabilidad de $\theta = \theta_0$ a posteriori es $p_1$ ($p_1 = P(\theta = \theta_0|x)$). Si la probabilidad a priori es como se definió anteriormente $P(\theta = \theta_0) = p_0$, entonces esta se puede actualizar usando: 
+$$\frac{p_1}{1-p_1} = \frac{p_0}{1-p_0} \cdot \frac{p(x|\theta_0)}{\int_{\theta} p(x|\theta)p(\theta) d\theta}$$
+Esto se demuestra usando la fdp ajustada anteriormente para $\theta$.
