@@ -1,0 +1,99 @@
+---
+title: "Metodos bayesianos - Ayudantia 7"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Ayudantía 7
+
+### Ejercicio 1
+
+Suponga que se realiza un experimento de lanzar una moneda y se considera éxito como la obtención de cara. Se obtienen 7 éxitos de 30 lanzamientos.<br>
+Usted plantea dos modelos y desea evaluar que modelo posee mejor comportamiento:<br>
+$M_1$: Modelo "complejo", se considera una función de verosimilitud con distribución binomial (esto quiere decir que $p(x|\theta) = \prod_{i=1}^n \binom{n}{x_i}p^{x_i}(1-p)^{n-x_i}$, no confundir con un una pitatoria de bernoullis) y una distribución a priori beta para la probabilidad de que salga sello con parámetros $\alpha = 2$ y $\beta = 8$.<br>
+$M_2$: Modelo "Simple" (anidado) se considera una función de verosimilitud con distribución binomial ($p(x|\theta) = \prod_{i=1}^n \binom{n}{x_i}p^{x_i}(1-p)^{n-x_i}$), sin embargo, se considera que la probabilidad de que salga sello o cara es fija y equiprobable.<br>
+Determine que modelo es mejor utilizando el Factor de Bayes.
+
+Para el primer modelo, consideremos que tenemos una única binomial, con $n = 30$ y $x_1 = 7$ según lo dicho en el enunciado. Por otro lado, la densidad a priori sería $p(\theta) = \frac{\Gamma(10)}{\Gamma(2)\Gamma(8)} \theta^{2-1}(1-\theta)^{8-1} \cdot 1_{[0,1]}(\theta)$. Luego, queremos conocer $\int_\Theta p(x|\theta)p(\theta)d\theta$<br> 
+$= \frac{\Gamma(10)}{\Gamma(2)\Gamma(8)} \int_0^1 \binom{30}{7}\theta^{7}(1-\theta)^{23} \cdot \theta^{1}(1-\theta)^{7} d\theta$<br>
+$= \frac{\Gamma(10)}{\Gamma(2)\Gamma(8)}\binom{30}{7} \int_0^1 \theta^{8}(1-\theta)^{30} d\theta$<br>
+$= \frac{\Gamma(10) \Gamma(9)\Gamma(31) \binom{30}{7}}{\Gamma(2)\Gamma(8) \Gamma(40)} \int_0^1 \frac{\Gamma(40)}{\Gamma(9)\Gamma(31)}\theta^{8}(1-\theta)^{30} d\theta$<br>
+$= \frac{\Gamma(10) \Gamma(9)\Gamma(31) \binom{30}{7}}{\Gamma(2)\Gamma(8) \Gamma(40)}$<br>
+De forma más general, se puede expresar $\frac{\Gamma(n-x+\beta)\Gamma(x+\alpha)}{\Gamma(n+\alpha+\beta)} \cdot \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \cdot \binom{n}{x}$.
+
+Por otro lado, para el modelo $M_2$, $\theta$ está dado y es $1/2$, por ende no es de nuestro interés proponer una densidad a priori si se conoce $\theta$ (recordemos que para hipótesis simples usamos solo $p(x|\theta)$), luego $p(x|\theta = 1/2) = \binom{30}{7} 0.5^7 (1-0.5)^23 = \binom{30}{7}0.5^{30}$.
+
+Con esto basta para armar el factor de bayes, que es la división entre las dos expresiones obtenidas: $BF = \frac{\Gamma(10) \Gamma(9)\Gamma(31)}{\Gamma(2)\Gamma(8) \Gamma(40) 0.5^{30}}$. Calculamos por medio de RStudio:
+```{r}
+a <- 2
+b <- 8
+n <- 30
+x <- 7
+
+FB <- gamma(a+b)*gamma(x+a)*gamma(n-x+b)/(gamma(a)*gamma(b)*gamma(a+n+b)) * 2**n
+#FB <- gamma(10)*gamma(9)*gamma(31)/(gamma(2)*gamma(8)*gamma(40)*0.5**30)
+log10(FB)
+```
+Tras aplicar logaritmo en base 10 al factor de Bayes, se sigue que el valor obtenido es $1.6 > 1$, por lo que tenemos una evidencia fuerte a favor de que el modelo $M_1$ es
+el que debemos seleccionar.
+
+
+
+
+
+### Ejercicio 2
+
+Se obtiene información de una encuesta realizada a los empleados administrativos de una gran organización financiera, donde se recopilaron datos de los cuestionarios de aproximadamente 35 empleados de cada uno de los 30 departamentos seleccionados al azar.<br>
+Cada fila en los datos representa un departamento y contiene información sobre el conteo de respuestas favorables a las siete preguntas en dicho departamento. La variable rating representa la calicación general del departamento, mientras que las variables complaints, privileges, learning, raises y critical representan diferentes aspectos del ambiente laboral.<br>
+Se busca ajustar un modelo de regresión lineal múltiple que permita determinar si existe una relación lineal entre la calificación general del departamento y los aspectos del ambiente laboral medidos por las variables mencionadas.
+
+a) Determine un modelo de regresión lineal múltiple.<br>
+Se conoce que para un modelo de regresión clásico expresamos $y = \beta_0 + X\beta + \epsilon, \epsilon \sim N(0, \sigma^2I)$, en este caso el intercepto lo ubicamos por separado por comodidad. Ahora, en el caso bayesiano consideramos que los parámetros tienen comportamiento de v.a.s, o sea que tienen distribución. Hay diversas distribuciones o modelos que podemos usar en el contexto bayesiano para definir las prioris de todos los parámetros. En RStudio la función "regressionBF()" del paquete "BayesFactor", por ejemplo, considera una priori para $(\beta_0,\sigma^2) \sim p_1(\cdot, \cdot)$, donde $p_1(\cdot, \cdot) \propto \frac{1}{\sigma^2}$ y la priori para $\beta \sim N_{p-1}(0, ng\sigma^2(X^TX)^{-1})$, donde $g \sim \textup{InvGamma}(1/2, r/2)$. Esta es solo una forma de las posibles para plantear la regresión.<br>
+Podemos ajustar el modelo usando la función mencionada anteriormente:
+```{r}
+#| message: false
+library(BayesFactor) #Para calcular el factor de bayes y el modelo de regresión bayesiano
+datos <- attitude
+output <- regressionBF(rating ~ ., data = datos) #Analisis de Regresión bayesiana, compara el bF de todos los modelos vs el modelo de solo intercepto. 
+```
+
+b) Utilice el Factor de Bayes para realizar selección de variables.<br>
+Para obtener un modelo de regresión bayesiano (como hacemos con un modelo clásico usando lm()) usamos lmBF. De todas formas, anteriormente ya usamos "regressionBF()", con lo cual sabemos que modelos tendrán los mayores factores de Bayes al calcularlos (el modelo a elegir es el de mayor BF con respecto al intercepto).
+```{r}
+head(output) # Aparecen los elementos en orden descendente, se muestra el BF del modelo indicado versus al intercepto
+```
+El modelo solo con el regresor "complaints" es el que tiene mayor BF con respecto al modelo nulo, y de hecho se puede comprobar que esto implica que siempre tendrá un $BF > 1$ al compararse con los otros modelos.
+
+Calculando algunos modelos, en particular sus factores de bayes:
+```{r}
+BF1 <- lmBF(rating ~ complaints + learning + raises + advance + privileges, data = datos)
+BF2 <- lmBF(rating ~ complaints + learning, data = datos)
+BF3 <- lmBF(rating ~ complaints, data = datos)
+```
+
+Una vez obtenidos los objetos BFBayesFactor, se puede obtener el BF entre dos de los modelos al dividir el BF con respecto al intercepto del modelo A entre el BF del modelo B:
+```{r}
+BF1 # Podemos ver que comparado contra el intercepto, su BF es 7144.828
+BF2 # Podemos ver que comparado contra el intercepto, su BF es 207271.9
+BF3 # Podemos ver que comparado contra el intercepto, su BF es 417938.6
+BF3/BF1 # El factor de Bayes del modelo 3 contra el 1 es de 58.5 (resultado de la división)
+BF3/BF2 # El factor de Bayes del modelo 3 contra el 2 es de 2.016 (resultado de la división)
+```
+Podemos ver que el modelo 3 siempre tiene un $BF > 1$ al contrastarse versus algunos modelos. Si aplicamos logaritmo en base 10, solo al compararse contra el modelo 1 hay suficiente fuerza que apoye el modelo 3. Por otro lado, contra el modelo 2, no hay mucha fuerza para apoyar el modelo 1.
+```{r}
+log10(2.016379)
+```
+
+Luego, estudiamos el tercer modelo, que es el elegido:
+```{r}
+BF3 <- lmBF(rating ~ complaints, data = attitude, posterior = T, iterations = 10000) 
+# Posterior = T, devuelve muestras de la distribución a posteriori de los coeficientes $\beta_i$, $\sigma^2$ y $g$
+summary(BF3)
+```
+Como en este caso pedimos muestras de la posteriori, esto nos puede dar una idea de la forma de la distribución a posteriori. Los cuantiles muestrales, para una gran cantidad de iteraciones/muestras se deben acercar a los cuantiles poblacionales (LGM), obteniendo intervalos de confianza (aproximados) a posteriori de los coeficientes. Podemos elegir una región o intervalo de confianza del 95% eligiendo como límite inferior el cuantil muestral 2.5%, y como límite superior el cuantil muestral 97.5%.
+
+Podemos ver de esta forma, que todos los coeficientes son significativos, es decir, ningún intervalo de confianza contiene al 0.

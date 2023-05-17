@@ -29,7 +29,7 @@ Bajo esta función de pérdida y contexto, supongamos que deseamos tomar una dec
 
 <details>
 <summary>Demostración</summary>
-Podemos expresar la pérdida esperada como una matriz:
+Podemos expresar la pérdida esperada como una matriz, en este caso podemos expresar $l(a_i,w_i)$ como una matriz y multiplicar cada fila por la probabilidad de $w_0: P(\theta \in \theta_0)$ y $w_1: P(\theta \in \Theta_1)$: 
 $$(l(a_i, w_i) \cdot P(w_i))_{i=1,2} = \begin{bmatrix} & a_0 & a_1 \\ w_0 & 0 & c_1 \cdot P(\theta \in \Theta_0) \\ w_1 & c_2 \cdot P(\theta \in \Theta_1) & 0 \end{bmatrix}$$
 Luego, la pérdida esperada al escoger $a_0$ es la suma de la primera columna: $c_2 \cdot P(\theta \in \Theta_1)$, mientras que la de escoger $a_1$ es la suma de la segunda: $c_1 \cdot P(\theta \in \Theta_0)$. Entonces escogemos la menor pérdida esperada, supongamos que decidimos $a_0: \textup{Concluir } H_0$, entonces es porque $c_2 \cdot P(\theta \in \Theta_1) < c_1 \cdot P(\theta \in \Theta_0) \Rightarrow c_2 \cdot (1 - P(\theta \in \Theta_0)) < c_1 \cdot P(\theta \in \Theta_0) \Rightarrow c_2 < (c_1 + c_2) P(\theta \in \Theta_0)$. Luego, es análogo para demostrar el caso en que se decide $a_1$.
 </details>
@@ -51,11 +51,64 @@ Entonces concluimos $H_1$ si $1 - \phi \left( v^{-2}\theta_0 - \left( \frac{\mu}
 Consideren las hipótesis $H_0: \theta = \theta_0$ versus $H_1: \theta \neq \theta_0$. Entonces si la distribución de $\theta$ (a priori/posteriori según corresponda) es continua, $P(\theta = \theta_0) = 0$, por lo que nunca podríamos aceptar $H_0$ (bajo la función de pérdida anterior).
 
 Luego debemos asignarle una probabilidad a este evento, supongamos $0 < p_0 = P(\theta = \theta_0)$. Entonces la nueva fdp ajustada sería:
-$$p(\theta) = p_0 \cdot I_{(\theta = \theta_0)} + (1 - p_0) \cdot p'(\theta) \cdot I_{(\theta \neq \theta_0)} *$$
-Donde $p'(\theta)$ es la fdp original de $\theta$ a priori/posteriori. Como $P(\theta = \theta_0) = p_0$, entonces $P(\theta \neq \theta_0) = 1 - p_0$. De esta forma, escalamos la fdp original por $(1 - p_0)$ cuando $\theta$ es diferente de $\theta_0$. Esta v.a. ahora tiene una parte continua y otra discreta, luego si se integra la fdp en el dominio continuo y se suma la fdp el dominio discreto, el total es $1$.
+$$p(\theta) = p_0 \cdot I_{(\theta = \theta_0)} + (1 - p_0) \cdot p'(\theta)$$
+Donde $p'(\theta)$ es la fdp original de $\theta$ a priori/posteriori.<br> 
+Como $P(\theta = \theta_0) = p_0$, entonces $P(\theta \neq \theta_0) = 1 - p_0$. De esta forma, escalamos la fdp original por $(1 - p_0)$ cuando $\theta$ es diferente de $\theta_0$. Ahora esta v.a. es continua en todos los puntos, pero en particular en $\theta_0$ la variable mantiene una parte discreta que en la fdp se expresa como $p_0$ y la propia continua que se expresa por $(1-p_0)p'(\theta)$. Si sumamos la parte discreta a la parte continua intregrada, obtenemos que es $1$.
 
 ### Probabilidad a posteriori
 
 Supongamos que la probabilidad de $\theta = \theta_0$ a posteriori es $p_1$ ($p_1 = P(\theta = \theta_0|x)$). Si la probabilidad a priori es como se definió anteriormente $P(\theta = \theta_0) = p_0$, entonces esta se puede actualizar usando: 
 $$\frac{p_1}{1-p_1} = \frac{p_0}{1-p_0} \cdot \frac{p(x|\theta_0)}{\int_{\theta} p(x|\theta)p(\theta) d\theta}$$
-Esto se demuestra usando la fdp ajustada anteriormente para $\theta$.
+La razón de usar $\frac{p_1}{1-p_1}$, lo que se define como "chances" de $p_1$, es que cambios en $p_1$ se ven más claramente de esta forma.
+
+<details>
+<summary>Demostración</summary>
+Usando la fdp ajustada $p(\theta)$, notemos que por teorema de Bayes: <br>
+$p_1 = P(\theta = \theta_0|x) = p(x|\theta_0) \cdot P(\theta = \theta_0)/p(x) = p(x|\theta_0) \cdot p_0/p(x)$ <br>
+Mientras que por otro lado, también por Bayes: <br>
+$1 - p_1 = P(\theta \neq \theta_0|x)$ <br>
+$= p(x, \theta \neq \theta_0)/p(x)$ <br> 
+$= \int_{\Theta - \{ \theta_0 \}} p(x|\theta)p(\theta) d\theta /p(x)$ <br>
+$= \int_{\Theta - \{ \theta_0 \}} p(x|\theta)p'(\theta) d\theta (1-p_0) /p(x)$ <br>
+Entonces, si dividimos ambas expresiones, se sigue que: <br>
+$\frac{p_1}{1-p_1} = \frac{p_0}{1-p_0} \cdot \frac{p(x|\theta_0)}{\int_{\Theta - \{ \theta_0 \}} p(x|\theta)p'(\theta) d\theta}$
+</details>
+
+### Factor de Bayes
+
+<details>
+<summary>Interpretación Factor de Bayes</summary>
+Notemos que el factor $\frac{p_0}{1-p_0}$ es independiente de la evidencia y solo depende de alguna suposición inicial sobre la probabilidad de $\theta = \theta_0$ (no importa si es una v.a. continua o discreta, a priori siempre "inventamos" su probabilidad, aunque es más claro en el caso continuo), que puede o no ser errada. Por otro lado, al factor $\boldsymbol{\frac{p(x|\theta_0)}{\int_{\Theta} p(x|\theta)p'(\theta) d\theta}}$, lo denominaremos <b>Factor de Bayes (BF)</b>, y este si depende de la evidencia, por lo cuál va variando y nos dice si aumentar o disminuir la probabilidad supuesta $p_0$, para obtener actualizarla a la posteriori $p_1$ (más cercano a lo que es real). Si <b>BF</b> es grande, entonces $\frac{p_1}{1-p_1}$ y $p_1$ serán grandes, por lo tanto la probabilidad de $H_0$ será más grande de lo que estimamos a priori. Por lo tanto, en este contexto sería razonable aceptar $H_0$.
+</details>
+
+El factor de actualización de las chances de $H_0$, corresponde al <b>Factor de Bayes</b>. Luego para el caso $H_0: \theta = \theta_0$ versus $H_1: \theta \neq \theta_0$:
+$$BF = \frac{p(x|\theta_0)}{\int_{\Theta} p(x|\theta)p'(\theta) d\theta}$$
+
+En otros tipos de hipótesis también el factor de Bayes tiene forma similar, $BF = \frac{P(\theta \in \Theta_0)}{P(\theta \in \Theta_1)}$: 
+<ol>
+<li> Suponiendo dos hipótesis compuestas; $H_0: \theta \in \Theta_0$ versus $H_1: \theta \in \Theta_1$:
+$$BF = \frac{\int_{\Theta_0} p(x|\theta)p'(\theta) d\theta}{\int_{\Theta_1} p(x|\theta)p'(\theta) d\theta}$$
+</li>
+<li> Suponiendo dos hipótesis simples; $H_0: \theta = \theta_0$ versus $H_1: \theta = \theta_1$:
+$$BF = \frac{p(x|\theta_0)}{p(x|\theta_1)}$$
+*En este caso proponemos también probabilidades para $P(\theta = \theta_0)$ y $P(\theta = \theta_1)$ en caso de que $\theta$ tenga distribución a priori continua. Luego, esto no es relevante al final, porque estas probabilidades no formarán parte del factor de Bayes.
+</li>
+</ol>
+
+#### Razón de verosimilitudes integradas
+
+Dos hipótesis que contrasten modelos, por ejemplo $H_0: \textup{El modelo es } M_i$ versus $H_1: \textup{El modelo es } M_j$, pueden compararse con sus razones a posteriori:
+$$\frac{P(M_i|x)}{P(M_j|x)} = \frac{P(x|M_i)}{P(x|M_j)} \cdot \frac{P(M_i)}{P(M_j)}$$
+Donde el factor $\frac{P(x|M_i)}{P(x|M_j)}$, se denomina razón de verosimilitudes integradas (si se expande como integrales queda claro porqué el nombre, ver más abajo).
+
+El Factor de Bayes a considerar en este test de contraste de modelos, es la razón de verosimilitudes integradas:
+$$\frac{P(x|M_i)}{P(x|M_j)} = \frac{\int_{\Theta_0} p_{M_i}(x | \theta) p_{M_i}(\theta) d\theta}{\int_{\Theta_1} p_{M_j}(x | \theta) p_{M_j}(\theta) d\theta}$$
+Donde $p_{M_k}(x|\theta)$ es la verosimilitud en el caso del modelo $M_k$, mientras que $p_{M_k}(\theta)$ es la priori propuesta en el modelo $M_k$.
+
+#### Evidencia dada por el Factor de Bayes
+
+Si aplicamos logaritmo en base 10 al BF, entonces concluimos $H_0$ con diferente fuerza:<br>
+- Si $\log_{10} BF < 0$, se concluye $H_1$, para conocer con que fuerza se puede calcular $-\log_{10} BF = \log_{10} BF_{H_1}$ y usar este mismo criterio.<br>
+- Si $0 \leq \log_{10} BF < 1/2$, la fuerza de la evidencia a favor de $H_0$ apenas y merece una mención.<br>
+- Si $\frac{1}{2} \leq \log_{10} BF < 2$, la evidencia a favor de $H_0$ es fuerte.<br>
+- Si $2 \leq \log_{10} BF$, la evidencia a favor de $H_0$ es decisiva.

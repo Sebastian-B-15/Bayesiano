@@ -1,0 +1,98 @@
+---
+title: "Metodos bayesianos - Familias Conjugadas"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Familias conjugadas
+
+Nuestra idea es proponer una distribución a priori (cuando corresponda) que conduzca a una distribución a posteriori agradable dentro de lo posible. También desearíamos que la priori elegida sea vaga o tenga propiedades que eviten su intervención desmedida en la posteriori.
+
+Para resolver el primero de los problemas, sería muy útil que nuestra priori y posteriori pertenezcan a la misma familia de distribución. Estudiaremos a continuación este caso y como generarlo.
+
+### Familias de distribuciones a priori conjugadas
+
+Una familia conjugada de distribuciones a priori para $\theta$, con respecto a una verosimilitud (es decir la familia de priori's depende de la verosimilitud) $p(x|\theta)$ con estadístico suficiente $s = s(x)$, de <b>dimensión fija $k$</b> (independiente de $n$), corresponde a la familia de la forma:
+$$\{ p(\theta|\tau), \tau = (\tau_0, ..., \tau_k) \in \mathcal{T} \}$$
+Luego, $\boldsymbol{p(\theta|\tau) \propto p(s(x) = (\tau_1, ..., \tau_k)|\theta, n = \tau_0)}$.
+
+Entonces podemos ver que cualquier densidad proporcional a la del estadístico suficiente dado $\theta$, sirve como priori conjugada. En particular, los parámetros que puede tomar esta densidad son $\tau_1, ..., \tau_k$ correspondientes a las componenetes del estadístico suficiente, y $\tau_0$ que corresponde a la dimensión de la muestra ($x$) que es constante/parámetro para $\theta$. Los parámetros están libres y se pueden elegir cualesquiera con tal de que la constante de normalización sea finita (integral convergente).
+
+<details>
+<summary>Ejemplo</summary>
+Determine la familia de distribuciones a priori conjugada para la verosimilitud Poisson.
+
+Supongamos que tenemos una verosimilitud dada por $x_i|\theta \stackrel{iid}{\sim} P(\theta), i=1,...,n$. Se sabe que un estadístico suficiente para la poisson es $\sum_{i=1}^n x_i|\theta \sim P(n\theta)$ ($p(x|\theta) = \prod_{i=1}^n \theta^x_i \cdot e^{-\theta}/x_i! = \theta^{\sum x_i} \cdot e^{- n\theta} / \prod x_i!$, luego la función que depende de $x$ y $\theta$, puede expresarse como $h(\sum x, \theta)$, mientras que la función que solo depende de $x$ como $1/ \prod x_i!$). Se sigue que una priori conjugada es proporcional a:<br>
+$\propto (n\theta)^{\sum x_i} \cdot e^{- n\theta}^/ (\sum x_i)!$<br>
+$\propto (\tau_0\theta)^{\tau_1} \cdot e^{- \tau_0 \theta}$<br>
+$\propto \theta^{\tau_1} \cdot e^{- \tau_0 \theta}$
+Luego, este es el kernel de una Gamma (de parámetros $\tau_1$ y $\tau_0$), por lo tanto la familia de distribuciones a priori conjugada para una verosimilitud Poisson es la familia de las densidades Gamma.
+</details>
+
+#### Teorema
+
+Dada una verosimilitud, si tomamos una a priori perteneciente a la familia de distribuciones a priori conjugada en dicha verosimilitud, entonces la distribución a posteriori también pertenece a dicha familia.
+
+#### Distribuciones a priori conjugadas en una Familia Exponencial
+
+Sea una verosimilitud proveniente de la familia exponencial regular, es decir:
+$$p(x|\theta) = \left( \prod\limits_{i=1}^n f(x_i) \right) \cdot g(\theta)^n \cdot \exp \left\{ \sum_{j=1}^k c_j\phi_j(\theta) \cdot \sum_{i=1}^n h_j(x_i) \right\}$$
+Entonces, la familia de distribuciones conjugada en dicha verosimilitud es de la forma:
+$$p(\theta|\tau) \propto g(\theta)^{\tau_0} \cdot \exp \left\{ \sum_{j=1}^k c_j\phi_j(\theta)\tau_j \right\}$$
+Y $\tau_i, i=0,...,k$ son tales que la constante de normalización de esta densidad es finita.
+
+<details>
+<summary>Demostación previa - Distribución del estadístico suficiente en la Familia Exponencial</summary>
+Notemos que, para una verosimilitud dada como la anterior, se puede obtener un estadístico suficiente $t(x) = (\sum_{i=1}^n h_1(x_i), ..., \sum_{i=1}^n h_k(x_i))$, por propiedades de la familia exponencial (revisar demostraciones anteriores, es directo por teorema de factorización de Neyman). Luego, si queremos conocer la densidad de este estadístico, basta con integrar bajo la región $\{ x: t(x) = t \}$ (donde $t$ es un vector de dimensión adecuada $k$), es decir:
+$$p(t|\theta) = \int\limits_{\{ x: t(x) = t \}} p(x|\theta) dx$$
+Donde $p(x|\theta) = \left( \prod\limits_{i=1}^n f(x_i) \right) \cdot g(\theta)^n \cdot \exp \left\{ \phi(\theta)^T t(x) \right\}$, con $\phi(\theta) = (c_1 \phi_1(\theta), ..., c_k \phi_k(\theta))$. Sin embargo, como se integra bajo la región $\{ x: t(x) = t \}$, podemos reemplazar $t(x)$ por la constante $t$. Entonces se sigue que:
+$$p(t|\theta) = g(\theta)^n \cdot \exp \left\{ \phi(\theta)^T t(x) \right\} \cdot \int\limits_{\{ x: t(x) = t \}} \prod\limits_{i=1}^n f(x_i) dx$$
+Luego, podemos considerar que la integral es una función $h(t)$, ya que solo depende de la región que integremos dada por $t$:
+$$ = p(t|\theta) = g(\theta)^n \cdot \exp \left\{ \phi(\theta)^T \vec{t} \right\} \cdot h(\vec{t})$$
+Ahora es evidente que esta densidad y por tanto el estadístico suficiente, pertenece a la familia exponencial.
+</details>
+<details>
+<summary>Demostración Distribuciones priori conjugadas en la Familia Exponencial</summary>
+Dada la verosimilitud anterior, es claro que un estadístico suficiente para esta es $t(x) = (\sum_{i=1}^n h_1(x_i), ..., \sum_{i=1}^n h_k(x_i))$ (se puede verificar de varias formas). Luego, se puede ver su densidad en la demostración previa, por lo tanto la familia de prioris conjugadas está dada por las densidades tales que: <br>
+$p(\theta|x) \propto p(t|\theta)$<br> 
+$\propto g(\theta)^n \cdot \exp \left\{ \phi(\theta)^T \vec{t} \right\} \cdot h(\vec{t})$<br>
+$\propto g(\theta)^n \cdot \exp \left\{ \phi(\theta)^T \vec{t} \right\}$<br>
+$\propto g(\theta)^n \cdot \exp \left\{ \sum_{j=1}^k c_j\phi_j(\theta) \sum_{i=1}^n h_j(x_i) \right\}$<br>
+$\propto g(\theta)^{\tau_0} \cdot \exp \left\{ \sum_{j=1}^k c_j\phi_j(\theta)\tau_j \right\}$
+</details>
+
+<details>
+<summary>Ejemplo</summary>
+Utilice el teorema anterior para determinar la familia de distribuciones a priori conjugada para la verosimilitud Normal de varianza conocida.
+
+La densidad normal es $f(x; \sigma^2|\theta) = \frac{1}{\sqrt{2\pi\sigma^2}} \cdot \exp \left\{ -\frac{1}{2\sigma^2} (x - \theta)^2 \right\} = \frac{1}{\sqrt{2\pi\sigma^2}} \cdot \exp \left\{ -\frac{1}{2\sigma^2} (x^2 -2x\theta + \theta^2) \right\}$. Luego, podemos separar la densidad en las expresiones de la familia exponencial $f(x; \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \cdot \exp \{ -\frac{x^2}{2\sigma^2} \}$, $g(\theta) = \exp \{ -\frac{\theta^2}{2\sigma^2} \}$ y $h_j(x; \sigma^2) = \frac{x}{\sigma^2}, \phi_j(\theta) = \theta$.<br>
+Entonces, la familia de distribuciones a priori está dada por:<br>
+$p(\theta|x) \propto \exp \{ -\frac{n\theta^2}{2\sigma^2} \} \cdot \exp \{ \theta \cdot \tau_1 \}$<br>
+$\propto \exp \{ -\frac{\tau_0\theta^2}{2\sigma^2} + \theta \cdot \tau_1 \}$<br>
+Este es el kernel de una normal, luego ni siquiera hace identificar específicamente los parámetros, pero se puede apreciar que ninguno está fijo ($\tau_0$ implicado en la varianza, que por tanto no es fija y $\tau_1$ influyendo en la media), es decir que la media y varianza se pueden escoger a elección.
+</details>
+
+### Posteriori de una distribución mixta
+
+<details>
+<summary>Funciones de densidad de probabilidad mixtas</summary>
+Sean $p_1(x), ..., p_k(x)$ funciones de densidad, sean $c_1, ..., c_k$ constantes positivas que suman 1. Entonces $p(x) = \sum_{j=1}^k c_j \cdot p_j(x)$ es una fdp. Decimos que es una distribución mixta (mixture distribution), en particular, cuando $j < \infty$, tratamos con distribuciones mixtas finitas, que es lo que se tratará en general al referirnos a estas distribuciones.
+</details>
+
+<details>
+<summary>Desarrollo</summary>
+Sea una priori con distribución mixta, entonces la posteriori es tal que: $p^{(1)}(\theta|x) = \frac{\sum_{j=1}^k c_j p_j^{(0)}(\theta) \cdot p(x|\theta)}{C}$. Esto es por Bayes, donde $C = \int_{\Theta} \sum_{j=1}^k c_j p_j^{(0)}(\theta) \cdot p(x|\theta) d\theta = \sum_{j=1}^k c_j \int_{\Theta} p_j^{(0)}(\theta)p(x|\theta)d\theta = \sum_{j=1}^k c_j C_j$. 
+
+Por otra parte, nos interesa conocer cual sería la posteriori si elegimos como priori una sola de las distribuciones que conforma la mezcla, o sea $p_j^{(1)}(\theta|x) = \frac{p_j^{(0)}(\theta)p(x|\theta)}{C_j}$, donde $C_j = \int_{\Theta} p_j^{(0)}(\theta)p(x|\theta) d\theta$.
+
+Por lo tanto, retomando la expresión de la distribución a posteriori: $p^{(1)}(\theta|x) = \frac{\sum_{j=1}^k c_j p_j^{(0)}(\theta) \cdot p(x|\theta)}{C} = \frac{\sum_{j=1}^k C_j \cdot c_j p_j^{(0)}(\theta) \cdot p(x|\theta)/C_j}{C}$ 
+</details>
+
+Luego, la posteriori proveniente de una priori que es mezcla de distribuciones ($p^{(0)}(\theta) = \sum_{j=1}^k c_j p_j^{(0)}(\theta)$) está dada por:
+$$p^{(1)}(\theta|x) = \sum_{j=1}^k \frac{C_j \cdot c_j}{\sum_{i=1}^k C_i \cdot c_i} \cdot p_j^{(1)}(\theta)$$
+Donde $C_j = \int_{\Theta} p_j^{(0)}(\theta)p(x|\theta) d\theta$.<br>
+Luego, la posteriori es otra distribución mixta, con pesos actualizados en vez de $c_j$, considera $w_j = \frac{C_j \cdot c_j}{\sum_{i=1}^k C_i \cdot c_i}$, y se multiplica por la posteriori correspondiente relacionada a la distribución $j$-ésima en la mixtura.

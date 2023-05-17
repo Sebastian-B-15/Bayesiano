@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sebastian Baeza">
+
+<title>Metodos bayesianos - Ayudantia 8</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="Metodos-bayesianos_Ayudantia8_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Metodos-bayesianos_Ayudantia8_files/libs/quarto-html/quarto.js"></script>
+<script src="Metodos-bayesianos_Ayudantia8_files/libs/quarto-html/popper.min.js"></script>
+<script src="Metodos-bayesianos_Ayudantia8_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Metodos-bayesianos_Ayudantia8_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Metodos-bayesianos_Ayudantia8_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Ayudantia8_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Metodos-bayesianos_Ayudantia8_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Metodos-bayesianos_Ayudantia8_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Ayudantia8_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#metodos-bayesianos" id="toc-metodos-bayesianos" class="nav-link active" data-scroll-target="#metodos-bayesianos">Metodos bayesianos</a>
+  <ul class="collapse">
+  <li><a href="#ayudantía-8" id="toc-ayudantía-8" class="nav-link" data-scroll-target="#ayudantía-8">Ayudantía 8</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-1" id="toc-ejercicio-1" class="nav-link" data-scroll-target="#ejercicio-1">Ejercicio 1</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Metodos bayesianos - Ayudantia 8</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sebastian Baeza </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="metodos-bayesianos" class="level1">
+<h1>Metodos bayesianos</h1>
+<section id="ayudantía-8" class="level2">
+<h2 class="anchored" data-anchor-id="ayudantía-8">Ayudantía 8</h2>
+<section id="ejercicio-1" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-1">Ejercicio 1</h3>
+<p>Se tiene una caja con dos casillas que contienen chas rojas y blancas, y se gana si, al extraer una cha de manera aleatoria desde la caja, la ficha extraida es roja. <br> Un mago ha anunciado las probabilidades de extraer una ficha roja en cada compartimento, indicando que, en una de las casillas, la probabilidad de obtener una ficha roja es 0.04 mientras que, en la otra casilla, esta probabilidad es de 0.875. <br> Además, es importante destacar que el mago menciona que la probabilidad de escoger la casilla 1 o 2 es la misma.<br> Sin embargo, un amigo que ha presenciado el acto de magia, sospecha que existe una variabilidad en la información dada por el mago indicando que las probabilidades mencionadas corresponden a promedios o medias pero que poseen una varianza.<br> Según él, una casilla tiene una probabilidad de 0.04 de poseer una ficha roja con una varianza de 0.00007, mientras que la otra posee una probabilidad de 0.875 con una varianza de 0.0032.<br> Además, el mago menciona que de las 17 personas que participaron en el acto, sólo 10 personas sacaron una ficha roja.<br> Determine la probabilidad de ganar, teniendo en cuenta tanto las probabilidades dadas por el mago como la información adicional proporcionada por el amigo.<br> Considere el siguiente modelo de mezcla:<br> Verosimilitud <span class="math inline">\(Y|\theta \sim \textup{Bin}(n,\theta)\)</span>, Priori <span class="math inline">\(\theta \sim \frac{1}{2}\textup{Beta}(1,23) + \frac{1}{2}\textup{Beta}(15,1)\)</span></p>
+<ul>
+<li><ol type="a">
+<li>Encuentre la distribución a posteriori.</li>
+</ol></li>
+</ul>
+<p>Usaremos la fórmula conocida para obtener una posteriori proveniente de una priori que es mezcla de distribuciones: <span class="math inline">\(p^{(1)}(\theta|x) = \sum_{j=1}^k \frac{C_j \cdot c_j}{\sum_{i=1}^k C_i \cdot c_i} \cdot p_j^{(1)}(\theta)\)</span>, en este caso <span class="math inline">\(k=2\)</span>. Luego para la primera parte de la distribución a posteriori se tiene que:<br> <span class="math inline">\(p_1^{(1)}(\theta) \propto p(x|\theta) \cdot p_1^{(0)}(\theta)\)</span><br> <span class="math inline">\(\propto \theta^Y(1-\theta)^{n-Y} \cdot \theta^{\alpha-1}(1-\theta)^{\beta-1} \cdot 1_{[0,1]}(\theta)\)</span><br> <span class="math inline">\(\propto \theta^{Y+\alpha-1}(1-\theta)^{n-Y+\beta-1} \cdot 1_{[0,1]}(\theta)\)</span><br> Este es el kernel de una <span class="math inline">\(\textup{Beta}(Y+\alpha, n-Y+\beta)\)</span>. De hecho, para la segunda parte de la posteriori <span class="math inline">\(p_2^{(1)}(\theta)\)</span> también se puede usar este mismo resultado, solo cambian los parámetros de <span class="math inline">\(\alpha, \beta\)</span>.<br> Ahora solo queda determinar los pesos actualiados de la posteriori:<br> <span class="math inline">\(C_1 = \int_0^1 p(x|\theta) p_1^{(0)}(\theta) d\theta\)</span><br> <span class="math inline">\(= \int_0^1 \binom{n}{Y}/Beta(\alpha, \beta) \cdot \theta^{Y+\alpha-1}(1-\theta)^{n-Y+\beta-1} d\theta\)</span><br> <span class="math inline">\(= \binom{n}{Y} \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \int_0^1 \frac{\theta^{Y+\alpha-1}(1-\theta)^{n-Y+\beta-1}}{Beta(Y+\alpha, n-Y+\beta)}Beta(Y+\alpha, n-Y+\beta) d\theta\)</span><br> <span class="math inline">\(= \binom{n}{Y} \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \cdot \frac{\Gamma(Y+\alpha)\Gamma(n-Y+\beta)}{\Gamma(n+\alpha+\beta)} d\theta\)</span><br> Luego, de hecho esto también es aplicable a <span class="math inline">\(C_2\)</span>, ya que solo cambian los parámetros <span class="math inline">\(\alpha\)</span> y <span class="math inline">\(\beta\)</span>. Calculamos estos valores con RStudio:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">17</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a_1 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># \alpha_1 </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>b_1 <span class="ot">&lt;-</span> <span class="dv">23</span> <span class="co"># \beta_1</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>a_2 <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co"># \alpha_2</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>b_2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># \beta_2</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>C_1 <span class="ot">&lt;-</span> <span class="fu">gamma</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(a_1<span class="sc">+</span>b_1)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span>a_1)<span class="sc">*</span><span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span>b_1)<span class="sc">/</span>(<span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(n<span class="sc">+</span>a_1<span class="sc">+</span>b_1)<span class="sc">*</span><span class="fu">gamma</span>(a_1)<span class="sc">*</span><span class="fu">gamma</span>(b_1))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>C_2 <span class="ot">&lt;-</span> <span class="fu">gamma</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(a_2<span class="sc">+</span>b_2)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span>a_2)<span class="sc">*</span><span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span>b_2)<span class="sc">/</span>(<span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(n<span class="sc">+</span>a_2<span class="sc">+</span>b_2)<span class="sc">*</span><span class="fu">gamma</span>(a_2)<span class="sc">*</span><span class="fu">gamma</span>(b_2))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Calculamos <span class="math inline">\(C\)</span> haciendo un promedio ponderado de los <span class="math inline">\(C_j\)</span>, donde la ponderación es <span class="math inline">\(\frac{1}{2}\)</span> según el modelo propuesto para cada <span class="math inline">\(C_j\)</span>, luego:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">*</span>C_1 <span class="sc">+</span> <span class="fl">0.5</span><span class="sc">*</span>C_2</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Los pesos actualizados se obtienen con <span class="math inline">\(w_j^{(1)} = \frac{w_j^{(0)}C_j}{\sum_i w_i^{(0)}C_i}\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(w_1 <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">*</span> C_1 <span class="sc">/</span> C)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.005048135</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(w_2 <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">*</span> C_2 <span class="sc">/</span> C)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9949519</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>simula <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">0.44</span>){</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    simula[j] <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>, Y<span class="sc">+</span>a_1, n<span class="sc">-</span>Y<span class="sc">+</span>b_1)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>{</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    simula[j] <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>, Y<span class="sc">+</span>a_2, n<span class="sc">-</span>Y<span class="sc">+</span>b_2)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(simula, <span class="at">probability =</span> T, <span class="at">breaks =</span> <span class="dv">50</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Metodos-bayesianos_Ayudantia8_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TeachingDemos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'TeachingDemos' was built under R version 4.2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>intervalo <span class="ot">&lt;-</span> <span class="fu">emp.hpd</span>(simula, <span class="at">conf=</span><span class="fl">0.95</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>intervalo</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.168392 0.878021</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hdrcde)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'hdrcde' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>This is hdrcde 3.4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>region <span class="ot">&lt;-</span> <span class="fu">hdr.den</span>(simula, <span class="at">prob=</span><span class="dv">95</span>) <span class="co"># En porcentaje</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Metodos-bayesianos_Ayudantia8_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>region</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$hdr
+         [,1]      [,2]      [,3]      [,4]
+95% 0.1396358 0.3940332 0.6069449 0.9101763
+
+$mode
+[1] 0.7632572
+
+$falpha
+       5% 
+0.8266009 </code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sebastian Baeza">
+
+<title>Metodos bayesianos - Ayudantia 7</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="Metodos-bayesianos_Ayudantia7_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Metodos-bayesianos_Ayudantia7_files/libs/quarto-html/quarto.js"></script>
+<script src="Metodos-bayesianos_Ayudantia7_files/libs/quarto-html/popper.min.js"></script>
+<script src="Metodos-bayesianos_Ayudantia7_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Metodos-bayesianos_Ayudantia7_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Metodos-bayesianos_Ayudantia7_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Ayudantia7_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Metodos-bayesianos_Ayudantia7_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Metodos-bayesianos_Ayudantia7_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Ayudantia7_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#metodos-bayesianos" id="toc-metodos-bayesianos" class="nav-link active" data-scroll-target="#metodos-bayesianos">Metodos bayesianos</a>
+  <ul class="collapse">
+  <li><a href="#ayudantía-7" id="toc-ayudantía-7" class="nav-link" data-scroll-target="#ayudantía-7">Ayudantía 7</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-1" id="toc-ejercicio-1" class="nav-link" data-scroll-target="#ejercicio-1">Ejercicio 1</a></li>
+  <li><a href="#ejercicio-2" id="toc-ejercicio-2" class="nav-link" data-scroll-target="#ejercicio-2">Ejercicio 2</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Metodos bayesianos - Ayudantia 7</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sebastian Baeza </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="metodos-bayesianos" class="level1">
+<h1>Metodos bayesianos</h1>
+<section id="ayudantía-7" class="level2">
+<h2 class="anchored" data-anchor-id="ayudantía-7">Ayudantía 7</h2>
+<section id="ejercicio-1" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-1">Ejercicio 1</h3>
+<p>Suponga que se realiza un experimento de lanzar una moneda y se considera éxito como la obtención de cara. Se obtienen 7 éxitos de 30 lanzamientos.<br> Usted plantea dos modelos y desea evaluar que modelo posee mejor comportamiento:<br> <span class="math inline">\(M_1\)</span>: Modelo “complejo”, se considera una función de verosimilitud con distribución binomial (esto quiere decir que <span class="math inline">\(p(x|\theta) = \prod_{i=1}^n \binom{n}{x_i}p^{x_i}(1-p)^{n-x_i}\)</span>, no confundir con un una pitatoria de bernoullis) y una distribución a priori beta para la probabilidad de que salga sello con parámetros <span class="math inline">\(\alpha = 2\)</span> y <span class="math inline">\(\beta = 8\)</span>.<br> <span class="math inline">\(M_2\)</span>: Modelo “Simple” (anidado) se considera una función de verosimilitud con distribución binomial (<span class="math inline">\(p(x|\theta) = \prod_{i=1}^n \binom{n}{x_i}p^{x_i}(1-p)^{n-x_i}\)</span>), sin embargo, se considera que la probabilidad de que salga sello o cara es fija y equiprobable.<br> Determine que modelo es mejor utilizando el Factor de Bayes.</p>
+<p>Para el primer modelo, consideremos que tenemos una única binomial, con <span class="math inline">\(n = 30\)</span> y <span class="math inline">\(x_1 = 7\)</span> según lo dicho en el enunciado. Por otro lado, la densidad a priori sería <span class="math inline">\(p(\theta) = \frac{\Gamma(10)}{\Gamma(2)\Gamma(8)} \theta^{2-1}(1-\theta)^{8-1} \cdot 1_{[0,1]}(\theta)\)</span>. Luego, queremos conocer <span class="math inline">\(\int_\Theta p(x|\theta)p(\theta)d\theta\)</span><br> <span class="math inline">\(= \frac{\Gamma(10)}{\Gamma(2)\Gamma(8)} \int_0^1 \binom{30}{7}\theta^{7}(1-\theta)^{23} \cdot \theta^{1}(1-\theta)^{7} d\theta\)</span><br> <span class="math inline">\(= \frac{\Gamma(10)}{\Gamma(2)\Gamma(8)}\binom{30}{7} \int_0^1 \theta^{8}(1-\theta)^{30} d\theta\)</span><br> <span class="math inline">\(= \frac{\Gamma(10) \Gamma(9)\Gamma(31) \binom{30}{7}}{\Gamma(2)\Gamma(8) \Gamma(40)} \int_0^1 \frac{\Gamma(40)}{\Gamma(9)\Gamma(31)}\theta^{8}(1-\theta)^{30} d\theta\)</span><br> <span class="math inline">\(= \frac{\Gamma(10) \Gamma(9)\Gamma(31) \binom{30}{7}}{\Gamma(2)\Gamma(8) \Gamma(40)}\)</span><br> De forma más general, se puede expresar <span class="math inline">\(\frac{\Gamma(n-x+\beta)\Gamma(x+\alpha)}{\Gamma(n+\alpha+\beta)} \cdot \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \cdot \binom{n}{x}\)</span>.</p>
+<p>Por otro lado, para el modelo <span class="math inline">\(M_2\)</span>, <span class="math inline">\(\theta\)</span> está dado y es <span class="math inline">\(1/2\)</span>, por ende no es de nuestro interés proponer una densidad a priori si se conoce <span class="math inline">\(\theta\)</span> (recordemos que para hipótesis simples usamos solo <span class="math inline">\(p(x|\theta)\)</span>), luego <span class="math inline">\(p(x|\theta = 1/2) = \binom{30}{7} 0.5^7 (1-0.5)^23 = \binom{30}{7}0.5^{30}\)</span>.</p>
+<p>Con esto basta para armar el factor de bayes, que es la división entre las dos expresiones obtenidas: <span class="math inline">\(BF = \frac{\Gamma(10) \Gamma(9)\Gamma(31)}{\Gamma(2)\Gamma(8) \Gamma(40) 0.5^{30}}\)</span>. Calculamos por medio de RStudio:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>FB <span class="ot">&lt;-</span> <span class="fu">gamma</span>(a<span class="sc">+</span>b)<span class="sc">*</span><span class="fu">gamma</span>(x<span class="sc">+</span>a)<span class="sc">*</span><span class="fu">gamma</span>(n<span class="sc">-</span>x<span class="sc">+</span>b)<span class="sc">/</span>(<span class="fu">gamma</span>(a)<span class="sc">*</span><span class="fu">gamma</span>(b)<span class="sc">*</span><span class="fu">gamma</span>(a<span class="sc">+</span>n<span class="sc">+</span>b)) <span class="sc">*</span> <span class="dv">2</span><span class="sc">**</span>n</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#FB &lt;- gamma(10)*gamma(9)*gamma(31)/(gamma(2)*gamma(8)*gamma(40)*0.5**30)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(FB)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.607828</code></pre>
+</div>
+</div>
+<p>Tras aplicar logaritmo en base 10 al factor de Bayes, se sigue que el valor obtenido es <span class="math inline">\(1.6 &gt; 1\)</span>, por lo que tenemos una evidencia fuerte a favor de que el modelo <span class="math inline">\(M_1\)</span> es el que debemos seleccionar.</p>
+</section>
+<section id="ejercicio-2" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-2">Ejercicio 2</h3>
+<p>Se obtiene información de una encuesta realizada a los empleados administrativos de una gran organización financiera, donde se recopilaron datos de los cuestionarios de aproximadamente 35 empleados de cada uno de los 30 departamentos seleccionados al azar.<br> Cada fila en los datos representa un departamento y contiene información sobre el conteo de respuestas favorables a las siete preguntas en dicho departamento. La variable rating representa la calicación general del departamento, mientras que las variables complaints, privileges, learning, raises y critical representan diferentes aspectos del ambiente laboral.<br> Se busca ajustar un modelo de regresión lineal múltiple que permita determinar si existe una relación lineal entre la calificación general del departamento y los aspectos del ambiente laboral medidos por las variables mencionadas.</p>
+<ol type="a">
+<li>Determine un modelo de regresión lineal múltiple.<br> Se conoce que para un modelo de regresión clásico expresamos <span class="math inline">\(y = \beta_0 + X\beta + \epsilon, \epsilon \sim N(0, \sigma^2I)\)</span>, en este caso el intercepto lo ubicamos por separado por comodidad. Ahora, en el caso bayesiano consideramos que los parámetros tienen comportamiento de v.a.s, o sea que tienen distribución. Hay diversas distribuciones o modelos que podemos usar en el contexto bayesiano para definir las prioris de todos los parámetros. En RStudio la función “regressionBF()” del paquete “BayesFactor”, por ejemplo, considera una priori para <span class="math inline">\((\beta_0,\sigma^2) \sim p_1(\cdot, \cdot)\)</span>, donde <span class="math inline">\(p_1(\cdot, \cdot) \propto \frac{1}{\sigma^2}\)</span> y la priori para <span class="math inline">\(\beta \sim N_{p-1}(0, ng\sigma^2(X^TX)^{-1})\)</span>, donde <span class="math inline">\(g \sim \textup{InvGamma}(1/2, r/2)\)</span>. Esta es solo una forma de las posibles para plantear la regresión.<br> Podemos ajustar el modelo usando la función mencionada anteriormente:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BayesFactor) <span class="co">#Para calcular el factor de bayes y el modelo de regresión bayesiano</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'BayesFactor' was built under R version 4.2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> attitude</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">regressionBF</span>(rating <span class="sc">~</span> ., <span class="at">data =</span> datos) <span class="co">#Analisis de Regresión bayesiana, compara el bF de todos los modelos vs el modelo de solo intercepto. </span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li>Utilice el Factor de Bayes para realizar selección de variables.<br> Para obtener un modelo de regresión bayesiano (como hacemos con un modelo clásico usando lm()) usamos lmBF. De todas formas, anteriormente ya usamos “regressionBF()”, con lo cual sabemos que modelos tendrán los mayores factores de Bayes al calcularlos (el modelo a elegir es el de mayor BF con respecto al intercepto).</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(output) <span class="co"># Aparecen los elementos en orden descendente, se muestra el BF del modelo indicado versus al intercepto</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Bayes factor analysis
+--------------
+[1] complaints                      : 417938.6 ±0.01%
+[2] complaints + learning           : 207271.9 ±0%
+[3] complaints + learning + advance : 88041.54 ±0%
+[4] complaints + raises             : 77498.99 ±0%
+[5] complaints + privileges         : 75015.23 ±0%
+[6] complaints + advance            : 72759.76 ±0%
+
+Against denominator:
+  Intercept only 
+---
+Bayes factor type: BFlinearModel, JZS</code></pre>
+</div>
+</div>
+<p>El modelo solo con el regresor “complaints” es el que tiene mayor BF con respecto al modelo nulo, y de hecho se puede comprobar que esto implica que siempre tendrá un <span class="math inline">\(BF &gt; 1\)</span> al compararse con los otros modelos.</p>
+<p>Calculando algunos modelos, en particular sus factores de bayes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>BF1 <span class="ot">&lt;-</span> <span class="fu">lmBF</span>(rating <span class="sc">~</span> complaints <span class="sc">+</span> learning <span class="sc">+</span> raises <span class="sc">+</span> advance <span class="sc">+</span> privileges, <span class="at">data =</span> datos)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>BF2 <span class="ot">&lt;-</span> <span class="fu">lmBF</span>(rating <span class="sc">~</span> complaints <span class="sc">+</span> learning, <span class="at">data =</span> datos)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>BF3 <span class="ot">&lt;-</span> <span class="fu">lmBF</span>(rating <span class="sc">~</span> complaints, <span class="at">data =</span> datos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Una vez obtenidos los objetos BFBayesFactor, se puede obtener el BF entre dos de los modelos al dividir el BF con respecto al intercepto del modelo A entre el BF del modelo B:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>BF1 <span class="co"># Podemos ver que comparado contra el intercepto, su BF es 7144.828</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Bayes factor analysis
+--------------
+[1] complaints + learning + raises + advance + privileges : 7144.828 ±0%
+
+Against denominator:
+  Intercept only 
+---
+Bayes factor type: BFlinearModel, JZS</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>BF2 <span class="co"># Podemos ver que comparado contra el intercepto, su BF es 207271.9</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Bayes factor analysis
+--------------
+[1] complaints + learning : 207271.9 ±0%
+
+Against denominator:
+  Intercept only 
+---
+Bayes factor type: BFlinearModel, JZS</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>BF3 <span class="co"># Podemos ver que comparado contra el intercepto, su BF es 417938.6</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Bayes factor analysis
+--------------
+[1] complaints : 417938.6 ±0.01%
+
+Against denominator:
+  Intercept only 
+---
+Bayes factor type: BFlinearModel, JZS</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>BF3<span class="sc">/</span>BF1 <span class="co"># El factor de Bayes del modelo 3 contra el 1 es de 58.5 (resultado de la división)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Bayes factor analysis
+--------------
+[1] complaints : 58.49527 ±0.01%
+
+Against denominator:
+  rating ~ complaints + learning + raises + advance + privileges 
+---
+Bayes factor type: BFlinearModel, JZS</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>BF3<span class="sc">/</span>BF2 <span class="co"># El factor de Bayes del modelo 3 contra el 2 es de 2.016 (resultado de la división)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Bayes factor analysis
+--------------
+[1] complaints : 2.016379 ±0.01%
+
+Against denominator:
+  rating ~ complaints + learning 
+---
+Bayes factor type: BFlinearModel, JZS</code></pre>
+</div>
+</div>
+<p>Podemos ver que el modelo 3 siempre tiene un <span class="math inline">\(BF &gt; 1\)</span> al contrastarse versus algunos modelos. Si aplicamos logaritmo en base 10, solo al compararse contra el modelo 1 hay suficiente fuerza que apoye el modelo 3. Por otro lado, contra el modelo 2, no hay mucha fuerza para apoyar el modelo 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="fl">2.016379</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3045722</code></pre>
+</div>
+</div>
+<p>Luego, estudiamos el tercer modelo, que es el elegido:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>BF3 <span class="ot">&lt;-</span> <span class="fu">lmBF</span>(rating <span class="sc">~</span> complaints, <span class="at">data =</span> attitude, <span class="at">posterior =</span> T, <span class="at">iterations =</span> <span class="dv">10000</span>) </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior = T, devuelve muestras de la distribución a posteriori de los coeficientes $\beta_i$, $\sigma^2$ y $g$</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(BF3)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iterations = 1:10000
+Thinning interval = 1 
+Number of chains = 1 
+Sample size per chain = 10000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+              Mean     SD Naive SE Time-series SE
+mu         64.6394  1.378  0.01378       0.013597
+complaints  0.7278  0.106  0.00106       0.001151
+sig2       54.9466 16.347  0.16347       0.189819
+g           7.8743 98.907  0.98907       0.989068
+
+2. Quantiles for each variable:
+
+              2.5%     25%     50%     75%   97.5%
+mu         61.8880 63.7518 64.6468 65.5401 67.3495
+complaints  0.5182  0.6590  0.7281  0.7988  0.9303
+sig2       31.7083 43.4222 52.0884 63.4942 95.4172
+g           0.2038  0.6345  1.3336  3.2899 38.1578</code></pre>
+</div>
+</div>
+<p>Como en este caso pedimos muestras de la posteriori, esto nos puede dar una idea de la forma de la distribución a posteriori. Los cuantiles muestrales, para una gran cantidad de iteraciones/muestras se deben acercar a los cuantiles poblacionales (LGM), obteniendo intervalos de confianza (aproximados) a posteriori de los coeficientes. Podemos elegir una región o intervalo de confianza del 95% eligiendo como límite inferior el cuantil muestral 2.5%, y como límite superior el cuantil muestral 97.5%.</p>
+<p>Podemos ver de esta forma, que todos los coeficientes son significativos, es decir, ningún intervalo de confianza contiene al 0.</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

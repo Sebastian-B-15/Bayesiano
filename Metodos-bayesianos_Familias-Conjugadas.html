@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sebastian Baeza">
+
+<title>Metodos bayesianos - Familias Conjugadas</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Metodos-bayesianos_Familias-Conjugadas_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Metodos-bayesianos_Familias-Conjugadas_files/libs/quarto-html/quarto.js"></script>
+<script src="Metodos-bayesianos_Familias-Conjugadas_files/libs/quarto-html/popper.min.js"></script>
+<script src="Metodos-bayesianos_Familias-Conjugadas_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Metodos-bayesianos_Familias-Conjugadas_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Metodos-bayesianos_Familias-Conjugadas_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Familias-Conjugadas_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Metodos-bayesianos_Familias-Conjugadas_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Metodos-bayesianos_Familias-Conjugadas_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Familias-Conjugadas_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#metodos-bayesianos" id="toc-metodos-bayesianos" class="nav-link active" data-scroll-target="#metodos-bayesianos">Metodos bayesianos</a>
+  <ul class="collapse">
+  <li><a href="#familias-conjugadas" id="toc-familias-conjugadas" class="nav-link" data-scroll-target="#familias-conjugadas">Familias conjugadas</a>
+  <ul class="collapse">
+  <li><a href="#familias-de-distribuciones-a-priori-conjugadas" id="toc-familias-de-distribuciones-a-priori-conjugadas" class="nav-link" data-scroll-target="#familias-de-distribuciones-a-priori-conjugadas">Familias de distribuciones a priori conjugadas</a></li>
+  <li><a href="#posteriori-de-una-distribución-mixta" id="toc-posteriori-de-una-distribución-mixta" class="nav-link" data-scroll-target="#posteriori-de-una-distribución-mixta">Posteriori de una distribución mixta</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Metodos bayesianos - Familias Conjugadas</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sebastian Baeza </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="metodos-bayesianos" class="level1">
+<h1>Metodos bayesianos</h1>
+<section id="familias-conjugadas" class="level2">
+<h2 class="anchored" data-anchor-id="familias-conjugadas">Familias conjugadas</h2>
+<p>Nuestra idea es proponer una distribución a priori (cuando corresponda) que conduzca a una distribución a posteriori agradable dentro de lo posible. También desearíamos que la priori elegida sea vaga o tenga propiedades que eviten su intervención desmedida en la posteriori.</p>
+<p>Para resolver el primero de los problemas, sería muy útil que nuestra priori y posteriori pertenezcan a la misma familia de distribución. Estudiaremos a continuación este caso y como generarlo.</p>
+<section id="familias-de-distribuciones-a-priori-conjugadas" class="level3">
+<h3 class="anchored" data-anchor-id="familias-de-distribuciones-a-priori-conjugadas">Familias de distribuciones a priori conjugadas</h3>
+<p>Una familia conjugada de distribuciones a priori para <span class="math inline">\(\theta\)</span>, con respecto a una verosimilitud (es decir la familia de priori’s depende de la verosimilitud) <span class="math inline">\(p(x|\theta)\)</span> con estadístico suficiente <span class="math inline">\(s = s(x)\)</span>, de <b>dimensión fija <span class="math inline">\(k\)</span></b> (independiente de <span class="math inline">\(n\)</span>), corresponde a la familia de la forma: <span class="math display">\[\{ p(\theta|\tau), \tau = (\tau_0, ..., \tau_k) \in \mathcal{T} \}\]</span> Luego, <span class="math inline">\(\boldsymbol{p(\theta|\tau) \propto p(s(x) = (\tau_1, ..., \tau_k)|\theta, n = \tau_0)}\)</span>.</p>
+<p>Entonces podemos ver que cualquier densidad proporcional a la del estadístico suficiente dado <span class="math inline">\(\theta\)</span>, sirve como priori conjugada. En particular, los parámetros que puede tomar esta densidad son <span class="math inline">\(\tau_1, ..., \tau_k\)</span> correspondientes a las componenetes del estadístico suficiente, y <span class="math inline">\(\tau_0\)</span> que corresponde a la dimensión de la muestra (<span class="math inline">\(x\)</span>) que es constante/parámetro para <span class="math inline">\(\theta\)</span>. Los parámetros están libres y se pueden elegir cualesquiera con tal de que la constante de normalización sea finita (integral convergente).</p>
+<details>
+<summary>
+Ejemplo
+</summary>
+<p>Determine la familia de distribuciones a priori conjugada para la verosimilitud Poisson.</p>
+Supongamos que tenemos una verosimilitud dada por <span class="math inline">\(x_i|\theta \stackrel{iid}{\sim} P(\theta), i=1,...,n\)</span>. Se sabe que un estadístico suficiente para la poisson es <span class="math inline">\(\sum_{i=1}^n x_i|\theta \sim P(n\theta)\)</span> (<span class="math inline">\(p(x|\theta) = \prod_{i=1}^n \theta^x_i \cdot e^{-\theta}/x_i! = \theta^{\sum x_i} \cdot e^{- n\theta} / \prod x_i!\)</span>, luego la función que depende de <span class="math inline">\(x\)</span> y <span class="math inline">\(\theta\)</span>, puede expresarse como <span class="math inline">\(h(\sum x, \theta)\)</span>, mientras que la función que solo depende de <span class="math inline">\(x\)</span> como <span class="math inline">\(1/ \prod x_i!\)</span>). Se sigue que una priori conjugada es proporcional a:<br> <span class="math inline">\(\propto (n\theta)^{\sum x_i} \cdot e^{- n\theta}^/ (\sum x_i)!\)</span><br> <span class="math inline">\(\propto (\tau_0\theta)^{\tau_1} \cdot e^{- \tau_0 \theta}\)</span><br> <span class="math inline">\(\propto \theta^{\tau_1} \cdot e^{- \tau_0 \theta}\)</span> Luego, este es el kernel de una Gamma (de parámetros <span class="math inline">\(\tau_1\)</span> y <span class="math inline">\(\tau_0\)</span>), por lo tanto la familia de distribuciones a priori conjugada para una verosimilitud Poisson es la familia de las densidades Gamma.
+</details>
+<section id="teorema" class="level4">
+<h4 class="anchored" data-anchor-id="teorema">Teorema</h4>
+<p>Dada una verosimilitud, si tomamos una a priori perteneciente a la familia de distribuciones a priori conjugada en dicha verosimilitud, entonces la distribución a posteriori también pertenece a dicha familia.</p>
+</section>
+<section id="distribuciones-a-priori-conjugadas-en-una-familia-exponencial" class="level4">
+<h4 class="anchored" data-anchor-id="distribuciones-a-priori-conjugadas-en-una-familia-exponencial">Distribuciones a priori conjugadas en una Familia Exponencial</h4>
+<p>Sea una verosimilitud proveniente de la familia exponencial regular, es decir: <span class="math display">\[p(x|\theta) = \left( \prod\limits_{i=1}^n f(x_i) \right) \cdot g(\theta)^n \cdot \exp \left\{ \sum_{j=1}^k c_j\phi_j(\theta) \cdot \sum_{i=1}^n h_j(x_i) \right\}\]</span> Entonces, la familia de distribuciones conjugada en dicha verosimilitud es de la forma: <span class="math display">\[p(\theta|\tau) \propto g(\theta)^{\tau_0} \cdot \exp \left\{ \sum_{j=1}^k c_j\phi_j(\theta)\tau_j \right\}\]</span> Y <span class="math inline">\(\tau_i, i=0,...,k\)</span> son tales que la constante de normalización de esta densidad es finita.</p>
+<details>
+<summary>
+Demostación previa - Distribución del estadístico suficiente en la Familia Exponencial
+</summary>
+Notemos que, para una verosimilitud dada como la anterior, se puede obtener un estadístico suficiente <span class="math inline">\(t(x) = (\sum_{i=1}^n h_1(x_i), ..., \sum_{i=1}^n h_k(x_i))\)</span>, por propiedades de la familia exponencial (revisar demostraciones anteriores, es directo por teorema de factorización de Neyman). Luego, si queremos conocer la densidad de este estadístico, basta con integrar bajo la región <span class="math inline">\(\{ x: t(x) = t \}\)</span> (donde <span class="math inline">\(t\)</span> es un vector de dimensión adecuada <span class="math inline">\(k\)</span>), es decir: <span class="math display">\[p(t|\theta) = \int\limits_{\{ x: t(x) = t \}} p(x|\theta) dx\]</span> Donde <span class="math inline">\(p(x|\theta) = \left( \prod\limits_{i=1}^n f(x_i) \right) \cdot g(\theta)^n \cdot \exp \left\{ \phi(\theta)^T t(x) \right\}\)</span>, con <span class="math inline">\(\phi(\theta) = (c_1 \phi_1(\theta), ..., c_k \phi_k(\theta))\)</span>. Sin embargo, como se integra bajo la región <span class="math inline">\(\{ x: t(x) = t \}\)</span>, podemos reemplazar <span class="math inline">\(t(x)\)</span> por la constante <span class="math inline">\(t\)</span>. Entonces se sigue que: <span class="math display">\[p(t|\theta) = g(\theta)^n \cdot \exp \left\{ \phi(\theta)^T t(x) \right\} \cdot \int\limits_{\{ x: t(x) = t \}} \prod\limits_{i=1}^n f(x_i) dx\]</span> Luego, podemos considerar que la integral es una función <span class="math inline">\(h(t)\)</span>, ya que solo depende de la región que integremos dada por <span class="math inline">\(t\)</span>: <span class="math display">\[ = p(t|\theta) = g(\theta)^n \cdot \exp \left\{ \phi(\theta)^T \vec{t} \right\} \cdot h(\vec{t})\]</span> Ahora es evidente que esta densidad y por tanto el estadístico suficiente, pertenece a la familia exponencial.
+</details>
+<details>
+<summary>
+Demostración Distribuciones priori conjugadas en la Familia Exponencial
+</summary>
+Dada la verosimilitud anterior, es claro que un estadístico suficiente para esta es <span class="math inline">\(t(x) = (\sum_{i=1}^n h_1(x_i), ..., \sum_{i=1}^n h_k(x_i))\)</span> (se puede verificar de varias formas). Luego, se puede ver su densidad en la demostración previa, por lo tanto la familia de prioris conjugadas está dada por las densidades tales que: <br> <span class="math inline">\(p(\theta|x) \propto p(t|\theta)\)</span><br> <span class="math inline">\(\propto g(\theta)^n \cdot \exp \left\{ \phi(\theta)^T \vec{t} \right\} \cdot h(\vec{t})\)</span><br> <span class="math inline">\(\propto g(\theta)^n \cdot \exp \left\{ \phi(\theta)^T \vec{t} \right\}\)</span><br> <span class="math inline">\(\propto g(\theta)^n \cdot \exp \left\{ \sum_{j=1}^k c_j\phi_j(\theta) \sum_{i=1}^n h_j(x_i) \right\}\)</span><br> <span class="math inline">\(\propto g(\theta)^{\tau_0} \cdot \exp \left\{ \sum_{j=1}^k c_j\phi_j(\theta)\tau_j \right\}\)</span>
+</details>
+<details>
+<summary>
+Ejemplo
+</summary>
+<p>Utilice el teorema anterior para determinar la familia de distribuciones a priori conjugada para la verosimilitud Normal de varianza conocida.</p>
+La densidad normal es <span class="math inline">\(f(x; \sigma^2|\theta) = \frac{1}{\sqrt{2\pi\sigma^2}} \cdot \exp \left\{ -\frac{1}{2\sigma^2} (x - \theta)^2 \right\} = \frac{1}{\sqrt{2\pi\sigma^2}} \cdot \exp \left\{ -\frac{1}{2\sigma^2} (x^2 -2x\theta + \theta^2) \right\}\)</span>. Luego, podemos separar la densidad en las expresiones de la familia exponencial <span class="math inline">\(f(x; \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \cdot \exp \{ -\frac{x^2}{2\sigma^2} \}\)</span>, <span class="math inline">\(g(\theta) = \exp \{ -\frac{\theta^2}{2\sigma^2} \}\)</span> y <span class="math inline">\(h_j(x; \sigma^2) = \frac{x}{\sigma^2}, \phi_j(\theta) = \theta\)</span>.<br> Entonces, la familia de distribuciones a priori está dada por:<br> <span class="math inline">\(p(\theta|x) \propto \exp \{ -\frac{n\theta^2}{2\sigma^2} \} \cdot \exp \{ \theta \cdot \tau_1 \}\)</span><br> <span class="math inline">\(\propto \exp \{ -\frac{\tau_0\theta^2}{2\sigma^2} + \theta \cdot \tau_1 \}\)</span><br> Este es el kernel de una normal, luego ni siquiera hace identificar específicamente los parámetros, pero se puede apreciar que ninguno está fijo (<span class="math inline">\(\tau_0\)</span> implicado en la varianza, que por tanto no es fija y <span class="math inline">\(\tau_1\)</span> influyendo en la media), es decir que la media y varianza se pueden escoger a elección.
+</details>
+</section>
+</section>
+<section id="posteriori-de-una-distribución-mixta" class="level3">
+<h3 class="anchored" data-anchor-id="posteriori-de-una-distribución-mixta">Posteriori de una distribución mixta</h3>
+<details>
+<summary>
+Funciones de densidad de probabilidad mixtas
+</summary>
+Sean <span class="math inline">\(p_1(x), ..., p_k(x)\)</span> funciones de densidad, sean <span class="math inline">\(c_1, ..., c_k\)</span> constantes positivas que suman 1. Entonces <span class="math inline">\(p(x) = \sum_{j=1}^k c_j \cdot p_j(x)\)</span> es una fdp. Decimos que es una distribución mixta (mixture distribution), en particular, cuando <span class="math inline">\(j &lt; \infty\)</span>, tratamos con distribuciones mixtas finitas, que es lo que se tratará en general al referirnos a estas distribuciones.
+</details>
+<details>
+<summary>
+Desarrollo
+</summary>
+<p>Sea una priori con distribución mixta, entonces la posteriori es tal que: <span class="math inline">\(p^{(1)}(\theta|x) = \frac{\sum_{j=1}^k c_j p_j^{(0)}(\theta) \cdot p(x|\theta)}{C}\)</span>. Esto es por Bayes, donde <span class="math inline">\(C = \int_{\Theta} \sum_{j=1}^k c_j p_j^{(0)}(\theta) \cdot p(x|\theta) d\theta = \sum_{j=1}^k c_j \int_{\Theta} p_j^{(0)}(\theta)p(x|\theta)d\theta = \sum_{j=1}^k c_j C_j\)</span>.</p>
+<p>Por otra parte, nos interesa conocer cual sería la posteriori si elegimos como priori una sola de las distribuciones que conforma la mezcla, o sea <span class="math inline">\(p_j^{(1)}(\theta|x) = \frac{p_j^{(0)}(\theta)p(x|\theta)}{C_j}\)</span>, donde <span class="math inline">\(C_j = \int_{\Theta} p_j^{(0)}(\theta)p(x|\theta) d\theta\)</span>.</p>
+Por lo tanto, retomando la expresión de la distribución a posteriori: <span class="math inline">\(p^{(1)}(\theta|x) = \frac{\sum_{j=1}^k c_j p_j^{(0)}(\theta) \cdot p(x|\theta)}{C} = \frac{\sum_{j=1}^k C_j \cdot c_j p_j^{(0)}(\theta) \cdot p(x|\theta)/C_j}{C}\)</span>
+</details>
+<p>Luego, la posteriori proveniente de una priori que es mezcla de distribuciones (<span class="math inline">\(p^{(0)}(\theta) = \sum_{j=1}^k c_j p_j^{(0)}(\theta)\)</span>) está dada por: <span class="math display">\[p^{(1)}(\theta|x) = \sum_{j=1}^k \frac{C_j \cdot c_j}{\sum_{i=1}^k C_i \cdot c_i} \cdot p_j^{(1)}(\theta)\]</span> Donde <span class="math inline">\(C_j = \int_{\Theta} p_j^{(0)}(\theta)p(x|\theta) d\theta\)</span>.<br> Luego, la posteriori es otra distribución mixta, con pesos actualizados en vez de <span class="math inline">\(c_j\)</span>, considera <span class="math inline">\(w_j = \frac{C_j \cdot c_j}{\sum_{i=1}^k C_i \cdot c_i}\)</span>, y se multiplica por la posteriori correspondiente relacionada a la distribución <span class="math inline">\(j\)</span>-ésima en la mixtura.</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
