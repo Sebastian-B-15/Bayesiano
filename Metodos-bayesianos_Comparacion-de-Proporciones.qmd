@@ -1,0 +1,81 @@
+---
+title: "Metodos bayesianos - Comparación de proporciones"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Comparación de proporciones
+
+Suponga que se está en presencia de un experimento con observaciones $x_1$ y $x_2$ condicionalmente independientes dados $\theta_1$ y $\theta_2$: $x_i|\theta_i \sim Bin(n_i, \theta_i)$. 
+
+En este contexto, 1ueremos determinar si $\theta_1 > \theta_2$ (problema de decisión), para lo cual podemos usar un intervalo de credibilidad/predicción para $\gamma = \theta_1 - \theta_2$ o plantear el test de hipótesis $H_0: \gamma > 0$ versus $H_1: \gamma < 0$.
+
+#### Priori's recomendadas en este contexto
+
+Ya vimos en la anterior sección ejemplos de priori's que se pueden usar cuando tenemos una verosimilitud bernoulli, luego esto es análogo cuando tenemos una verosimilitud de una única binomial. Entonces:
+
+<center>
+<table>
+  <tr>
+    <th><center>Priori</center></th>
+    <th><center>Posteriori (Beta, parámetros)</center></th>
+  </tr>
+  <tr>
+    <td><center>Familia conjugada:<br>$Beta(\alpha_i, \beta_i)$</center></td>
+    <td><center>$\alpha_i + x_i$<br> $\beta_i + n_i - x_i$</center></td>
+  </tr>
+  <tr>
+    <td><center>Jeffreys:<br>$Beta(1/2, 1/2)$</center></td>
+    <td><center>$1/2 + x_i$<br> $1/2 + n_i - x_i$</center></td>
+  </tr>
+    <td><center>Plana en $\theta_i$:<br>$Beta(1,1)$</center></td>
+    <td><center>$1 + x_i$<br> $1 + n_i - x_i$</center></td>
+  <tr>
+  </tr>
+    <td><center>Plana en $\eta_i$:<br>$\propto \theta^{-1}(1-\theta)^{-1}$</center></td>
+    <td><center>$x_i$<br> $n_i - x_i$</center></td>
+  </tr>
+</table>
+</center>
+
+Luego, de esta forma se puede ver que la distribución conjunta a posteriori es $p(\theta_1, \theta_2|x_1, x_2) = p(\theta_1|x_1) \cdot p(\theta_2|x_2)$ (condicionalmente independientes), de lo cual se sigue que $P(\theta_1 > \theta_2 | x_1, x_2) = \int_0^1 \int_0^{\theta_1} \textup{Beta}(\theta_1;a,b) \textup{Beta}(\theta_2;c,d) d\theta_2 d\theta_1$. Donde $a, b, c, d$ son los parámetros respectivos de las betas a posteriori.
+
+Existen aproximaciones analíticas para estimar esta doble integral, o bien para encontrar intervalos HPD para $\gamma = \theta_1 - \theta_2$, también se puede usar montecarlo (Ley de los Grandes Números) para estimarla.
+
+<details>
+<summary>Ejemplo</summary>
+Con el objeto de comparar las tasas de morosidad por créditos de consumo de dos bancos, se obtuvo una muestra de 90 expedientes del primero, encontrándose 13 clientes morosos, y una muestra de 100 expedientes del segundo, encontrándose 12 clientes morosos. Encuentre una aproximación para la probabilidad de que la tasa de morosidad del primer banco sea mayor que la del segundo.
+
+Definamos $\theta_1$ como la tasa de morosidad del banco 1, mientras que $\theta_2$ como la tasa de morosidad del banco 2. Es claro que las muestras son provenientes de una distribución binomial; $x_1|\theta_1 \sim Bin(90, \theta_1)$ (obteniéndose $x_1 = 13$) y $x_2|\theta_2 \sim Bin(100, \theta_2)$ (obteniéndose $x_2 = 12$).
+
+Luego, supongamos que queremos estimar la probabilidad $P(\theta_1 > \theta_2)$ proponiendo la priori de Jeffreys. Entonces usamos montecarlo:
+```{r}
+n1 <- 90
+n2 <- 100
+x1 <- 13
+x2 <- 12
+# Simulamos de ambas posterioris
+set.seed(2023)
+post1jef <- rbeta(10^5, 1/2 + x1, 1/2 + n1 - x1)
+post2jef <- rbeta(10^5, 1/2 + x2, 1/2 + n2 - x2)
+(probjef <- mean(post1jef > post2jef))
+```
+
+Si deseamos usar una priori plana para $\theta_i$, entonces la probabilidad es:
+```{r}
+post1pla <- rbeta(10^5, 1 + x1, 1 + n1 - x1)
+post2pla <- rbeta(10^5, 1 + x2, 1 + n2 - x2)
+(probpla <- mean(post1pla > post2pla))
+```
+
+Y en caso de que deseamos usar una plana para el parámetro natural:
+```{r}
+post1pn <- rbeta(10^5, x1, n1 - x1)
+post2pn <- rbeta(10^5, x2, n2 - x2)
+(probpn <- mean(post1pn > post2pn))
+```
+</details>

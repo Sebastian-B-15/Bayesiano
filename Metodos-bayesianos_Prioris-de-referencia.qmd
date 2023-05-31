@@ -1,0 +1,116 @@
+---
+title: "Metodos bayesianos - Prioris de referencias"
+author: "Sebastian Baeza"
+format: html
+toc: true
+lang: es
+---
+
+# Metodos bayesianos
+
+## Priori's no informativas
+
+Otra idea para proponer una distribución a priori, es que esta tenga el menor impacto posible en la posteriori. Esto significa que queremos considerar prioris "vagas", de alta varianza, o directamente planas (distribución uniforme). Estas distribuciones a priori se denominan no informativas.
+
+### Distribuciones impropias y propias
+
+Una distribución de probabilidad se dice impropia (no válida) si al integrar la fdp esta integral diverge. En caso contrario, la distribución se dice propia.
+
+<b>Podemos considerar distribuciones a priori impropias solo cuando de ellas derivan en una distribución a posteriori propia.</b>
+
+<details>
+<summary>Ejemplo - Normal</summary>
+Consideremos un problema donde la verosimilitud es normal $x|\theta \sim N(\theta, \sigma^2)$, y planteamos una priori impropia plana para $\theta$ sobre $\mathbb{R}$.
+
+Para asegurarnos que de verdad la posteriori sea propia, usamos el teorema de Bayes sin proporcionales:
+$p(\theta|x) = \frac{p(x|\theta) \cdot p(\theta)}{\int p(x|\theta) \cdot p(\theta) d\theta}$<br>
+$= \frac{(2\pi\sigma^2)^{-n/2} \exp \left\{ -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n x_i^2 - 2\theta \sum_{i=1}^n x_i + n\theta^2 \right) \right\} }{\int (2\pi\sigma^2)^{-n/2} \exp \left\{ -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n x_i^2 - 2\theta \sum_{i=1}^n x_i + n\theta^2 \right) \right\} d\theta}$<br>
+$= \frac{(2\pi\sigma^2)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left( \frac{1}{n}\sum_{i=1}^n x_i^2 - 2\theta \bar{x} + \theta^2 \right) \right\} }{\int (2\pi\sigma^2)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left( - 2\theta \bar{x} + \theta^2 \right) \right\} d\theta}$<br>
+$= \frac{(2\pi\sigma^2)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left( - 2\theta \bar{x} + \theta^2 \right) \right\} }{\int (2\pi\sigma^2)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left( - 2\theta \bar{x} + \theta^2 \right) \right\} d\theta}$<br>
+$= \frac{(2\pi\sigma^2/n)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left(\bar{x}^2 - 2\theta \bar{x} + \theta^2 \right) \right\} }{\int (2\pi\sigma^2/n)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left(\bar{x}^2 - 2\theta \bar{x} + \theta^2 \right) \right\} d\theta}$<br>
+$= (2\pi\sigma^2/n)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left(\bar{x}^2 - 2\theta \bar{x} + \theta^2 \right) \right\}$<br>
+Esta es la fdp de una $\theta|x \sim N(\bar{x}, \sigma^2/n)$ (evidentemente es priopia, pues es conocida).
+</details>
+
+### Priori de Jeffreys
+
+Jeffreys establece que cualquier regla/forma de distribución a priori no informativa debe ser tal que, al aplicarla sobre $\theta$ y $g(\theta)$, obtendríamos lo mismo de aplicar la regla sobre $\theta$, y luego aplicar el teorema de transformación de variables (sobre $p(\theta)$) para obtener la distribución de $g(\theta)$.
+
+Una opción en este contexto es considerar como priori $p(\theta) \propto [I_{\theta}(\theta)]^{1/2}$, ya que cumple lo anterior.
+
+<details>
+<summary>Información de Fisher y una propiedad</summary>
+La matriz de información de Fisher se define como $I_{\theta}(\theta) = E \left[ \left( \frac{d \log p(x|\theta)}{d\theta} \right)^2 | \theta \right]$. Y en particular, bajo condiciones de regularidad $I_{\theta}(\theta) = - E \left[ \frac{d^2 \log p(x|\theta)}{d\theta^2} | \theta \right]$
+
+Notemos que $I_{\theta}(\theta) = I_{g(\theta)}(g(\theta)) \cdot \left( \frac{dg(\theta)}{d\theta} \right)^2$, donde $\theta_p = g(\theta)$ es una reparametrización (transformación inyectiva) de $\theta$.
+
+La demostración es sencilla teniendo en cuenta la regla de la cadena, primero por definición:<br>
+$I_{\theta}(\theta) = E \left[ \left( \frac{d \log p(x|\theta)}{d\theta} \right)^2 | \theta \right] = E \left[ \left( \frac{d \log p(x|g(\theta))}{dg(\theta)} \cdot \frac{dg(\theta)}{d\theta} \right)^2 | g(\theta) \right]$<br>
+$= E \left[ \left( \frac{d \log p(x|g(\theta))}{dg(\theta)} \right)^2 | \theta_p \right] \left( \frac{dg(\theta)}{d\theta} \right)^2$<br>
+$= I_{\theta_p}(\theta_p) \left( \frac{d\theta_p}{d\theta} \right)^2$
+</details>
+
+<details>
+<summary>Demostración</summary>
+Por la propiedad anterior, tenemos que $I_{\theta}(\theta) =  I_{g(\theta)}(g(\theta)) \left( \frac{dg(\theta)}{d\theta} \right)^2$. Luego, podemos considerar el orden contrario, es decir $I_{g(\theta)}(g(\theta)) =  I_{\theta}(\theta) \left( \frac{d\theta}{dg(\theta)} \right)^2$, ya que $\theta$ es una transformación inyectiva de $g(\theta)$ (se le aplica $g^{-1}$). 
+
+Por otro lado, si usamos las priori's de Jeffreys, se sigue que: $p_{\theta}(\theta) = k_1 \cdot I^{1/2}_{\theta}(\theta)$ y $p(g(\theta)) \propto I^{1/2}_{g(\theta)}(g(\theta))$, donde $k_1$ es una constante de normalización. 
+
+Luego, notemos que al aplicar el teorema de cambio de variable para $\theta \to g(\theta)$ se sigue que $p(g(\theta)) = p_{\theta}(g^{-1}(g(\theta))) \cdot \left| \frac{dg^{-1}(g(\theta))}{dg(\theta)} \right| = k_1 \cdot I^{1/2}_{\theta}(\theta) \cdot \left| \frac{d\theta}{dg(\theta)} \right|$<br>
+$= k_1 \cdot I^{1/2}_{\theta}(\theta) \cdot \sqrt{\left( \frac{d\theta}{g(\theta)} \right)^2}$<br>
+$= k_1 \cdot I^{1/2}_{g(\theta)}(g(\theta))$<br>
+$\propto I^{1/2}_{g(\theta)}(g(\theta))$
+</details>
+
+<details>
+<summary>Interpretación</summary>
+Si no conocemos información sobre el parámetro y su distribución, entonces proponer densidades vagas o planas contradice lo anterior, en el sentido de que si bien somos conservadores con el parámetro, supongamos $\theta$, no lo somos con $g(\theta)$, supongamos $\log \theta$. Entonces suponemos que no conocemos nada sobre $\theta$ (o somos neutrales), pero si conocemos sobre $\log \theta$ (o con esta reparametrización no somos neutrales). 
+
+Veamos que si $p(\theta) \propto 1$, por teorema de cambio de variable $p(g(\theta)) \propto \left| \frac{d \exp g(\theta)}{d g(\theta)} \right| \propto e^{g(\theta)}$.
+</details>
+
+<details>
+<summary>Ejemplo - comparaciones de prioris</summary>
+Para una verosimilitud $Bern(\theta)$, compare las distribuciones a posteriori obtenidas para $\theta$ a partir de las priori's:
+<ol>
+<li>Distribución plana en $\theta$.</li>
+<li>Distribución plana en el parámetro natural.</li>
+<li>Distribución a priori de Jeffreys.</li>
+</ol>
+
+Sea $p(x|\theta) = \theta^{\sum_{i=1}^n x_i}(1-\theta)^{n-\sum_{i=1}^n x_i}$.<br>
+Para el primer caso se tiene que $p(\theta) \propto 1_{[0,1]}(\theta)$, ya que solo tiene sentido que $\theta$ se encuentre en el intervalo acotado $[0,1]$, entonces $\theta \sim U(0,1)$ (distribución propia), luego:<br>
+$p(\theta|x) \propto \theta^{\sum_{i=1}^n x_i}(1-\theta)^{n-\sum_{i=1}^n x_i} \cdot 1_{[0,1]}(\theta)$<br>
+Este es el kernel de una beta, luego $\theta|x \sim \textup{Beta}(\sum_{i=1}^n x_i + 1, n - \sum_{i=1}^n x_i + 1)$.
+
+Para hallar el parámetro natural expresamos la verosimilitud como familia exponencial: $p(x|\theta) = \theta^{\sum_{i=1}^n x_i}(1-\theta)^{n-\sum_{i=1}^n x_i} \cdot 1_{[0,1]}(x_i)$<br>
+$= (1-\theta)^n \cdot \left( \frac{\theta}{1-\theta} \right)^{\sum_{i=1}^n x_i} \cdot 1_{[0,1]}(x_i)$<br>
+$= (1-\theta)^n \cdot 1_{[0,1]}(x_i) \cdot \exp \left\{ (\sum_{i=1}^n x_i) \cdot \log \left( \frac{\theta}{1-\theta} \right) \right\}$<br>
+(quizás es más sencillo obtener el parámetro natural desde una sola observación, y no la verosimilitud conjunta)<br>
+Luego, sea $\eta = g(\theta) = \log\frac{\theta}{1-\theta}$ es tal que $p_\eta(\eta) \propto 1_{\mathbb{R}^+}(\eta)$. Ahora, se sigue que $\theta = g^{-1}(\eta) = \frac{e^\eta}{1+e^\eta}$. Entonces por teorema de cambio de variable: $p(\theta) = p_\eta(g(\theta)) \cdot \left| \frac{dg(\theta)}{d\theta} \right|$<br> 
+$\propto \left| \frac{d \log(\theta) - \log(1-\theta))}{d\theta} \right| \cdot 1_{[0,1]}(\theta)$<br> 
+$\propto (\frac{1}{\theta} + \frac{1}{1-\theta}) \cdot 1_{[0,1]}(\theta)$<br> 
+$\propto \frac{1}{\theta(1-\theta)} \cdot 1_{[0,1]}(\theta)$<br>
+Ahora, esta no corresponde a una beta (sus parámetros debiesen ser positivos y para una beta serían 0), probablemente debe ser una distribución impropia, se comprueba integrando:
+$\int_{0}^1 (\frac{1}{\theta} + \frac{1}{1-\theta}) d\theta = \log(\theta) - \log(1-\theta) |_0^1 = +\infty$. De todas maneras no hay problema con esto mientras obtengamos una posteriori propia:<br>
+$p(\theta|x) \propto \theta^{\sum_{i=1}^n x_i}(1-\theta)^{n-\sum_{i=1}^n x_i} \cdot \frac{1}{\theta(1-\theta)} \cdot 1_{[0,1]}(\theta)$<br>
+$\propto \theta^{\sum_{i=1}^n x_i - 1}(1-\theta)^{n-\sum_{i=1}^n x_i - 1} \cdot 1_{[0,1]}(\theta)$<br>
+Este es el kernel de una beta, entonces $\theta|x \sim \textup{Beta}(\sum_{i=1}^n x_i, n-\sum_{i=1}^n x_i)$ (que es propia cuando ninguno de los parámetros es 0).
+
+Usando la recomendación de Jeffreys, se sigue que $I_{\theta}(\theta) = - nE \left[ \frac{d^2\log p(x_1|\theta)}{d\theta^2}|\theta \right]$<br>
+$= -n E \left[ \frac{d^2 \left( \log (1-\theta) + (x_1) \cdot \log \left( \frac{\theta}{1-\theta} \right) \right)}{d\theta^2} \right]$<br>
+$= -n E \left[-\frac{1}{(1-\theta)^2} + x_1 \left( -\frac{1}{\theta^2} + \frac{1}{(1-\theta)^2} \right) \right]$<br>
+$= \frac{n}{(1-\theta)^2} - n\theta \left( -\frac{1}{\theta^2} + \frac{1}{(1-\theta)^2} \right)$<br>
+$= \frac{n}{(1-\theta)^2} + \frac{n}{\theta} - \frac{n\theta}{(1-\theta)^2}$<br>
+$= \frac{n(1-\theta)}{(1-\theta)^2} + \frac{n}{\theta}$<br>
+$= \frac{n}{(1-\theta)} + \frac{n}{\theta}$<br>
+$= \frac{n}{\theta(1-\theta)}$<br>
+Luego, nos basta en realidad tomar una expresión proporcional a esta. Entonces $p(\theta) \propto \theta^{-1/2}(1-\theta)^{-1/2}$, que es el kernel de una beta de parámetros $1/2, 1/2$. La posteriori es:<br>
+$p(\theta|x) \propto \theta^{\sum_{i=1}^n x_i}(1-\theta)^{n-\sum_{i=1}^n x_i} \cdot \theta^{-1/2}(1-\theta)^{-1/2}$<br>
+$\propto \theta^{\sum_{i=1}^n x_i - \frac{1}{2}}(1-\theta)^{n-\sum_{i=1}^n x_i - \frac{1}{2}}$<br>
+Entonces $\theta|x \sim \textup{Beta}(\sum_{i=1}^n x_i + \frac{1}{2}, n - \sum_{i=1}^n x_i + \frac{1}{2})$, que es una distribución propia.
+</details>
+
+#### Caso multiparamétrico
+
+Si $\theta$ es multidimensional, el principio de invarianza de Jeffreys sugiere la priori para $\theta$: $p(\theta) \propto |I(\theta)|^{1/2}$ (determinante).

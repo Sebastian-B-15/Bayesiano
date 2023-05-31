@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sebastian Baeza">
+
+<title>Metodos bayesianos - Prioris de referencias</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Metodos-bayesianos_Prioris-de-referencia_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Metodos-bayesianos_Prioris-de-referencia_files/libs/quarto-html/quarto.js"></script>
+<script src="Metodos-bayesianos_Prioris-de-referencia_files/libs/quarto-html/popper.min.js"></script>
+<script src="Metodos-bayesianos_Prioris-de-referencia_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Metodos-bayesianos_Prioris-de-referencia_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Metodos-bayesianos_Prioris-de-referencia_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Prioris-de-referencia_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Metodos-bayesianos_Prioris-de-referencia_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Metodos-bayesianos_Prioris-de-referencia_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Metodos-bayesianos_Prioris-de-referencia_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#metodos-bayesianos" id="toc-metodos-bayesianos" class="nav-link active" data-scroll-target="#metodos-bayesianos">Metodos bayesianos</a>
+  <ul class="collapse">
+  <li><a href="#prioris-no-informativas" id="toc-prioris-no-informativas" class="nav-link" data-scroll-target="#prioris-no-informativas">Priori’s no informativas</a>
+  <ul class="collapse">
+  <li><a href="#distribuciones-impropias-y-propias" id="toc-distribuciones-impropias-y-propias" class="nav-link" data-scroll-target="#distribuciones-impropias-y-propias">Distribuciones impropias y propias</a></li>
+  <li><a href="#priori-de-jeffreys" id="toc-priori-de-jeffreys" class="nav-link" data-scroll-target="#priori-de-jeffreys">Priori de Jeffreys</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Metodos bayesianos - Prioris de referencias</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sebastian Baeza </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="metodos-bayesianos" class="level1">
+<h1>Metodos bayesianos</h1>
+<section id="prioris-no-informativas" class="level2">
+<h2 class="anchored" data-anchor-id="prioris-no-informativas">Priori’s no informativas</h2>
+<p>Otra idea para proponer una distribución a priori, es que esta tenga el menor impacto posible en la posteriori. Esto significa que queremos considerar prioris “vagas”, de alta varianza, o directamente planas (distribución uniforme). Estas distribuciones a priori se denominan no informativas.</p>
+<section id="distribuciones-impropias-y-propias" class="level3">
+<h3 class="anchored" data-anchor-id="distribuciones-impropias-y-propias">Distribuciones impropias y propias</h3>
+<p>Una distribución de probabilidad se dice impropia (no válida) si al integrar la fdp esta integral diverge. En caso contrario, la distribución se dice propia.</p>
+<p><b>Podemos considerar distribuciones a priori impropias solo cuando de ellas derivan en una distribución a posteriori propia.</b></p>
+<details>
+<summary>
+Ejemplo - Normal
+</summary>
+<p>Consideremos un problema donde la verosimilitud es normal <span class="math inline">\(x|\theta \sim N(\theta, \sigma^2)\)</span>, y planteamos una priori impropia plana para <span class="math inline">\(\theta\)</span> sobre <span class="math inline">\(\mathbb{R}\)</span>.</p>
+Para asegurarnos que de verdad la posteriori sea propia, usamos el teorema de Bayes sin proporcionales: <span class="math inline">\(p(\theta|x) = \frac{p(x|\theta) \cdot p(\theta)}{\int p(x|\theta) \cdot p(\theta) d\theta}\)</span><br> <span class="math inline">\(= \frac{(2\pi\sigma^2)^{-n/2} \exp \left\{ -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n x_i^2 - 2\theta \sum_{i=1}^n x_i + n\theta^2 \right) \right\} }{\int (2\pi\sigma^2)^{-n/2} \exp \left\{ -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n x_i^2 - 2\theta \sum_{i=1}^n x_i + n\theta^2 \right) \right\} d\theta}\)</span><br> <span class="math inline">\(= \frac{(2\pi\sigma^2)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left( \frac{1}{n}\sum_{i=1}^n x_i^2 - 2\theta \bar{x} + \theta^2 \right) \right\} }{\int (2\pi\sigma^2)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left( - 2\theta \bar{x} + \theta^2 \right) \right\} d\theta}\)</span><br> <span class="math inline">\(= \frac{(2\pi\sigma^2)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left( - 2\theta \bar{x} + \theta^2 \right) \right\} }{\int (2\pi\sigma^2)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left( - 2\theta \bar{x} + \theta^2 \right) \right\} d\theta}\)</span><br> <span class="math inline">\(= \frac{(2\pi\sigma^2/n)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left(\bar{x}^2 - 2\theta \bar{x} + \theta^2 \right) \right\} }{\int (2\pi\sigma^2/n)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left(\bar{x}^2 - 2\theta \bar{x} + \theta^2 \right) \right\} d\theta}\)</span><br> <span class="math inline">\(= (2\pi\sigma^2/n)^{-1/2} \exp \left\{ -\frac{1}{2\sigma^2/n} \left(\bar{x}^2 - 2\theta \bar{x} + \theta^2 \right) \right\}\)</span><br> Esta es la fdp de una <span class="math inline">\(\theta|x \sim N(\bar{x}, \sigma^2/n)\)</span> (evidentemente es priopia, pues es conocida).
+</details>
+</section>
+<section id="priori-de-jeffreys" class="level3">
+<h3 class="anchored" data-anchor-id="priori-de-jeffreys">Priori de Jeffreys</h3>
+<p>Jeffreys establece que cualquier regla/forma de distribución a priori no informativa debe ser tal que, al aplicarla sobre <span class="math inline">\(\theta\)</span> y <span class="math inline">\(g(\theta)\)</span>, obtendríamos lo mismo de aplicar la regla sobre <span class="math inline">\(\theta\)</span>, y luego aplicar el teorema de transformación de variables (sobre <span class="math inline">\(p(\theta)\)</span>) para obtener la distribución de <span class="math inline">\(g(\theta)\)</span>.</p>
+<p>Una opción en este contexto es considerar como priori <span class="math inline">\(p(\theta) \propto [I_{\theta}(\theta)]^{1/2}\)</span>, ya que cumple lo anterior.</p>
+<details>
+<summary>
+Información de Fisher y una propiedad
+</summary>
+<p>La matriz de información de Fisher se define como <span class="math inline">\(I_{\theta}(\theta) = E \left[ \left( \frac{d \log p(x|\theta)}{d\theta} \right)^2 | \theta \right]\)</span>. Y en particular, bajo condiciones de regularidad <span class="math inline">\(I_{\theta}(\theta) = - E \left[ \frac{d^2 \log p(x|\theta)}{d\theta^2} | \theta \right]\)</span></p>
+<p>Notemos que <span class="math inline">\(I_{\theta}(\theta) = I_{g(\theta)}(g(\theta)) \cdot \left( \frac{dg(\theta)}{d\theta} \right)^2\)</span>, donde <span class="math inline">\(\theta_p = g(\theta)\)</span> es una reparametrización (transformación inyectiva) de <span class="math inline">\(\theta\)</span>.</p>
+La demostración es sencilla teniendo en cuenta la regla de la cadena, primero por definición:<br> <span class="math inline">\(I_{\theta}(\theta) = E \left[ \left( \frac{d \log p(x|\theta)}{d\theta} \right)^2 | \theta \right] = E \left[ \left( \frac{d \log p(x|g(\theta))}{dg(\theta)} \cdot \frac{dg(\theta)}{d\theta} \right)^2 | g(\theta) \right]\)</span><br> <span class="math inline">\(= E \left[ \left( \frac{d \log p(x|g(\theta))}{dg(\theta)} \right)^2 | \theta_p \right] \left( \frac{dg(\theta)}{d\theta} \right)^2\)</span><br> <span class="math inline">\(= I_{\theta_p}(\theta_p) \left( \frac{d\theta_p}{d\theta} \right)^2\)</span>
+</details>
+<details>
+<summary>
+Demostración
+</summary>
+<p>Por la propiedad anterior, tenemos que <span class="math inline">\(I_{\theta}(\theta) = I_{g(\theta)}(g(\theta)) \left( \frac{dg(\theta)}{d\theta} \right)^2\)</span>. Luego, podemos considerar el orden contrario, es decir <span class="math inline">\(I_{g(\theta)}(g(\theta)) = I_{\theta}(\theta) \left( \frac{d\theta}{dg(\theta)} \right)^2\)</span>, ya que <span class="math inline">\(\theta\)</span> es una transformación inyectiva de <span class="math inline">\(g(\theta)\)</span> (se le aplica <span class="math inline">\(g^{-1}\)</span>).</p>
+<p>Por otro lado, si usamos las priori’s de Jeffreys, se sigue que: <span class="math inline">\(p_{\theta}(\theta) = k_1 \cdot I^{1/2}_{\theta}(\theta)\)</span> y <span class="math inline">\(p(g(\theta)) \propto I^{1/2}_{g(\theta)}(g(\theta))\)</span>, donde <span class="math inline">\(k_1\)</span> es una constante de normalización.</p>
+Luego, notemos que al aplicar el teorema de cambio de variable para <span class="math inline">\(\theta \to g(\theta)\)</span> se sigue que <span class="math inline">\(p(g(\theta)) = p_{\theta}(g^{-1}(g(\theta))) \cdot \left| \frac{dg^{-1}(g(\theta))}{dg(\theta)} \right| = k_1 \cdot I^{1/2}_{\theta}(\theta) \cdot \left| \frac{d\theta}{dg(\theta)} \right|\)</span><br> <span class="math inline">\(= k_1 \cdot I^{1/2}_{\theta}(\theta) \cdot \sqrt{\left( \frac{d\theta}{g(\theta)} \right)^2}\)</span><br> <span class="math inline">\(= k_1 \cdot I^{1/2}_{g(\theta)}(g(\theta))\)</span><br> <span class="math inline">\(\propto I^{1/2}_{g(\theta)}(g(\theta))\)</span>
+</details>
+<details>
+<summary>
+Interpretación
+</summary>
+<p>Si no conocemos información sobre el parámetro y su distribución, entonces proponer densidades vagas o planas contradice lo anterior, en el sentido de que si bien somos conservadores con el parámetro, supongamos <span class="math inline">\(\theta\)</span>, no lo somos con <span class="math inline">\(g(\theta)\)</span>, supongamos <span class="math inline">\(\log \theta\)</span>. Entonces suponemos que no conocemos nada sobre <span class="math inline">\(\theta\)</span> (o somos neutrales), pero si conocemos sobre <span class="math inline">\(\log \theta\)</span> (o con esta reparametrización no somos neutrales).</p>
+Veamos que si <span class="math inline">\(p(\theta) \propto 1\)</span>, por teorema de cambio de variable <span class="math inline">\(p(g(\theta)) \propto \left| \frac{d \exp g(\theta)}{d g(\theta)} \right| \propto e^{g(\theta)}\)</span>.
+</details>
+<details>
+<summary>
+Ejemplo - comparaciones de prioris
+</summary>
+Para una verosimilitud <span class="math inline">\(Bern(\theta)\)</span>, compare las distribuciones a posteriori obtenidas para <span class="math inline">\(\theta\)</span> a partir de las priori’s:
+<ol>
+<li>
+Distribución plana en <span class="math inline">\(\theta\)</span>.
+</li>
+<li>
+Distribución plana en el parámetro natural.
+</li>
+<li>
+Distribución a priori de Jeffreys.
+</li>
+</ol>
+<p>Sea <span class="math inline">\(p(x|\theta) = \theta^{\sum_{i=1}^n x_i}(1-\theta)^{n-\sum_{i=1}^n x_i}\)</span>.<br> Para el primer caso se tiene que <span class="math inline">\(p(\theta) \propto 1_{[0,1]}(\theta)\)</span>, ya que solo tiene sentido que <span class="math inline">\(\theta\)</span> se encuentre en el intervalo acotado <span class="math inline">\([0,1]\)</span>, entonces <span class="math inline">\(\theta \sim U(0,1)\)</span> (distribución propia), luego:<br> <span class="math inline">\(p(\theta|x) \propto \theta^{\sum_{i=1}^n x_i}(1-\theta)^{n-\sum_{i=1}^n x_i} \cdot 1_{[0,1]}(\theta)\)</span><br> Este es el kernel de una beta, luego <span class="math inline">\(\theta|x \sim \textup{Beta}(\sum_{i=1}^n x_i + 1, n - \sum_{i=1}^n x_i + 1)\)</span>.</p>
+<p>Para hallar el parámetro natural expresamos la verosimilitud como familia exponencial: <span class="math inline">\(p(x|\theta) = \theta^{\sum_{i=1}^n x_i}(1-\theta)^{n-\sum_{i=1}^n x_i} \cdot 1_{[0,1]}(x_i)\)</span><br> <span class="math inline">\(= (1-\theta)^n \cdot \left( \frac{\theta}{1-\theta} \right)^{\sum_{i=1}^n x_i} \cdot 1_{[0,1]}(x_i)\)</span><br> <span class="math inline">\(= (1-\theta)^n \cdot 1_{[0,1]}(x_i) \cdot \exp \left\{ (\sum_{i=1}^n x_i) \cdot \log \left( \frac{\theta}{1-\theta} \right) \right\}\)</span><br> (quizás es más sencillo obtener el parámetro natural desde una sola observación, y no la verosimilitud conjunta)<br> Luego, sea <span class="math inline">\(\eta = g(\theta) = \log\frac{\theta}{1-\theta}\)</span> es tal que <span class="math inline">\(p_\eta(\eta) \propto 1_{\mathbb{R}^+}(\eta)\)</span>. Ahora, se sigue que <span class="math inline">\(\theta = g^{-1}(\eta) = \frac{e^\eta}{1+e^\eta}\)</span>. Entonces por teorema de cambio de variable: <span class="math inline">\(p(\theta) = p_\eta(g(\theta)) \cdot \left| \frac{dg(\theta)}{d\theta} \right|\)</span><br> <span class="math inline">\(\propto \left| \frac{d \log(\theta) - \log(1-\theta))}{d\theta} \right| \cdot 1_{[0,1]}(\theta)\)</span><br> <span class="math inline">\(\propto (\frac{1}{\theta} + \frac{1}{1-\theta}) \cdot 1_{[0,1]}(\theta)\)</span><br> <span class="math inline">\(\propto \frac{1}{\theta(1-\theta)} \cdot 1_{[0,1]}(\theta)\)</span><br> Ahora, esta no corresponde a una beta (sus parámetros debiesen ser positivos y para una beta serían 0), probablemente debe ser una distribución impropia, se comprueba integrando: <span class="math inline">\(\int_{0}^1 (\frac{1}{\theta} + \frac{1}{1-\theta}) d\theta = \log(\theta) - \log(1-\theta) |_0^1 = +\infty\)</span>. De todas maneras no hay problema con esto mientras obtengamos una posteriori propia:<br> <span class="math inline">\(p(\theta|x) \propto \theta^{\sum_{i=1}^n x_i}(1-\theta)^{n-\sum_{i=1}^n x_i} \cdot \frac{1}{\theta(1-\theta)} \cdot 1_{[0,1]}(\theta)\)</span><br> <span class="math inline">\(\propto \theta^{\sum_{i=1}^n x_i - 1}(1-\theta)^{n-\sum_{i=1}^n x_i - 1} \cdot 1_{[0,1]}(\theta)\)</span><br> Este es el kernel de una beta, entonces <span class="math inline">\(\theta|x \sim \textup{Beta}(\sum_{i=1}^n x_i, n-\sum_{i=1}^n x_i)\)</span> (que es propia cuando ninguno de los parámetros es 0).</p>
+Usando la recomendación de Jeffreys, se sigue que <span class="math inline">\(I_{\theta}(\theta) = - nE \left[ \frac{d^2\log p(x_1|\theta)}{d\theta^2}|\theta \right]\)</span><br> <span class="math inline">\(= -n E \left[ \frac{d^2 \left( \log (1-\theta) + (x_1) \cdot \log \left( \frac{\theta}{1-\theta} \right) \right)}{d\theta^2} \right]\)</span><br> <span class="math inline">\(= -n E \left[-\frac{1}{(1-\theta)^2} + x_1 \left( -\frac{1}{\theta^2} + \frac{1}{(1-\theta)^2} \right) \right]\)</span><br> <span class="math inline">\(= \frac{n}{(1-\theta)^2} - n\theta \left( -\frac{1}{\theta^2} + \frac{1}{(1-\theta)^2} \right)\)</span><br> <span class="math inline">\(= \frac{n}{(1-\theta)^2} + \frac{n}{\theta} - \frac{n\theta}{(1-\theta)^2}\)</span><br> <span class="math inline">\(= \frac{n(1-\theta)}{(1-\theta)^2} + \frac{n}{\theta}\)</span><br> <span class="math inline">\(= \frac{n}{(1-\theta)} + \frac{n}{\theta}\)</span><br> <span class="math inline">\(= \frac{n}{\theta(1-\theta)}\)</span><br> Luego, nos basta en realidad tomar una expresión proporcional a esta. Entonces <span class="math inline">\(p(\theta) \propto \theta^{-1/2}(1-\theta)^{-1/2}\)</span>, que es el kernel de una beta de parámetros <span class="math inline">\(1/2, 1/2\)</span>. La posteriori es:<br> <span class="math inline">\(p(\theta|x) \propto \theta^{\sum_{i=1}^n x_i}(1-\theta)^{n-\sum_{i=1}^n x_i} \cdot \theta^{-1/2}(1-\theta)^{-1/2}\)</span><br> <span class="math inline">\(\propto \theta^{\sum_{i=1}^n x_i - \frac{1}{2}}(1-\theta)^{n-\sum_{i=1}^n x_i - \frac{1}{2}}\)</span><br> Entonces <span class="math inline">\(\theta|x \sim \textup{Beta}(\sum_{i=1}^n x_i + \frac{1}{2}, n - \sum_{i=1}^n x_i + \frac{1}{2})\)</span>, que es una distribución propia.
+</details>
+<section id="caso-multiparamétrico" class="level4">
+<h4 class="anchored" data-anchor-id="caso-multiparamétrico">Caso multiparamétrico</h4>
+<p>Si <span class="math inline">\(\theta\)</span> es multidimensional, el principio de invarianza de Jeffreys sugiere la priori para <span class="math inline">\(\theta\)</span>: <span class="math inline">\(p(\theta) \propto |I(\theta)|^{1/2}\)</span> (determinante).</p>
+</section>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
