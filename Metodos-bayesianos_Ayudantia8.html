@@ -115,6 +115,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#ayudantía-8" id="toc-ayudantía-8" class="nav-link" data-scroll-target="#ayudantía-8">Ayudantía 8</a>
   <ul class="collapse">
   <li><a href="#ejercicio-1" id="toc-ejercicio-1" class="nav-link" data-scroll-target="#ejercicio-1">Ejercicio 1</a></li>
+  <li><a href="#ejercicio-extra" id="toc-ejercicio-extra" class="nav-link" data-scroll-target="#ejercicio-extra">Ejercicio Extra</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -166,15 +167,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>a_2 <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co"># \alpha_2</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>b_2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># \beta_2</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>C_1 <span class="ot">&lt;-</span> <span class="fu">gamma</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(a_1<span class="sc">+</span>b_1)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span>a_1)<span class="sc">*</span><span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span>b_1)<span class="sc">/</span>(<span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(n<span class="sc">+</span>a_1<span class="sc">+</span>b_1)<span class="sc">*</span><span class="fu">gamma</span>(a_1)<span class="sc">*</span><span class="fu">gamma</span>(b_1))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>C_1 <span class="ot">&lt;-</span> <span class="fu">gamma</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(a_1<span class="sc">+</span>b_1)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span>a_1)<span class="sc">*</span><span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span>b_1)<span class="sc">/</span>(<span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(a_1<span class="sc">+</span>b_1<span class="sc">+</span>n)<span class="sc">*</span><span class="fu">gamma</span>(a_1)<span class="sc">*</span><span class="fu">gamma</span>(b_1))</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>C_2 <span class="ot">&lt;-</span> <span class="fu">gamma</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(a_2<span class="sc">+</span>b_2)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span>a_2)<span class="sc">*</span><span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span>b_2)<span class="sc">/</span>(<span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(n<span class="sc">+</span>a_2<span class="sc">+</span>b_2)<span class="sc">*</span><span class="fu">gamma</span>(a_2)<span class="sc">*</span><span class="fu">gamma</span>(b_2))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>C_2 <span class="ot">&lt;-</span> <span class="fu">gamma</span>(n<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(a_2<span class="sc">+</span>b_2)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span>a_2)<span class="sc">*</span><span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span>b_2)<span class="sc">/</span>(<span class="fu">gamma</span>(n<span class="sc">-</span>Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(Y<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">gamma</span>(a_2<span class="sc">+</span>b_2<span class="sc">+</span>n)<span class="sc">*</span><span class="fu">gamma</span>(a_2)<span class="sc">*</span><span class="fu">gamma</span>(b_2))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Calculamos <span class="math inline">\(C\)</span> haciendo un promedio ponderado de los <span class="math inline">\(C_j\)</span>, donde la ponderación es <span class="math inline">\(\frac{1}{2}\)</span> según el modelo propuesto para cada <span class="math inline">\(C_j\)</span>, luego:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">*</span>C_1 <span class="sc">+</span> <span class="fl">0.5</span><span class="sc">*</span>C_2</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Los pesos actualizados se obtienen con <span class="math inline">\(w_j^{(1)} = \frac{w_j^{(0)}C_j}{\sum_i w_i^{(0)}C_i}\)</span>.</p>
+<p>Los pesos actualizados se obtienen con <span class="math inline">\(w_j^{(1)} = \frac{w_j^{(0)}C_j}{\sum_i w_i^{(0)}C_i} = \frac{w_j^{(0)}C_j}{C}\)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(w_1 <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">*</span> C_1 <span class="sc">/</span> C)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -185,22 +186,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 0.9949519</code></pre>
 </div>
 </div>
+<p>Luego, ya tenemos armada la densidad a posteriori, que es una distribución mixta: <span class="math inline">\(p(\theta|x) = 0.005 \cdot \textup{Beta}(10+1,17-10+23) + 0.995 \cdot \textup{Beta}(10+15,17-10+1)\)</span>. Entonces procedemos a simular desde esta distribución para obtener una gráfica de la forma de su densidad:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>simula <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">0.44</span>){</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    simula[j] <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>, Y<span class="sc">+</span>a_1, n<span class="sc">-</span>Y<span class="sc">+</span>b_1)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>{</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    simula[j] <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>, Y<span class="sc">+</span>a_2, n<span class="sc">-</span>Y<span class="sc">+</span>b_2)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(simula, <span class="at">probability =</span> T, <span class="at">breaks =</span> <span class="dv">50</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2023</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>simula <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> w_1){</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    simula[j] <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>, Y<span class="sc">+</span>a_1, n<span class="sc">-</span>Y<span class="sc">+</span>b_1)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>{</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    simula[j] <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>, Y<span class="sc">+</span>a_2, n<span class="sc">-</span>Y<span class="sc">+</span>b_2)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(simula, </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">probability =</span> T, </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">50</span>, </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histograma de simulaciones de la Posteriori"</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>     )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Metodos-bayesianos_Ayudantia8_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Luego, además de obtener intervalos de confianza con la función hpd() usando la función inversa de la distribución, también se pueden usar, en general, vectores con simulaciones de la v.a.. Entonces usando esto, calculamos las respectivas regiones de credibilidad:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TeachingDemos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -209,31 +218,152 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>intervalo <span class="ot">&lt;-</span> <span class="fu">emp.hpd</span>(simula, <span class="at">conf=</span><span class="fl">0.95</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>intervalo</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.168392 0.878021</code></pre>
+<pre><code>[1] 0.6115668 0.8988404</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hdrcde)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La opción anterior no nos da la región hpd, sino que el intervalo hpd. Si se quiere la región hpd, podemos usar la función hdi(), de la librería HDInterval:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(HDInterval)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'HDInterval' was built under R version 4.2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hdi</span>(simula, <span class="at">allowSplit =</span> <span class="cn">TRUE</span>, <span class="at">credMass =</span> <span class="fl">0.95</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    lower     upper 
+0.6115668 0.8988404 
+attr(,"credMass")
+[1] 0.95</code></pre>
+</div>
+</div>
+<p>También podemos usar la función density() para generar un objeto tipo density que permite graficar la densidad, entre otras cosas:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>densidad <span class="ot">&lt;-</span> <span class="fu">density</span>(simula)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> densidad<span class="sc">$</span>x, <span class="at">y =</span> densidad<span class="sc">$</span>y)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>intervalo <span class="ot">&lt;-</span> <span class="fu">hdi</span>(densidad, <span class="at">allowSplit =</span> <span class="cn">TRUE</span>, <span class="at">credMass =</span> <span class="fl">0.95</span>) <span class="co">#Al aplicar density() el intervalo cambia un poco</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>fdp.int <span class="ot">&lt;-</span> <span class="fu">attr</span>(intervalo, <span class="st">'height'</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#hdi también devuelve los extremos de los intervalos evaluados en la densidad (en este caso solo es un punto el que devuelve, ya que ambos extremos evaluados valen lo mismo). Para obtenerlos se puede usar esto</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>datos, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data=</span>datos[datos<span class="sc">$</span>x <span class="sc">&lt;</span> intervalo[<span class="dv">2</span>],][datos<span class="sc">$</span>x <span class="sc">&gt;</span> intervalo[<span class="dv">1</span>],], <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">ymin=</span><span class="dv">0</span>, <span class="at">ymax=</span>y), <span class="at">fill =</span> <span class="st">"red"</span>) <span class="sc">+</span>  </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">lwd=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Función de densidad"</span>,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"x"</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Densidad a Posteriori"</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span>fdp.int, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">lwd=</span><span class="fl">1.5</span>, <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Metodos-bayesianos_Ayudantia8_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hdrcde)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'hdrcde' was built under R version 4.2.3</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>This is hdrcde 3.4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>region <span class="ot">&lt;-</span> <span class="fu">hdr.den</span>(simula, <span class="at">prob=</span><span class="dv">95</span>) <span class="co"># En porcentaje</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>region <span class="ot">&lt;-</span> <span class="fu">hdr.den</span>(simula, <span class="at">prob=</span><span class="dv">95</span>) <span class="co"># En porcentaje</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Metodos-bayesianos_Ayudantia8_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="Metodos-bayesianos_Ayudantia8_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>region</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>region</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$hdr
-         [,1]      [,2]      [,3]      [,4]
-95% 0.1396358 0.3940332 0.6069449 0.9101763
+         [,1]      [,2]
+95% 0.6142511 0.9028507
 
 $mode
-[1] 0.7632572
+[1] 0.7667075
 
 $falpha
-       5% 
-0.8266009 </code></pre>
+      5% 
+1.283309 </code></pre>
+</div>
+</div>
+</section>
+<section id="ejercicio-extra" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-extra">Ejercicio Extra</h3>
+<p>Considere <span class="math inline">\(x_1, ..., x_{10} | \theta \stackrel{iid}{\sim} N(\theta,1)\)</span>, en donde su media observada es <span class="math inline">\(\bar{y} = - 0.25\)</span>. Considere una priori <span class="math inline">\(\theta \sim 0.9 \cdot N(1,0.5^2) + 0.1 \cdot N(-1, 0.5^2)\)</span> Encuentre la distribución a posteriori y la región HPD de un 95% de credibilidad.</p>
+<p>Para obtener la distribución a posteriori usaremos la fórmula conocida. Entonces para usarla debemos calcular las posterioris correspondientes de las densidades que conforman la priori mixta:<br> <span class="math inline">\(p_j^{(1)}(\theta) \propto \exp \left\{ -\frac{1}{2\sigma^2} (\sum x_i^2 - 2\theta \sum x_i + n\theta^2) \right\} \cdot \exp \left\{ -\frac{1}{2\sigma_j^2} (\theta^2 - 2\mu_j \theta + \mu_j^2) \right\}\)</span><br> (Este es un modelo normal-normal)<br> <span class="math inline">\(p_j^{(1)}(\theta) \propto \exp \left\{ -\frac{1}{2 \sigma^2 \sigma_j^2} (- \sigma_j^2 \cdot 2\theta \sum x_i + \sigma_j^2 \cdot n\theta^2 - \sigma^2 \cdot 2\mu_j \theta + \sigma^2 \cdot \theta) \right\}\)</span><br> <span class="math inline">\(\propto \exp \left\{ -\frac{1}{2 \sigma^2 \sigma_j^2} (- 2\theta (\sigma_j^2 \sum x_i + \sigma^2 \mu_j) + \theta^2 (\sigma_j^2 n + \sigma^2) ) \right\}\)</span><br> <span class="math inline">\(\propto \exp \left\{ -\frac{\sigma_j^2 n + \sigma^2}{2 \sigma^2 \sigma_j^2} (- 2\theta (\frac{\sigma_j^2 \sum x_i + \sigma^2 \mu_j}{\sigma_j^2 n + \sigma^2}) + \theta^2) \right\}\)</span><br> <span class="math inline">\(\propto \exp \left\{ - \frac{1}{2} \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_j^2} \right)^{-1} \left( - 2\theta \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_j^2} \right)^{-1} \left( \frac{\mu_j}{\sigma_j^2} + \frac{\sum x_i}{\sigma^2} \right) + \theta^2 \right) \right\}\)</span><br> Este es el kernel de una <span class="math inline">\(\theta|y \sim N \left( \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_j^2} \right)^{-1} \left( \frac{\mu_j}{\sigma_j^2} + \frac{\sum x_i}{\sigma^2} \right), \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_j^2} \right)^{-1} \right)\)</span>.<br> Ahora, queremos calcular los pesos actualizados a estas posterioris, entonces: <span class="math inline">\(C_j = \int_{\mathbb{R}} \left( \frac{1}{\sqrt{2\pi\sigma^2}} \right)^n \exp \left\{ -\frac{1}{2\sigma^2} (\sum x_i^2 - 2\theta \sum x_i + n\theta^2) \right\} \cdot \left( \frac{1}{\sqrt{2\pi\sigma_j^2}} \right) \exp \left\{ -\frac{1}{2\sigma_j^2} (\theta^2 - 2\mu_j \theta + \mu_j^2) \right\} d\theta\)</span><br> <span class="math inline">\(= \left( \frac{1}{\sqrt{2\pi\sigma^2}} \right)^n \cdot \left( \frac{1}{\sqrt{2\pi\sigma_j^2}} \right) \int_{\mathbb{R}} \exp \left\{ -\frac{1}{2\sigma^2\sigma_j^2} (\sigma_j^2\sum x_i^2 - 2\theta \sigma_j^2\sum x_i + \theta^2 \sigma_j^2n + \theta^2\sigma^2 - 2\sigma^2\theta \mu_j + \sigma^2\mu_j^2) \right\} d\theta\)</span><br> <span class="math inline">\(= \left( \frac{1}{\sqrt{2\pi\sigma^2}} \right)^n \cdot \left( \frac{1}{\sqrt{2\pi\sigma_j^2}} \right) \cdot e^{-\frac{\sigma_j^2\sum x_i^2 + \sigma^2\mu_j}{2\sigma^2\sigma_j^2}} \int_{\mathbb{R}} \exp \left\{ -\frac{1}{2\sigma^2\sigma_j^2} (- 2\theta (\sigma_j^2\sum x_i + \sigma^2\mu_j) + \theta^2 (\sigma_j^2n + \sigma^2)) \right\} d\theta\)</span><br> <span class="math inline">\(= \left( \frac{1}{\sqrt{2\pi\sigma^2}} \right)^n \cdot \left( \frac{1}{\sqrt{2\pi\sigma_j^2}} \right) \cdot \exp \left\{ -\frac{\sigma_j^2\sum x_i^2 + \sigma^2\mu_j}{2\sigma^2\sigma_j^2} + \frac{\left( \frac{n}{\sigma^2} + \frac{1}{\sigma_j^2} \right)^{-2} \left( \frac{\mu_j}{\sigma_j^2} + \frac{\sum x_i}{\sigma^2} \right)^2}{2\left( \frac{n}{\sigma^2} + \frac{1}{\sigma_j^2} \right)^{-1}} \right\} \int_{\mathbb{R}} \exp \left\{ -\frac{1}{2}\left( \frac{n}{\sigma^2} + \frac{1}{\sigma_j^2} \right)^{-1} \left( \theta - \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_j^2} \right)^{-1} \left( \frac{\mu_j}{\sigma_j^2} + \frac{\sum x_i}{\sigma^2} \right) \right)^2 \right\} d\theta\)</span><br> <span class="math inline">\(= \left( \frac{1}{\sqrt{2\pi(n\sigma_j^2 + \sigma^2)^{-1}}} \right)^{n} \cdot \exp \left\{ -\frac{\sigma_j^2\sum x_i^2 + \sigma^2\mu_j}{2\sigma^2\sigma_j^2} + \frac{\left( \frac{n}{\sigma^2} + \frac{1}{\sigma_j^2} \right)^{-1} \left( \frac{\mu_j}{\sigma_j^2} + \frac{\sum x_i}{\sigma^2} \right)^2}{2} \right\}\)</span><br> <span class="math inline">\(= \left( \frac{1}{\sqrt{2\pi(n\sigma_j^2 + \sigma^2)^{-1}}} \right)^{n} \cdot \exp \left\{ -\frac{\sigma_j^2\sum x_i^2 + \sigma^2\mu_j}{2\sigma^2\sigma_j^2} + \frac{\sigma^2\sigma_j^2 \left( \frac{\mu_j}{\sigma_j^2} + \frac{\sum x_i}{\sigma^2} \right)^2}{2 (n\sigma_j^2 + \sigma^2)} \right\}\)</span><br> <span class="math inline">\(= \left( \frac{1}{\sqrt{2\pi(n\sigma_j^2 + \sigma^2)^{-1}}} \right)^{n} \cdot \exp \left\{ -\frac{\sum x_i^2}{2\sigma^2} - \frac{\mu_j}{2\sigma^2_j} + \frac{ \frac{\sigma^2\mu_j^2}{\sigma_j^2} + 2\mu_j\sum x_i + \sigma_j^2\frac{(\sum x_i)^2}{\sigma^2}}{2 (n\sigma_j^2 + \sigma^2)} \right\}\)</span><br> <span class="math inline">\(= \left( \frac{1}{\sqrt{2\pi(n\sigma_j^2 + \sigma^2)^{-1}}} \right)^{n} \cdot \exp \left\{ \frac{-\frac{\sum x_i^2}{\sigma^2}n\sigma_j^2 - \sum x_i^2 - \mu_j n - \frac{\mu_j}{\sigma^2_j}\sigma^2}{2 (n\sigma_j^2 + \sigma^2)} + \frac{ \frac{\sigma^2\mu_j^2}{\sigma_j^2} + 2\mu_j\sum x_i + \sigma_j^2\frac{(\sum x_i)^2}{\sigma^2}}{2 (n\sigma_j^2 + \sigma^2)} \right\}\)</span><br> Luego, podemos calcular estas constantes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sumx <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">2.5</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>sigma1 <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>mu2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>denom1 <span class="ot">&lt;-</span> (n <span class="sc">*</span> sigma1 <span class="sc">+</span> sigma)<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>denom2 <span class="ot">&lt;-</span> (n <span class="sc">*</span> sigma2 <span class="sc">+</span> sigma)<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>C1 <span class="ot">&lt;-</span> (<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>denom1)<span class="sc">^</span>(<span class="sc">-</span>n<span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> <span class="fu">exp</span>(denom1<span class="sc">*</span>(<span class="sc">-</span>sumx<span class="sc">*</span>n<span class="sc">*</span>sigma1<span class="sc">/</span>sigma <span class="sc">-</span> sumx <span class="sc">-</span> mu1<span class="sc">*</span>n <span class="sc">-</span> mu1<span class="sc">*</span>sigma1<span class="sc">/</span>sigma <span class="sc">+</span> sigma<span class="sc">*</span>mu1<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>sigma1 <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>mu1<span class="sc">*</span>sumx <span class="sc">+</span> sigma1<span class="sc">*</span>sumx<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>sigma)) <span class="co"># No conocemos sum x_i^2, pero igual se cancelará, lo único que no es lo que lleva \mu_j, pues es diferente para j=1,2.</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>C2 <span class="ot">&lt;-</span> (<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>denom2)<span class="sc">^</span>(<span class="sc">-</span>n<span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> <span class="fu">exp</span>(denom2<span class="sc">*</span>(<span class="sc">-</span>sumx<span class="sc">*</span>n<span class="sc">*</span>sigma2<span class="sc">/</span>sigma <span class="sc">-</span> sumx <span class="sc">-</span> mu2<span class="sc">*</span>n <span class="sc">-</span> mu2<span class="sc">*</span>sigma2<span class="sc">/</span>sigma <span class="sc">+</span> sigma<span class="sc">*</span>mu2<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>sigma2 <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>mu2<span class="sc">*</span>sumx <span class="sc">+</span> sigma2<span class="sc">*</span>sumx<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>sigma))</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>w01 <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>w02 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> w01 <span class="sc">*</span> C1 <span class="sc">+</span> w02 <span class="sc">*</span> C2</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Pesos a posteriori</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>w11 <span class="ot">&lt;-</span> w01 <span class="sc">*</span> C1 <span class="sc">/</span> C</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>w12 <span class="ot">&lt;-</span> w02 <span class="sc">*</span> C2 <span class="sc">/</span> C</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Luego, la distribución a posteriori es: <span class="math inline">\(\theta|y \sim 0.0015 \cdot N\left( \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_1^2} \right)^{-1} \left( \frac{\mu_1}{\sigma_1^2} + \frac{\sum x_i}{\sigma^2} \right), \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_1^2} \right)^{-1} \right) + 0.9985 \cdot N \left( \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_2^2} \right)^{-1} \left( \frac{\mu_2}{\sigma_2^2} + \frac{\sum x_i}{\sigma^2} \right), \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_2^2} \right)^{-1} \right)\)</span>. Entonces podemos simular a partir de esta distribución:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">&lt;-</span> (n<span class="sc">/</span>sigma <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>sigma1)<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">&lt;-</span> (n<span class="sc">/</span>sigma <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>sigma2)<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2023</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>simula2 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) {</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> w11){</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    simula2[j] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> var1<span class="sc">*</span>(mu1<span class="sc">/</span>sigma1 <span class="sc">+</span> sumx<span class="sc">/</span>sigma), <span class="at">sd =</span> <span class="fu">sqrt</span>(var1))</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>{</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    simula2[j] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> var2<span class="sc">*</span>(mu2<span class="sc">/</span>sigma2 <span class="sc">+</span> sumx<span class="sc">/</span>sigma), <span class="at">sd =</span> <span class="fu">sqrt</span>(var2))</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(simula2, </span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">probability =</span> T, </span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">50</span>, </span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histograma de simulaciones de la Posteriori"</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>     )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Metodos-bayesianos_Ayudantia8_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Graficamos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>densidad <span class="ot">&lt;-</span> <span class="fu">density</span>(simula2)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> densidad<span class="sc">$</span>x, <span class="at">y =</span> densidad<span class="sc">$</span>y)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>intervalo <span class="ot">&lt;-</span> <span class="fu">hdi</span>(densidad, <span class="at">allowSplit =</span> <span class="cn">TRUE</span>, <span class="at">credMass =</span> <span class="fl">0.95</span>) </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>fdp.int <span class="ot">&lt;-</span> <span class="fu">attr</span>(intervalo, <span class="st">'height'</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>datos, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data=</span>datos[datos<span class="sc">$</span>x <span class="sc">&lt;</span> intervalo[<span class="dv">2</span>],][datos<span class="sc">$</span>x <span class="sc">&gt;</span> intervalo[<span class="dv">1</span>],], <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">ymin=</span><span class="dv">0</span>, <span class="at">ymax=</span>y), <span class="at">fill =</span> <span class="st">"red"</span>) <span class="sc">+</span>  </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">lwd=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Función de densidad"</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"x"</span>,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Densidad a Posteriori"</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span>fdp.int, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">lwd=</span><span class="fl">1.5</span>, <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Metodos-bayesianos_Ayudantia8_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">9</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="cn">NULL</span>, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> w11<span class="sc">*</span><span class="fu">dnorm</span>(x, <span class="at">mean =</span> var1<span class="sc">*</span>(mu1<span class="sc">/</span>sigma1 <span class="sc">+</span> sumx<span class="sc">/</span>sigma), <span class="at">sd =</span> <span class="fu">sqrt</span>(var1)) <span class="sc">+</span> w12<span class="sc">*</span><span class="fu">dnorm</span>(x, <span class="at">mean =</span> var2<span class="sc">*</span>(mu2<span class="sc">/</span>sigma2 <span class="sc">+</span> sumx<span class="sc">/</span>sigma), <span class="at">sd =</span> <span class="fu">sqrt</span>(var2)))) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>,<span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 894 row(s) containing missing values (geom_path).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Metodos-bayesianos_Ayudantia8_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
